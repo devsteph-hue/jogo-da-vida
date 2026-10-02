@@ -368,7 +368,7 @@ main{padding-bottom:130px}
 .tcena.c3on>:not(.c3box):not(.tfala){display:none!important}
 .c3box{position:absolute;inset:0;display:grid;place-items:center}
 .c3c{width:100%;height:100%;display:block;touch-action:pan-y}
-.tcena.c3on .tfala{max-width:52%;font-size:11.5px;display:-webkit-box;-webkit-line-clamp:4;-webkit-box-orient:vertical;overflow:hidden;padding:6px 9px}
+.tcena.c3on .tfala{max-width:64%;font-size:11.5px;line-height:1.3;padding:6px 9px}
 .c3chips{display:flex;gap:6px;flex-wrap:wrap;margin:-4px 0 14px}
 .c3chips button{background:var(--sf);color:var(--tx);font-weight:800;font-size:13px;border-radius:14px;padding:7px 12px;border:2.5px solid var(--ol);box-shadow:2px 3px 0 var(--ol)}
 .c3chips button.on{background:var(--pe)}
@@ -443,6 +443,21 @@ main{padding-bottom:130px}
 .qlab{display:block;font-size:13px;font-weight:700;margin:8px 0}.qlab select,.qlab input{display:block;width:100%;margin-top:4px;font:inherit;padding:8px;border-radius:10px;border:2px solid var(--ol);background:var(--bg);color:var(--tx);box-sizing:border-box}
 .qta{width:100%;min-height:180px;font:inherit;font-size:13px;padding:10px;border-radius:12px;border:2px solid var(--ol);background:var(--bg);color:var(--tx);box-sizing:border-box;margin-top:6px}.qta.pq{min-height:60px}
 .qilist{font-size:12.5px;padding-left:20px;max-height:220px;overflow:auto}.qilist li{margin-bottom:4px}.qilist li b{margin-left:6px;color:var(--pe2)}
+/* aba agachar */
+.agcard{background:var(--sf);border:2.5px solid var(--ol);border-radius:22px;box-shadow:var(--sh);padding:12px 14px;margin-bottom:14px}
+.agcard h3{margin:0 0 8px}
+.ag3d{height:240px;border-radius:16px;background:radial-gradient(circle at 50% 35%,#FFF4E8,#F6D7BE);overflow:hidden}
+[data-theme=dark] .ag3d{background:radial-gradient(circle at 50% 35%,#3A3358,#24203A)}.ag3d canvas{width:100%;height:100%;display:block}
+.agnum{text-align:center;margin-top:6px}.agnum b{display:block;font-size:64px;line-height:1;font-weight:900}.agnum span{color:var(--mu);font-weight:700;font-size:14px}
+.agbar{height:14px;border-radius:8px;background:var(--sf2);border:2px solid var(--ol);overflow:hidden;margin-top:10px}.agbar i{display:block;height:100%;background:var(--mi);transition:width .3s}
+.agstart{display:block;width:100%;max-width:none;margin:0;padding:14px;font-size:18px}
+.agbtns{display:flex;gap:8px;flex-wrap:wrap}.agbtns .go{flex:1;margin:0}
+.agop{display:flex;gap:6px;flex-wrap:wrap}.agop button{background:var(--sf2);color:var(--tx);font-weight:800;font-size:13px;border-radius:12px;padding:8px 10px;border:2px solid var(--ol)}.agop button.on{background:var(--pe)}.agop button[disabled]{opacity:.5}
+.aglab{font-size:13px;font-weight:800;margin:10px 0 6px}
+.agrow{display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin-top:10px;font-size:13px;font-weight:700}.agrow input[type=text]{width:90px;font:inherit;padding:6px 8px;border-radius:10px;border:2px solid var(--ol);background:var(--bg);color:var(--tx);margin-left:4px}
+.agvoz{display:flex;align-items:center;gap:6px}
+.agdias{display:grid;grid-template-columns:repeat(7,1fr);gap:6px}.agd{text-align:center;background:var(--sf2);border-radius:12px;padding:6px 0;border:2px solid transparent}.agd b{display:block;font-size:15px}.agd small{color:var(--mu);font-size:11px}
+.agd.ok{background:var(--mi);color:#fff;border-color:var(--ol)}.agd.ok small{color:#fff}.agd.meio{border-color:var(--pe)}
 </style></head><body>
 <main id="main"></main>
 <nav class="tabs" aria-label="Seções"><div>
@@ -1288,7 +1303,6 @@ function vCasinha(){const T=tama(),sel=T.sel||'eu',p=T[sel],L=level(totalXP()).l
     :[['racao','🥣','Ração'],['sache','🐟','Sachê'],['brincar','🧶','Brincar'],['carinho','💗','Carinho'],['escovar','🪮','Escovar'],['banho','🛁','Banho'],['caixa','🧹','Limpar caixinha']];
   let extra='';
   if(T.aba==='roupa'&&sel==='eu')extra=`<div class="tpanel"><h3>Guarda-roupa</h3><div class="troupas">${ROUPAS.map(([id,n,lv])=>{const ok=L>=lv;return `<button class="${p.roupa===id?'on':''}" ${ok?`onclick="tRoupaSet('${id}')"`:'disabled'}>${tAvatar({...p,roupa:id},'feliz','')}<span>${ok?n:'🔒 Nível '+lv}</span></button>`}).join('')}</div><p class="muted" style="font-size:12.5px">Roupas novas liberam conforme você sobe de nível no jogo.</p></div>`;
-  if(sel!=='eu')extra+=`<div class="tpanel"><h3>Coleira</h3><div class="tcores">${COLEIRAS.map(c=>`<button style="background:${c}" class="${p.coleira===c?'on':''}" aria-label="Coleira ${c}" onclick="tColeira('${c}')"></button>`).join('')}</div></div>`;
   return `<header class="ph"><h1>Casinha</h1><p class="muted">Cuide de você e dos gatinhos. Seus hábitos de verdade também cuidam deles.</p><p class="muted" style="font-size:11px;margin:2px 0 8px">Gatos 3D: modelo “cat” de artofaria (Sketchfab).</p></header>
   <section class="tcena"><div class="tjanela"></div><div class="tchao"></div>
     <div class="tfala"><b>${esc(T.guardiao.nome)}</b> ${esc(tFala(T))}</div>
@@ -1448,7 +1462,7 @@ function c3Tex(id){const T=V3.T;if(C3.texCache[id])return C3.texCache[id];const 
   if(id==='lilas'){g.fillStyle='#FFE08A';for(let y=20;y<512;y+=64)for(let x=(y/64%2)*32+16;x<512;x+=64){g.beginPath();for(let k=0;k<10;k++){const a=k/10*Math.PI*2-Math.PI/2,rr=k%2?5:12;g.lineTo(x+Math.cos(a)*rr,y+Math.sin(a)*rr)}g.fill()}}
   if(id==='listras'){g.fillStyle='#F4F1EA';for(let y=0;y<512;y+=32)g.fillRect(0,y,512,12)}
   const t=new T.CanvasTexture(c);t.flipY=false;t.wrapS=t.wrapT=T.RepeatWrapping;t.colorSpace=T.SRGBColorSpace;return C3.texCache[id]=t}
-function c3Roupa(id){if(!V3.model)return;if(!C3.look){V3.model.traverse(o=>{if(o.isMesh&&/look/.test(o.name)){C3.look=o;C3.orig=o.material.map}})}if(!C3.look)return;
+function c3Roupa(id){if(!V3.model)return;if(!C3.look||C3.look.userData.roupa){C3.look=null;V3.model.traverse(o=>{if(!C3.look&&o.isMesh&&/look/.test(o.name)&&!o.userData.roupa){C3.look=o;C3.orig=C3.orig||o.material.map}})}if(!C3.look)return;
   C3.look.material.map=id==='original'?C3.orig:c3Tex(id);C3.look.material.needsUpdate=true}
 /* ---------- gatos feitos de formas simples ---------- */
 function c3Gato(tipo){const T=V3.T,G=new T.Group();const sia=tipo==='guardiao',fra=tipo==='frajola';
@@ -1525,7 +1539,7 @@ function c3Loop(){cancelAnimationFrame(C3.raf);const T=V3.T;const tick=now=>{if(
    // efeitos subindo
    for(const fx of C3.fx.slice()){const e=(now-fx.t0)/1000;if(e<0){fx.s.visible=false;continue}fx.s.visible=true;fx.s.position.y+=fx.v*.016;fx.s.material.opacity=Math.max(0,1-e/1.6);if(e>1.6){C3.scene.remove(fx.s);C3.fx.splice(C3.fx.indexOf(fx),1)}}
    // destaque de quem está selecionado
-   const sel=Tm.sel||'eu';for(const k in C3.cats)C3.cats[k].userData.col.scale.setScalar(k===sel?1.25:1);
+   const sel=Tm.sel||'eu';for(const k in C3.cats){const u2=C3.cats[k].userData;u2.col.scale.setScalar(k===sel?1.25:1);if(u2.sel)u2.sel.visible=false}
    C3.ren.render(C3.scene,C3.cam);C3.raf=requestAnimationFrame(tick)};C3.raf=requestAnimationFrame(tick)}
 /* liga na tela da Casinha */
 const _vCasinhaC3=vCasinha;
@@ -1814,7 +1828,7 @@ async function c3GatosReais(){try{const base=await c3GatoModelo();const T=V3.T;
     const capa=[];if(k==='guardiao')u.corpo.traverse(o=>{if(o.isMesh&&(o.geometry.type==='CylinderGeometry'))capa.push(o)});
     const est=[];if(k==='guardiao')u.cab.traverse(o=>{if(o.isMesh&&o.geometry.type==='ExtrudeGeometry')est.push(o)});
     u.corpo.clear();u.corpo.add(piv);
-    const h=s.y*esc*(k==='preto'?1.12:1),len=Math.max(s.x,s.z)*esc;u.col.position.set(0,h*.6,len*.28);u.col.scale.setScalar(.42);u.col.rotation.set(Math.PI/2-.35,0,0);u.corpo.add(u.col);
+    const h=s.y*esc*(k==='preto'?1.12:1),len=Math.max(s.x,s.z)*esc;u.col.visible=false;const anel=new T.Mesh(new T.RingGeometry(.26,.32,40),new T.MeshBasicMaterial({color:0xF2875A,transparent:true,opacity:.9,side:T.DoubleSide}));anel.rotation.x=-Math.PI/2;anel.position.y=.012;anel.visible=false;g.add(anel);u.sel=anel;
     if(k==='guardiao'){for(const o of est){o.position.set(0,h*1.12,len*.36);o.scale.setScalar(.9);u.corpo.add(o)}}
     u.cab=new T.Group();u.cauda=new T.Group();u.olhos=[];u.real=true;g.traverse(o=>{o.userData.who=k})}
   }catch(e){/* sem o arquivo do gato: ficam os gatinhos de formas simples */}}
@@ -2003,7 +2017,7 @@ async function quizAbrir(){const ov=document.createElement('div');ov.className='
     const f=V3ANIM[a](t);v3Pose(f.P,f.y);V3.model.rotation.y=.25*Math.sin(now/3000);ren.render(sc,cam);QZS.raf=requestAnimationFrame(loop)};QZS.raf=requestAnimationFrame(loop)}
 function qzReage(a){QZS.anim=a;QZS.t0=performance.now()}
 function qzMenu(){const D=qzDados();const box=QZS.ov.querySelector('#qbox');
-  box.innerHTML=`<h2>Concurso de banco · nível médio</h2><p class="muted">10 questões por rodada, com explicação. Cada acerto vale 1 XP (até 30 XP por dia com os jogos).</p>
+  box.innerHTML=`<h2>Concurso de banco · nível médio</h2><p class="muted">Questões no nível das provas de Escriturário (BB) e Técnico Bancário (Caixa), estilo Cesgranrio. 10 por rodada, com explicação. Cada acerto vale 1 XP (até 30 XP por dia com os jogos).</p>
    <button class="go qbig" onclick="qzComecar('mix')">🎲 Rodada misturada</button>
    <div class="qmats">${QMAT.map(m=>{const s=D.st[m]||{ok:0,t:0};return `<button onclick="qzComecar('${m}')"><b>${m}</b><small>${s.t?Math.round(100*s.ok/s.t)+'% de acerto · '+s.t+' respondidas':'ainda não começou'}</small></button>`}).join('')}</div>
    ${D.erros.length?`<button class="mini" style="width:100%;margin-top:10px" onclick="qzComecar('erros')">🔁 Revisar as que errei (${D.erros.length})</button>`:''}`}
@@ -2072,6 +2086,167 @@ const _qzMenuI=qzMenu;qzMenu=function(){_qzMenuI();const box=QZS.ov.querySelecto
    ${n?`<button class="go qbig" onclick="qzComecar('reais')">Rodada só com questões reais</button>`:''}<button class="mini" style="width:100%;margin-top:8px" onclick="qzImportar()">➕ Importar questões de uma prova</button>${n?`<button class="reset" onclick="qzApagarImp()">Apagar as importadas</button>`:''}</div>`)};
 // mostra a origem da questão real
 const _qzQuestaoI=qzQuestao;qzQuestao=function(){_qzQuestaoI();const R=QZS.r,q=R.qs[R.k];if(q.real){const f=(qzImp()[q.i-QZ.length]||{}).f;const t=QZS.ov.querySelector('.qtop .pill');if(t)t.insertAdjacentHTML('afterend',`<span class="pill" style="background:#FFE08A">Prova real${f?' · '+esc(f):''}</span>`)}};
+
+
+/* ================= ABA "AGACHAR": 60 agachamentos em casa, contando sozinho ================= */
+V3ANIM.agachar=d=>({P:{LeftUpLeg:[-1.45*d,0,0],RightUpLeg:[-1.45*d,0,0],LeftLeg:[1.8*d,0,0],RightLeg:[1.8*d,0,0],LeftFoot:[.35*d,0,0],RightFoot:[.35*d,0,0],Spine:[.25*d,0,0],Spine1:[.15*d,0,0],
+  LeftArm:[1.5,0,.4],RightArm:[1.5,0,-.4],LeftForeArm:[0,0,1.95],RightForeArm:[0,0,-1.95]},y:-.56*d});
+const AGP={'1x60':[60],'2x30':[30,30],'3x20':[20,20,20],'4x15':[15,15,15,15],'6x10':[10,10,10,10,10,10]};
+const AG={fase:'pronto',rep:0,si:0,t0:0,fim:0,pausa:null,tick:null,wl:null};
+function agD(){S.agacha=S.agacha||{plano:'4x15',tempo:3,desc:30,peso:'',voz:true,dias:{},xp:0,xpDias:{}};return S.agacha}
+const _totalXPa=totalXP;totalXP=function(){return _totalXPa()+((S.agacha&&S.agacha.xp)||0)};
+function agFala(t){const D=agD();if(!D.voz)return;try{const u=new SpeechSynthesisUtterance(String(t));u.lang='pt-BR';u.rate=1.15;speechSynthesis.cancel();speechSynthesis.speak(u)}catch(e){}}
+function agBip(f,d){try{beep(f,d||.08,.22)}catch(e){}}
+function agSeries(){return AGP[agD().plano]}
+function agFeitas(){const s=agSeries();let n=0;for(let i=0;i<AG.si;i++)n+=s[i];return n+AG.rep}
+async function agWake(on){try{if(on&&navigator.wakeLock&&!AG.wl)AG.wl=await navigator.wakeLock.request('screen');if(!on&&AG.wl){AG.wl.release();AG.wl=null}}catch(e){}}
+function agIniciar(){const D=agD();Object.assign(AG,{fase:'prep',rep:0,si:0,t0:performance.now(),fim:performance.now()+3000,pausa:null});agFala('Prepare-se');agWake(true);agLoop();render()}
+function agLoop(){clearInterval(AG.tick);AG.tick=setInterval(()=>{if(AG.pausa)return;const now=performance.now(),D=agD(),T=D.tempo*1000,s=agSeries();
+  if(AG.fase==='prep'){const r=Math.ceil((AG.fim-now)/1000);if(r!==AG.ult){AG.ult=r;if(r>0){agBip(660);agUI()}}if(now>=AG.fim){AG.fase='serie';AG.t0=now;AG.rep=0;agBip(990,.15);agFala('Vai!');render()}return}
+  if(AG.fase==='serie'){const k=Math.floor((now-AG.t0)/T);const ph=((now-AG.t0)%T)/T;
+    if(ph>.6&&AG.marca!==k){AG.marca=k;agBip(520,.05)}// hora de subir
+    if(k>AG.rep){AG.rep=k;agBip(880,.07);agFala(AG.rep);agSalvaParcial();
+      if(AG.rep>=s[AG.si]){if(AG.si>=s.length-1){agConcluir();return}AG.fase='desc';AG.fim=now+D.desc*1000;agFala('Descanso');render();return}}
+    agUI();return}
+  if(AG.fase==='desc'){const r=Math.ceil((AG.fim-now)/1000);if(r!==AG.ult){AG.ult=r;if(r<=3&&r>0)agBip(660);agUI()}if(now>=AG.fim){AG.si++;AG.rep=0;AG.fase='serie';AG.t0=now;AG.marca=-1;agBip(990,.15);agFala('Série '+(AG.si+1));render()}}},80)}
+function agSalvaParcial(){const D=agD(),k=dkey(new Date());D.dias[k]=Math.max(D.dias[k]||0,(D.base||0)+agFeitas());save()}
+function agConcluir(){clearInterval(AG.tick);AG.fase='fim';agWake(false);const D=agD(),k=dkey(new Date());D.dias[k]=Math.max(D.dias[k]||0,(D.base||0)+agFeitas());
+  let ganho=0;if(!D.xpDias[k]){D.xpDias[k]=1;ganho=10;D.xp+=10}save();agBip(1320,.3);agFala('Sessenta! Parabéns!');AG.ganho=ganho;render()}
+function agPausar(){if(AG.pausa){const dt=performance.now()-AG.pausa;AG.t0+=dt;AG.fim+=dt;AG.pausa=null;agFala('Continuando')}else{AG.pausa=performance.now();agFala('Pausa')}render()}
+function agPular(){if(AG.fase==='desc')AG.fim=performance.now()}
+function agMais(s){if(AG.fase==='desc'){AG.fim+=s*1000;agUI()}}
+function agParar(){clearInterval(AG.tick);agWake(false);if(agFeitas()>0)agSalvaParcial();AG.fase='pronto';AG.pausa=null;render()}
+function agSet(k,v){const D=agD();D[k]=v;save();render()}
+function agUI(){const n=agFeitas(),s=agSeries(),tot=s.reduce((a,b)=>a+b,0);const big=document.getElementById('agBig'),sub=document.getElementById('agSub'),bar=document.getElementById('agBar');if(!big)return;const now=performance.now();
+  if(AG.fase==='prep'){big.textContent=Math.max(1,Math.ceil((AG.fim-now)/1000));sub.textContent='prepare-se, pegue o peso'}
+  else if(AG.fase==='serie'){big.textContent=AG.rep;sub.textContent=`série ${AG.si+1} de ${s.length} · ${AG.rep}/${s[AG.si]}`+(((now-AG.t0)%(agD().tempo*1000))/(agD().tempo*1000)<.6?' · desce':' · sobe')}
+  else if(AG.fase==='desc'){big.textContent=Math.max(0,Math.ceil((AG.fim-now)/1000));sub.textContent=`descanso · próxima: série ${AG.si+2} de ${s.length}`}
+  if(bar)bar.style.width=Math.round(100*n/tot)+'%';const tt=document.getElementById('agTot');if(tt)tt.textContent=`${n} de ${tot}`}
+function vAgachar(){const D=agD(),s=agSeries(),tot=s.reduce((a,b)=>a+b,0),k=dkey(new Date()),hoje=D.dias[k]||0;const rodando=['prep','serie','desc'].includes(AG.fase);
+  const dias=Array.from({length:7},(_,i)=>{const d=new Date();d.setDate(d.getDate()-6+i);const kk=dkey(d),v=D.dias[kk]||0;return `<div class="agd ${v>=60?'ok':v?'meio':''}"><b>${v>=60?'✓':v||'·'}</b><small>${['D','S','T','Q','Q','S','S'][d.getDay()]}</small></div>`}).join('');
+  let seq=0;for(let i=0;;i++){const d=new Date();d.setDate(d.getDate()-i);const v=D.dias[dkey(d)]||0;if(v>=60)seq++;else if(i>0)break;if(i>400)break}
+  const opc=(chave,lista,fmt)=>`<div class="agop">${lista.map(v=>`<button class="${D[chave]==v?'on':''}" ${rodando?'disabled':''} onclick="agSet('${chave}',${typeof v==='string'?`'${v}'`:v})">${fmt(v)}</button>`).join('')}</div>`;
+  return `<header class="ph"><h1>60 agachamentos</h1><p class="muted">Agachamento com o pesinho junto ao peito (taça). Aperte Iniciar: o app conta sozinho no ritmo escolhido e dá o descanso entre as séries.</p></header>
+   <section class="agcard"><div id="ag3d" class="ag3d"></div>
+    <div class="agnum"><b id="agBig">${AG.fase==='fim'?'60':AG.fase==='pronto'?hoje:AG.rep}</b><span id="agSub">${AG.fase==='fim'?'feito! 🎉'+(AG.ganho?` +${AG.ganho} XP`:''):AG.fase==='pronto'?'agachamentos hoje':''}</span></div>
+    <div class="agbar"><i id="agBar" style="width:${AG.fase==='fim'?100:Math.round(100*agFeitas()/tot)}%"></i></div><p class="muted" id="agTot" style="text-align:center;margin:4px 0 10px;font-size:12.5px">${agFeitas()} de ${tot}</p>
+    ${rodando?`<div class="agbtns"><button class="go" onclick="agPausar()">${AG.pausa?'▶ Continuar':'⏸ Pausar'}</button>${AG.fase==='desc'?`<button class="mini" onclick="agMais(15)">+15 s</button><button class="mini" onclick="agPular()">Pular descanso</button>`:''}<button class="mini warn" onclick="agParar()">Encerrar</button></div>`
+     :`<button class="go agstart" onclick="agIniciar()">${AG.fase==='fim'?'Fazer de novo':'▶ Iniciar'}</button>`}</section>
+   <section class="agcard"><h3>Como fazer</h3>${opc('plano',Object.keys(AGP),v=>v.replace('x',' × '))}
+    <p class="aglab">Ritmo de cada agachamento</p>${opc('tempo',[2,3,4],v=>v+' s'+(v===3?' (2 desce, 1 sobe)':''))}
+    <p class="aglab">Descanso entre as séries</p>${opc('desc',[20,30,45,60],v=>v+' s')}
+    <div class="agrow"><label>Peso <input type="text" inputmode="decimal" value="${esc(D.peso||'')}" placeholder="ex.: 4 kg" onchange="agSet('peso',this.value)"></label><label class="agvoz"><input type="checkbox" ${D.voz?'checked':''} onchange="agSet('voz',this.checked)"> contar em voz alta</label></div>
+    <details class="pall"><summary>Técnica do agachamento com peso</summary><ol class="rtxt"><li>Segure o peso junto ao peito, cotovelos para baixo.</li><li>Pés na largura dos ombros, pontas levemente para fora.</li><li>Desça levando o quadril para trás, como se fosse sentar, até as coxas ficarem paralelas ao chão.</li><li>Joelhos na direção das pontas dos pés, sem fechar para dentro. Calcanhar no chão.</li><li>Suba empurrando o chão, apertando o glúteo no topo. Respire: solta o ar na subida.</li></ol></details></section>
+   <section class="agcard"><h3>Últimos 7 dias</h3><div class="agdias">${dias}</div><p class="muted" style="font-size:12.5px;margin:8px 0 0">${seq?`🔥 ${seq} ${seq===1?'dia':'dias'} seguidos com 60.`:'Faça 60 hoje para começar a sequência.'} Completar 60 no dia vale +10 XP.</p></section>`}
+// 3D: ela agacha junto
+const A3={ren:null,canvas:null,scene:null,cam:null,raf:0};
+async function agMount3d(box){try{await v3Load()}catch(e){return}const T=V3.T;if(!A3.ren){A3.canvas=document.createElement('canvas');A3.ren=new T.WebGLRenderer({canvas:A3.canvas,antialias:true,alpha:true});A3.ren.outputColorSpace=T.SRGBColorSpace;A3.ren.setPixelRatio(Math.min(2,window.devicePixelRatio||1));
+    A3.scene=new T.Scene();A3.scene.add(new T.HemisphereLight(0xffffff,0x8a6a55,2.1));const d=new T.DirectionalLight(0xffffff,1.6);d.position.set(1.5,3,3);A3.scene.add(d);A3.cam=new T.PerspectiveCamera(28,1,.1,50);
+    const ch=new T.Mesh(new T.CircleGeometry(.7,40),new T.MeshBasicMaterial({color:0,transparent:true,opacity:.12}));ch.rotation.x=-Math.PI/2;A3.scene.add(ch)}
+  if(!box.isConnected)return;box.innerHTML='';box.appendChild(A3.canvas);A3.scene.add(V3.model);V3.model.position.set(0,0,0);
+  cancelAnimationFrame(A3.raf);const tick=now=>{if(!A3.canvas.isConnected)return;const w=A3.canvas.clientWidth,h=A3.canvas.clientHeight;if(A3.canvas.width!==Math.round(w*A3.ren.getPixelRatio())){A3.ren.setSize(w,h,false);A3.cam.aspect=w/h;A3.cam.updateProjectionMatrix()}
+    A3.cam.position.set(2.2,1.2,3.6);A3.cam.lookAt(0,.8,0);let f;
+    if(AG.fase==='serie'&&!AG.pausa){const T2=agD().tempo*1000,ph=((now-AG.t0)%T2)/T2;const d=ph<.6?Math.sin(ph/.6*Math.PI/2):Math.cos((ph-.6)/.4*Math.PI/2);f=V3ANIM.agachar(d)}
+    else if(AG.fase==='fim')f=V3ANIM.comemorar(now/1000);else if(AG.fase==='prep')f=V3ANIM.alongar(now/1000);else f=V3ANIM.idle(now/1000);
+    v3Pose(f.P,f.y);V3.model.rotation.y=0;A3.ren.render(A3.scene,A3.cam);A3.raf=requestAnimationFrame(tick)};A3.raf=requestAnimationFrame(tick)}
+// aba nova
+(function(){const nav=document.querySelector('.tabs div');if(nav&&!nav.querySelector('[data-t=agachar]')){const b=document.createElement('button');b.dataset.t='agachar';b.setAttribute('onclick',"go('agachar')");b.innerHTML='<i aria-hidden="true">🏋️</i>Agachar';nav.insertBefore(b,nav.querySelector('[data-t=eu]'))}})();
+const _renderAg=render;render=function(){_renderAg();if(TAB==='agachar'&&S.onboarded&&!EVF){$('#main').innerHTML=vAgachar();$$('.tabs button').forEach(b=>b.classList.toggle('on',b.dataset.t==='agachar'));const box=document.getElementById('ag3d');if(box)agMount3d(box);agUI()}};
+
+
+/* ================= questões no nível das provas de BB e Caixa (Cesgranrio) =================
+   Autorais, no formato e na dificuldade das provas de Escriturário/Técnico Bancário. */
+const QZ2=[
+// MATEMÁTICA FINANCEIRA
+['Mat. Financeira','Um cliente aplicou R$ 20.000,00 a juros compostos de 2% ao mês. Qual será o montante ao final de 3 meses?',['R$ 21.200,00','R$ 21.224,16','R$ 21.242,00','R$ 21.012,24','R$ 22.000,00'],1,'M = 20.000 × 1,02³ = 20.000 × 1,061208 = 21.224,16.'],
+['Mat. Financeira','Um empréstimo de R$ 10.000,00 será pago pelo Sistema de Amortização Constante (SAC) em 5 prestações mensais, com juros de 2% ao mês. Qual o valor da 3ª prestação?',['R$ 2.200,00','R$ 2.160,00','R$ 2.120,00','R$ 2.080,00','R$ 2.000,00'],2,'Amortização = 10.000 ÷ 5 = 2.000. Antes da 3ª parcela, o saldo é 6.000; juros = 2% × 6.000 = 120. Prestação = 2.000 + 120 = 2.120.'],
+['Mat. Financeira','A taxa nominal de 24% ao ano, com capitalização mensal, corresponde a qual taxa efetiva anual, aproximadamente?',['24,00%','25,34%','26,82%','28,00%','12,68%'],2,'A taxa mensal é 24% ÷ 12 = 2%. Efetiva anual = 1,02¹² − 1 ≈ 0,2682 = 26,82%.'],
+['Mat. Financeira','Uma dívida de R$ 12.100,00 vence daqui a 2 meses. Se for quitada hoje, com desconto racional composto à taxa de 10% ao mês, o valor pago será:',['R$ 9.680,00','R$ 9.801,00','R$ 10.000,00','R$ 10.890,00','R$ 11.000,00'],2,'No desconto racional composto, o valor atual é N ÷ (1 + i)ⁿ = 12.100 ÷ 1,21 = 10.000.'],
+['Mat. Financeira','Uma aplicação rendeu 12,2% em um ano em que a inflação foi de 2%. A taxa real de rendimento foi de:',['10,2%','10,0%','9,8%','14,4%','12,0%'],1,'(1 + r) = 1,122 ÷ 1,02 = 1,10. Logo, r = 10%.'],
+['Mat. Financeira','A juros simples de 1,5% ao mês, um capital rendeu R$ 960,00 de juros em 8 meses. O capital aplicado foi de:',['R$ 6.400,00','R$ 7.200,00','R$ 8.000,00','R$ 9.600,00','R$ 12.000,00'],2,'J = C × i × t → 960 = C × 0,015 × 8 = 0,12C → C = 8.000.'],
+['Mat. Financeira','Um financiamento de R$ 5.000,00 será pago em 2 prestações mensais iguais, a primeira um mês após a contratação, com juros compostos de 10% ao mês. O valor de cada prestação é, aproximadamente:',['R$ 2.500,00','R$ 2.750,00','R$ 2.880,95','R$ 2.904,76','R$ 3.025,00'],2,'5.000 = P/1,1 + P/1,21 → 5.000 = P × (1,1 + 1) ÷ 1,21 = P × 1,7355 → P ≈ 2.880,95.'],
+['Mat. Financeira','Uma loja vende um produto por R$ 1.000,00 à vista ou em 2 parcelas de R$ 520,00 (entrada + 30 dias). A taxa mensal de juros embutida no parcelamento é de, aproximadamente:',['4,00%','8,00%','8,33%','10,00%','4,17%'],2,'Pagando a entrada de 520, fica financiado 480, que vira 520 em 30 dias. Juros = 40 ÷ 480 ≈ 8,33%.'],
+['Mat. Financeira','R$ 1.000,00 aplicados a juros compostos de 10% ao mês ultrapassam R$ 1.400,00 a partir de quantos meses?',['3','4','5','6','7'],1,'1,1³ = 1,331 (R$ 1.331,00) e 1,1⁴ = 1,4641 (R$ 1.464,10). A partir do 4º mês.'],
+['Mat. Financeira','A taxa de 21% ao bimestre, em juros compostos, é equivalente a qual taxa mensal?',['10,5%','10,0%','11,0%','9,5%','21,0%'],1,'(1 + i)² = 1,21 → 1 + i = 1,1 → i = 10% ao mês.'],
+// MATEMÁTICA
+['Matemática','Em uma agência, 40% dos funcionários são homens. Entre os homens, 25% têm pós-graduação; entre as mulheres, 50%. Que percentual do total tem pós-graduação?',['37,5%','40,0%','42,5%','45,0%','30,0%'],1,'0,4 × 0,25 + 0,6 × 0,5 = 0,10 + 0,30 = 0,40 = 40%.'],
+['Matemática','Cinco caixas atendem 180 clientes em 6 horas. Mantido o ritmo, quantos caixas são necessários para atender 270 clientes em 5 horas?',['6','7','8','9','10'],3,'Cada caixa atende 180 ÷ (5 × 6) = 6 clientes por hora. São necessários 270 ÷ (5 × 6) = 9 caixas.'],
+['Matemática','O preço de um serviço aumentou 25%. Para voltar ao valor original, o novo preço deve sofrer um desconto de:',['25%','20%','22,5%','18%','15%'],1,'100 → 125. Para voltar a 100, o desconto é 25 ÷ 125 = 20%.'],
+['Matemática','A média de idade de 10 gerentes é 40 anos. Um gerente de 58 anos sai e entra outro de 28 anos. A nova média é:',['36 anos','37 anos','38 anos','39 anos','40 anos'],1,'Soma = 400. Nova soma = 400 − 58 + 28 = 370. Média = 37.'],
+['Matemática','Na sequência 2, 6, 18, 54, …, qual é o 7º termo?',['486','729','1.458','2.916','4.374'],2,'PG de razão 3: a₇ = 2 × 3⁶ = 2 × 729 = 1.458.'],
+['Matemática','Um caixa tem 30 cédulas, só de R$ 20,00 e de R$ 50,00, somando R$ 1.050,00. Quantas são de R$ 50,00?',['10','12','15','18','20'],2,'x + y = 30 e 20x + 50y = 1.050. Substituindo: 600 + 30y = 1.050 → y = 15.'],
+['Matemática','A negação de "Se o cliente paga em dia, então recebe desconto" é:',['Se o cliente não paga em dia, então não recebe desconto.','O cliente não paga em dia e recebe desconto.','O cliente paga em dia e não recebe desconto.','O cliente paga em dia ou não recebe desconto.','Se o cliente recebe desconto, então paga em dia.'],2,'A negação de "se P, então Q" é "P e não Q".'],
+['Matemática','A proposição "Se chove, então a agência abre mais tarde" é equivalente a:',['Se a agência abre mais tarde, então chove.','Se não chove, então a agência não abre mais tarde.','Se a agência não abre mais tarde, então não chove.','Chove e a agência abre mais tarde.','Não chove ou a agência não abre mais tarde.'],2,'A contrapositiva ("se não Q, então não P") é equivalente à condicional original. Também equivale a "não chove ou a agência abre mais tarde".'],
+['Matemática','De 100 clientes, 60 têm cartão de crédito, 50 têm cheque especial e 20 têm os dois. Quantos não têm nenhum dos dois?',['0','10','20','30','40'],1,'Têm pelo menos um: 60 + 50 − 20 = 90. Nenhum: 100 − 90 = 10.'],
+['Matemática','R$ 9.000,00 serão divididos em partes diretamente proporcionais a 2, 3 e 4. A maior parte é de:',['R$ 3.000,00','R$ 3.600,00','R$ 4.000,00','R$ 4.500,00','R$ 2.000,00'],2,'Total de partes = 9; cada parte vale 1.000. A maior = 4 × 1.000 = 4.000.'],
+// PROBABILIDADE E ESTATÍSTICA
+['Estatística','Qual a variância populacional do conjunto {2, 4, 6, 8, 10}?',['4','6','8','10','40'],2,'Média = 6. Desvios ao quadrado: 16, 4, 0, 4, 16 = 40. Variância = 40 ÷ 5 = 8.'],
+['Estatística','Qual o desvio padrão populacional do conjunto {2, 4, 4, 4, 5, 5, 7, 9}?',['1,5','2','2,5','3','4'],1,'Média = 40 ÷ 8 = 5. Soma dos desvios ao quadrado = 9+1+1+1+0+0+4+16 = 32. Variância = 4; desvio = 2.'],
+['Estatística','Em um banco, 60% dos clientes têm conta-corrente e, desses, 30% têm investimentos. Sorteando um cliente, a probabilidade de ele ter conta-corrente e investimentos é:',['12%','18%','30%','50%','90%'],1,'P(A e B) = P(A) × P(B|A) = 0,6 × 0,3 = 0,18.'],
+['Estatística','Uma urna tem 4 bolas azuis e 6 brancas. Retirando 2 bolas sem reposição, a probabilidade de ambas serem azuis é:',['4/25','2/15','1/5','6/25','4/15'],1,'4/10 × 3/9 = 12/90 = 2/15.'],
+['Estatística','Uma moeda honesta é lançada 3 vezes. A probabilidade de sair exatamente 2 caras é:',['1/8','1/4','3/8','1/2','5/8'],2,'São 3 posições possíveis para a coroa, em 8 resultados: 3/8.'],
+['Estatística','Qual a mediana de {7, 3, 10, 5, 8, 12}?',['7','7,25','7,5','8','9'],2,'Em ordem: 3, 5, 7, 8, 10, 12. Com quantidade par, é a média dos dois centrais: (7 + 8) ÷ 2 = 7,5.'],
+['Estatística','Numa turma, 2 alunos tiraram 5, 5 alunos tiraram 7 e 3 alunos tiraram 9. A média da turma é:',['7,0','7,2','7,4','6,8','7,5'],1,'(2×5 + 5×7 + 3×9) ÷ 10 = (10 + 35 + 27) ÷ 10 = 7,2.'],
+['Estatística','A e B são eventos independentes, com P(A) = 0,4 e P(B) = 0,5. Então P(A ∪ B) é:',['0,90','0,70','0,20','0,45','0,80'],1,'P(A ∪ B) = 0,4 + 0,5 − 0,4 × 0,5 = 0,9 − 0,2 = 0,7.'],
+['Estatística','Uma variável tem média 50 e desvio padrão 10. O coeficiente de variação é:',['5%','10%','20%','50%','500%'],2,'CV = desvio ÷ média = 10 ÷ 50 = 0,20 = 20%.'],
+['Estatística','A máquina A produz 60% das peças, com 2% de defeito; a máquina B produz 40%, com 5% de defeito. A probabilidade de uma peça sorteada ser defeituosa é:',['3,5%','3,2%','7,0%','2,6%','3,0%'],1,'0,6 × 0,02 + 0,4 × 0,05 = 0,012 + 0,020 = 0,032 = 3,2%.'],
+// CONHECIMENTOS BANCÁRIOS
+['Bancários','Compete ao Conselho Monetário Nacional (CMN):',['emitir papel-moeda','executar a política monetária por meio de operações de mercado aberto','fixar as diretrizes e as normas das políticas monetária, creditícia e cambial','fiscalizar as companhias abertas','administrar o Tesouro Nacional'],2,'O CMN é o órgão normativo: fixa diretrizes. Emitir moeda e executar a política monetária cabem ao Banco Central; companhias abertas, à CVM.'],
+['Bancários','O Comitê de Política Monetária (Copom) realiza, por ano, quantas reuniões ordinárias?',['4','6','8','10','12'],2,'São oito reuniões ordinárias por ano, em média a cada 45 dias.'],
+['Bancários','Um aumento da alíquota do recolhimento compulsório sobre depósitos tende a:',['aumentar a oferta de crédito','reduzir a liquidez do sistema e a oferta de crédito','reduzir a taxa Selic automaticamente','aumentar a base monetária','elevar os depósitos à vista'],1,'Com mais recursos retidos no BC, os bancos têm menos dinheiro para emprestar: medida contracionista.'],
+['Bancários','Quando o Banco Central compra títulos públicos no mercado aberto, o efeito esperado é:',['contração da liquidez','aumento da liquidez da economia','aumento do compulsório','valorização do real','redução da base monetária'],1,'Ao comprar títulos, o BC paga com moeda e injeta dinheiro no sistema (política expansionista).'],
+['Bancários','Qual destes investimentos NÃO é coberto pelo Fundo Garantidor de Créditos (FGC)?',['CDB','LCI','LCA','Poupança','CRI'],4,'CRI e CRA (certificados de recebíveis), assim como ações, debêntures e fundos, não têm garantia do FGC.'],
+['Bancários','A Circular BCB nº 3.978/2020 dispõe sobre:',['o funcionamento do Pix','a política, os procedimentos e os controles internos para prevenção à lavagem de dinheiro e ao financiamento do terrorismo','as regras do cheque especial','o seguro-desemprego','o Open Finance'],1,'A Circular 3.978/2020 trata de PLD/FT: conhecer o cliente, monitorar operações e comunicar suspeitas ao COAF.'],
+['Bancários','A garantia pessoal prestada em um título de crédito, como a nota promissória, chama-se:',['fiança','aval','hipoteca','penhor','alienação fiduciária'],1,'Aval é a garantia própria dos títulos de crédito. Fiança é garantia de contratos; hipoteca, penhor e alienação fiduciária são garantias reais.'],
+['Bancários','A taxa de câmbio PTAX, divulgada pelo Banco Central, corresponde:',['à cotação de abertura do dólar','à média das taxas de câmbio apuradas em consultas ao longo do dia','à taxa máxima permitida pelo CMN','à cotação do dólar turismo','à taxa fixada pelo Tesouro'],1,'A PTAX é calculada pelo BC com base na média das cotações coletadas em janelas de consulta durante o dia.'],
+['Bancários','O prazo para apresentação de um cheque emitido na mesma praça de pagamento é de:',['15 dias','30 dias','60 dias','90 dias','180 dias'],1,'Pela Lei do Cheque (7.357/1985), são 30 dias na mesma praça e 60 dias em praça diferente.'],
+['Bancários','Sobre a LCI, é correto afirmar que:',['é lastreada em créditos do agronegócio','é isenta de IR para pessoa física e lastreada em créditos imobiliários','não tem garantia do FGC','é emitida apenas pelo Tesouro Nacional','é um título de renda variável'],1,'LCI = Letra de Crédito Imobiliário: lastro imobiliário, isenta de IR para PF e com garantia do FGC. A LCA é a do agronegócio.'],
+// INFORMÁTICA
+['Informática','No Excel, com A1 = 12 e B1 = 7, a fórmula =SE(E(A1>10;B1<5);"Sim";"Não") retorna:',['Sim','Não','VERDADEIRO','FALSO','#VALOR!'],1,'A função E exige as duas condições. A1>10 é verdadeiro, mas B1<5 é falso; logo, o resultado é "Não".'],
+['Informática','No Excel, a função que conta quantas células de um intervalo atendem a um critério é:',['CONT.VALORES','CONT.NÚM','CONT.SE','SOMASE','CONTAR.VAZIO'],2,'CONT.SE(intervalo;critério) conta as células que atendem ao critério, por exemplo =CONT.SE(A1:A10;">=7").'],
+['Informática','A célula C1 contém =A$1*$B1. Ao copiá-la para D3, a fórmula fica:',['=B$1*$B3','=A$1*$B3','=B$3*$C3','=B$1*$C3','=A$3*$B1'],0,'De C1 para D3: uma coluna à direita e duas linhas abaixo. A$1 → B$1 (linha travada). $B1 → $B3 (coluna travada).'],
+['Informática','A fórmula =PROCV(105;A2:C50;3;FALSO) retorna:',['a soma da coluna C','o valor da 3ª coluna do intervalo, na linha em que a 1ª coluna for exatamente 105','a posição do número 105','o valor 105 multiplicado por 3','o valor mais próximo de 105 na coluna C'],1,'PROCV procura 105 na primeira coluna (A) e devolve o valor da 3ª coluna (C). FALSO exige correspondência exata.'],
+['Informática','O tipo de código malicioso que criptografa os arquivos da vítima e exige pagamento para liberá-los é o:',['spyware','adware','ransomware','worm','keylogger'],2,'Ransomware sequestra os dados (criptografa) e pede resgate.'],
+['Informática','Em uma rotina de backup, o backup diferencial copia:',['todos os arquivos, sempre','os arquivos alterados desde o último backup completo','os arquivos alterados desde o último backup de qualquer tipo','apenas os arquivos do sistema','apenas arquivos novos do dia'],1,'O diferencial acumula tudo o que mudou desde o último completo. O incremental copia só o que mudou desde o último backup de qualquer tipo.'],
+['Informática','Uma VPN (rede privada virtual) é utilizada para:',['aumentar a velocidade da internet','criar um canal criptografado de comunicação sobre uma rede pública','bloquear vírus em anexos','substituir o antivírus','fazer backup em nuvem'],1,'A VPN cria um "túnel" criptografado, permitindo acesso seguro a uma rede privada pela internet.'],
+['Informática','Pela LGPD (Lei 13.709/2018), é considerado dado pessoal sensível:',['nome completo','endereço de e-mail','número do telefone','dado biométrico','número da conta bancária'],3,'Dados sensíveis incluem origem racial, religião, opinião política, saúde, vida sexual, dado genético e biométrico.'],
+['Informática','No Microsoft Word, o atalho para inserir uma quebra de página é:',['Ctrl + Enter','Ctrl + B','Shift + Enter','Alt + Enter','Ctrl + P'],0,'Ctrl+Enter insere quebra de página. Shift+Enter faz quebra de linha; Ctrl+P imprime.'],
+['Informática','No Excel, a fórmula =ARRED(2,567;2) retorna:',['2,56','2,57','2,5','3','2,567'],1,'ARRED arredonda para o número de casas indicado: 2,567 com 2 casas = 2,57.'],
+// LÍNGUA PORTUGUESA
+['Português','Assinale a opção que completa corretamente: "O relatório referiu-se ___ medidas que ___ diretoria aprovou."',['às / a','as / à','às / à','a / a','à / a'],0,'"Referir-se A" + "as medidas" = às. Em "a diretoria aprovou", "a diretoria" é sujeito: só artigo, sem crase.'],
+['Português','Assinale a frase correta quanto à concordância.',['Segue anexo as planilhas.','Seguem anexas as planilhas.','Segue anexas as planilhas.','Seguem anexo as planilhas.','Seguem anexos as planilhas.'],1,'"Anexo" é adjetivo e concorda com o substantivo (planilhas → anexas); o verbo concorda com o sujeito plural (seguem).'],
+['Português','Complete conforme a norma-padrão: "Os analistas assistiram ___ palestra sobre crédito."',['a','à','na','da','pela'],1,'"Assistir", no sentido de ver, pede a preposição A: assistir à palestra.'],
+['Português','Assinale a frase em que a colocação do pronome está de acordo com a norma-padrão.',['Far-se-á a reunião amanhã.','Me disseram que a reunião foi adiada.','Não informaram-nos sobre a mudança.','Quem avisou-te?','Tudo resolveu-se rapidamente.'],0,'Com verbo no futuro do presente e sem palavra atrativa, usa-se a mesóclise. "Não", "quem" e "tudo" atraem o pronome (próclise).'],
+['Português','Assinale a frase com ERRO de pontuação.',['Ontem, o gerente chegou cedo.','O cliente que chegou cedo, foi atendido primeiro.','Senhores, a agência fechará às 16h.','Quando o sistema voltou, todos comemoraram.','O banco, que tem cem anos, mudou de logo.'],1,'Não se separa o sujeito ("O cliente que chegou cedo") do verbo ("foi atendido") com vírgula.'],
+['Português','Em "As vendas subiram; contudo, a margem de lucro caiu", a palavra "contudo" pode ser substituída, sem mudar o sentido, por:',['portanto','porque','no entanto','assim','pois'],2,'"Contudo" indica oposição, como "no entanto", "porém" e "todavia". "Portanto" e "assim" indicam conclusão.'],
+['Português','A frase "O banco aprovou o crédito" na voz passiva analítica fica:',['Aprovou-se o crédito.','O crédito foi aprovado pelo banco.','O crédito aprovou o banco.','O crédito está aprovando.','Aprovaram o crédito.'],1,'Voz passiva analítica = ser + particípio: "foi aprovado pelo banco". "Aprovou-se o crédito" é a passiva sintética.'],
+['Português','Complete corretamente: "A agência ___ endereço mudou reabrirá amanhã."',['que o','cujo o','cujo','onde o','a qual'],2,'"Cujo" indica posse e não admite artigo depois dele: "cujo endereço".'],
+['Português','Assinale a frase correta quanto à concordância nominal.',['É proibida entrada de estranhos.','É proibida a entrada de estranhos.','É proibido a entrada de estranhos.','São proibido entradas.','É proibidas a entrada.'],1,'Com artigo ("a entrada"), o adjetivo concorda: "proibida". Sem artigo, ficaria "É proibido entrada".'],
+['Português','Em "O diretor foi taxativo ao negar o pedido", a palavra "taxativo" significa:',['hesitante','categórico','educado','irônico','confuso'],1,'Taxativo = que não admite contestação; categórico, firme.'],
+// VENDAS E NEGOCIAÇÃO
+['Vendas','No composto de marketing (4 Ps), o elemento "praça" refere-se:',['ao preço de venda','aos canais de distribuição e ao acesso do cliente ao produto','à propaganda','às características do produto','ao pós-venda'],1,'Os 4 Ps são produto, preço, praça (distribuição e pontos de venda) e promoção (comunicação).'],
+['Vendas','A fase do ciclo de vida do produto em que as vendas se estabilizam e a concorrência fica mais intensa é a:',['introdução','crescimento','maturidade','declínio','lançamento'],2,'Na maturidade, o mercado está saturado, as vendas param de crescer e a disputa por clientes aumenta.'],
+['Vendas','Pelo CDC, o prazo para reclamar de vício aparente em produto durável é de:',['7 dias','15 dias','30 dias','90 dias','1 ano'],3,'Art. 26 do CDC: 30 dias para produtos não duráveis e 90 dias para duráveis.'],
+['Vendas','Segundo o CDC, o consumidor cobrado em quantia indevida e que pagou tem direito, salvo engano justificável, a:',['receber apenas o valor pago','receber o dobro do que pagou em excesso, com correção e juros','receber o triplo','um desconto na próxima compra','nenhuma devolução'],1,'Art. 42, parágrafo único, do CDC: repetição do indébito em dobro.'],
+['Vendas','Em negociação, a sigla MAANA (ou BATNA) significa:',['a meta de vendas do mês','a melhor alternativa à negociação de um acordo','o preço mínimo do produto','a margem de lucro','o prazo final da proposta'],1,'MAANA é o que você fará se não houver acordo. Conhecê-la dá poder de negociação.'],
+['Vendas','Na técnica SPIN Selling, as perguntas seguem a sequência:',['Solução, Preço, Interesse, Negócio','Situação, Problema, Implicação, Necessidade de solução','Sondagem, Proposta, Insistência, Negociação','Serviço, Produto, Impacto, Negócio','Sinal, Prazo, Interesse, Nota'],1,'SPIN: Situação, Problema, Implicação e Necessidade de solução.'],
+['Vendas','O Net Promoter Score (NPS) mede:',['o lucro por cliente','a probabilidade de o cliente recomendar a empresa','o número de reclamações','o tempo de atendimento','o ticket médio'],1,'O NPS pergunta, de 0 a 10, quanto o cliente recomendaria a empresa: promotores (9-10) menos detratores (0-6).'],
+['Vendas','Pela Resolução CVM nº 30/2021 (suitability), antes de recomendar um investimento, o profissional deve:',['garantir a rentabilidade','verificar se o produto é adequado ao perfil do cliente','oferecer só produtos de renda fixa','dispensar a análise para clientes antigos','recomendar o produto mais rentável'],1,'Suitability é o dever de verificar a adequação do produto ao perfil, aos objetivos e à situação financeira do cliente.'],
+['Vendas','Pela hierarquia de necessidades de Maslow, na base da pirâmide estão as necessidades:',['de autorrealização','de estima','sociais','fisiológicas','de segurança'],3,'A base são as fisiológicas (alimento, sono), depois segurança, sociais, estima e, no topo, autorrealização.'],
+['Vendas','Segundo o CDC, a informação ou publicidade suficientemente precisa sobre produtos e serviços:',['não gera obrigação','obriga o fornecedor e integra o contrato','só vale por escrito','vale apenas por 7 dias','depende de autorização do Procon'],1,'Art. 30 do CDC: a oferta vincula o fornecedor e passa a fazer parte do contrato.'],
+// ATUALIDADES DO MERCADO FINANCEIRO
+['Atualidades','No Open Finance, o compartilhamento de dados do cliente entre instituições:',['é automático e obrigatório','depende do consentimento do cliente, que pode revogá-lo','é feito pelo Banco Central sem aviso','só vale para empresas','é proibido para bancos digitais'],1,'O compartilhamento só ocorre com consentimento expresso, para finalidade e prazo definidos, e pode ser revogado.'],
+['Atualidades','A modalidade do Pix voltada a pagamentos recorrentes (como contas de consumo e assinaturas), com autorização prévia do pagador, é o:',['Pix Saque','Pix Troco','Pix Automático','Pix Garantido','Pix Cobrança'],2,'O Pix Automático, lançado em 2025, permite débitos recorrentes autorizados uma única vez pelo pagador.'],
+['Atualidades','O Pix Saque permite:',['sacar dinheiro em estabelecimentos comerciais participantes, via Pix','fazer empréstimos instantâneos','pagar boletos parcelados','investir em renda fixa','trocar moeda estrangeira'],0,'No Pix Saque, o cliente faz um Pix para o estabelecimento e recebe o valor em espécie.'],
+['Atualidades','O marco legal dos criptoativos no Brasil foi estabelecido pela:',['Lei 9.613/1998','Lei 14.478/2022','Lei 13.709/2018','Lei 4.595/1964','Lei 7.357/1985'],1,'A Lei 14.478/2022 trata das prestadoras de serviços de ativos virtuais. 9.613 é lavagem de dinheiro; 13.709, LGPD; 4.595, SFN; 7.357, cheque.'],
+['Atualidades','A Sociedade de Crédito Direto (SCD), modalidade de fintech de crédito, caracteriza-se por:',['captar depósitos à vista do público','realizar operações de crédito com recursos próprios, por plataforma eletrônica','emitir moeda','administrar fundos de pensão','operar só com câmbio'],1,'A SCD empresta com capital próprio, por meio eletrônico, e não pode captar recursos do público.'],
+['Atualidades','Os chamados "títulos verdes" (green bonds) são:',['títulos do Tesouro indexados ao dólar','títulos de dívida cujos recursos financiam projetos com benefícios ambientais','ações de empresas agrícolas','moedas digitais','seguros rurais'],1,'Green bonds captam recursos para projetos ambientais, como energia renovável e eficiência energética.'],
+['Atualidades','A partir de 2025, o sistema de metas de inflação passou a adotar:',['meta anual de 4,5%','meta contínua de 3%, com intervalo de tolerância de 1,5 ponto percentual','meta fixada pelo Copom a cada reunião','meta de câmbio','fim das metas de inflação'],1,'O CMN adotou a meta contínua de 3%, apurada mês a mês em 12 meses, com tolerância de 1,5 p.p. para cima ou para baixo.'],
+['Atualidades','O golpe em que o falso atendente convence a vítima a instalar um aplicativo de acesso remoto e movimenta a conta pelo celular dela é conhecido como golpe:',['do falso boleto','da mão fantasma','do bilhete premiado','do cartão clonado','da falsa promoção'],1,'No golpe da mão fantasma, o criminoso controla o aparelho remotamente. Bancos nunca pedem para instalar esse tipo de app.'],
+['Atualidades','Correspondentes no país (como lotéricas e redes de varejo) prestam serviços:',['em nome próprio, sem vínculo com bancos','sob contrato e responsabilidade da instituição financeira contratante','apenas de câmbio','só para empresas','sem regulação do Banco Central'],1,'Os correspondentes atuam por conta e ordem da instituição contratante, que responde pelos serviços prestados.'],
+['Atualidades','O principal índice usado como referência para a meta de inflação no Brasil é o:',['IGP-M','INCC','IPCA','INPC','IPA'],2,'O IPCA, do IBGE, é o índice oficial do sistema de metas de inflação.']];
+QZ.length=0;QZ.push(...QZ2);
+const _qzDados2=qzDados;qzDados=function(){const D=_qzDados2();if(D.ver!==2){D.erros=(D.erros||[]).filter(i=>i>=80);D.vistas={};D.st={};D.ver=2}return D};
 
 boot();setTimeout(()=>{try{evRemind();evBadge()}catch(e){}},1500);
 
