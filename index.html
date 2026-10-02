@@ -512,7 +512,7 @@ function day(k){k=k||dkey(new Date());return S.days[k]||(S.days[k]={done:{},time
 function save(){try{localStorage.setItem('jogo-da-vida',JSON.stringify(S))}catch(e){}clearTimeout(saveT);saveT=setTimeout(async()=>{if(DB&&UID){try{await DB.doc('data/users/'+UID+'/vida/estado').set({json:JSON.stringify(S),at:Date.now()})}catch(e){}}},700)}
 async function boot(){try{const l=localStorage.getItem('jogo-da-vida');if(l)S=Object.assign(JSON.parse(JSON.stringify(DEF)),JSON.parse(l))}catch(e){}
   if(!S.plans)S.plans=defaultPlans();applyTheme();render();
-  try{const c=window.claude;if(!c||!c.use)return;const [db,user]=await Promise.all([c.use('db'),c.use('user')]);if(!db||!user)return;UID=await user.id();if(!UID)return;DB=db;
+  try{const c=null;/* sem nuvem do Claude: o progresso fica só no aparelho */if(!c||!c.use)return;const [db,user]=await Promise.all([c.use('db'),c.use('user')]);if(!db||!user)return;UID=await user.id();if(!UID)return;DB=db;
     const snap=await db.doc('data/users/'+UID+'/vida/estado').get();if(snap&&snap.exists){const d=snap.data();const r=JSON.parse(d.json||'{}');const localAt=+(localStorage.getItem('jogo-da-vida-at')||0);if(d.at>=localAt){S=Object.assign(JSON.parse(JSON.stringify(DEF)),r);if(!S.plans)S.plans=defaultPlans();applyTheme();render()}}else save();
   }catch(e){}}
 const _save=save;save=function(){try{localStorage.setItem('jogo-da-vida-at',Date.now())}catch(e){}_save()};
@@ -2332,7 +2332,7 @@ const VG_TEMAS=[
  {k:/ansied|medo|preocup|p[aâ]nico|nervos|estress|ang[uú]sti/i,cena:t=>[
    `Traga à mente, por um instante, o que está pesando: ${t}. Só observe, sem brigar com isso.`,'Agora imagine que você está sentada à margem de um rio calmo.','Cada preocupação que aparece, você coloca numa folha e deixa a folha descer com a correnteza.','Você vê a folha se afastando, ficando pequena, até sumir na curva do rio.','Se outra preocupação aparecer, tudo bem. Outra folha, outra vez.','Repare que você não é as suas preocupações. Você é quem observa o rio.','Sinta o chão firme embaixo de você. Ele te sustenta sem esforço.','O ar entra fresco e sai morno. O corpo sabe se acalmar quando você deixa.','Imagine uma luz morna no centro do peito, que se espalha devagar pelos ombros, pelos braços, pela barriga.'],
   af:['Eu estou segura neste momento.','Eu posso sentir medo e, mesmo assim, seguir em frente.','Um passo de cada vez é suficiente.']},
- {k:/treino|academia|agach|corpo|for[cç]a|m[uú]scul|gl[uú]teo|sa[uú]de|exerc/i,cena:t=>[
+ {k:/treino|academia|agach|corpo|for[cç]a|m[uú]scul|gl[uú]teo|exerc|corr|maratona|nadar|nata[cç]|esporte|yoga|pilates|bike|pedal/i,cena:t=>[
    `Agora imagine você vivendo isto: ${t}.`,'Você chega à academia com energia, coloca a música de que gosta e se aquece com calma.','Veja você executando cada exercício com técnica: a postura firme, o abdômen ativo, o movimento controlado.','Sinta o músculo trabalhando: o glúteo apertando no topo, os ombros firmes na elevação lateral.','A última repetição é difícil, mas você termina com a forma limpa, e sente orgulho.','Avance alguns meses. Você se olha no espelho com carinho e repara na força nova dos ombros, das costas, das pernas.','Você sobe uma escada sem cansar, carrega as compras com facilidade, dorme melhor.','O seu corpo não é um projeto de punição. Ele é a sua casa, e você está deixando essa casa mais forte.'],
   af:['O meu corpo fica mais forte a cada treino.','Eu treino por amor a mim, não contra mim.','Constância vale mais que perfeição.']},
  {k:/entrevista|trabalho|reuni|apresenta|emprego|chefe|carreira|cliente/i,cena:t=>[
@@ -2564,7 +2564,7 @@ const _unSalao3=unSalao;unSalao=function(D,dias){if(D.n.length<10)D.n=[...D.n,..
   return _unSalao3(D,dias).replace(/<div class="unmaobox">[\s\S]*?<\/svg><\/div>/,'<div id="un3d" class="un3d"><p class="v3msg">Carregando as mãos…</p></div>')
    .replace('Toque numa unha para pintar.','Toque numa unha para pintar. Arraste para girar.')
    .replace('<div id="un3d"',`<div class="agop unlado">${[[1,'Mão direita'],[2,'Mão esquerda'],[0,'As duas']].map(([v,n])=>`<button class="${(D.lado||0)===v?'on':''}" onclick="unD().lado=${v};save();unTela()">${n}</button>`).join('')}</div><div id="un3d"`)
-   .replace('<div class="uncores">',`<div class="undedos">${[['Mão direita',[4,3,2,1,0]],['Mão esquerda',[5,6,7,8,9]]].map(([nm,ids])=>`<div><small>${nm}</small>${ids.map((k,j)=>{const n=D.n[k];return `<button onclick="unPintar(${k})" title="${['polegar','indicador','médio','anelar','mindinho'][j]}" style="background:${n?n.c:'#F4D3C2'}" class="${n?'ok':''}">${['P','I','M','A','m'][j]}</button>`}).join('')}</div>`).join('')}</div><p class="muted" style="font-size:11px;margin:4px 0 6px;text-align:center">Toque na unha da mão 3D ou nos botões (polegar, indicador, médio, anelar, mindinho). Mãos 3D: “Woman hands low-poly”, de blendffnike (Sketchfab, CC-BY 4.0) · v40</p><div class="uncores">`)};
+   .replace('<div class="uncores">',`<div class="undedos">${[['Mão direita',[4,3,2,1,0]],['Mão esquerda',[5,6,7,8,9]]].map(([nm,ids])=>`<div><small>${nm}</small>${ids.map((k,j)=>{const n=D.n[k];return `<button onclick="unPintar(${k})" title="${['polegar','indicador','médio','anelar','mindinho'][j]}" style="background:${n?n.c:'#F4D3C2'}" class="${n?'ok':''}">${['P','I','M','A','m'][j]}</button>`}).join('')}</div>`).join('')}</div><p class="muted" style="font-size:11px;margin:4px 0 6px;text-align:center">Toque na unha da mão 3D ou nos botões (polegar, indicador, médio, anelar, mindinho). Mãos 3D: “Woman hands low-poly”, de blendffnike (Sketchfab, CC-BY 4.0) · v43</p><div class="uncores">`)};
 unTodas=function(){const D=unD();D.n=new Array(10).fill(0).map(()=>({c:D.cor,e:D.ef}));save();unTela()};
 unLimpar=function(){unD().n=new Array(10).fill(null);save();unTela()};
 const _unTela3=unTela;unTela=function(){_unTela3();const D=unD(),dias=unDias();const st=UN.ov&&UN.ov.querySelector('.unstats');
@@ -2658,6 +2658,94 @@ unCriarBordas=function(mesh){const T=V3.T;if(!UN3.pecas)return;if(!UN3.eixos)unE
   UN3.bordas=UN3.eixos.map((E,k)=>{if(!E)return null;const mat=new T.MeshStandardMaterial({color:0xFFFFFF,emissive:0x3a3330,roughness:.45,side:T.DoubleSide,polygonOffset:true,polygonOffsetFactor:-2,polygonOffsetUnits:-6});
     const b=new T.Mesh(geo,mat);b.quaternion.setFromRotationMatrix(new T.Matrix4().makeBasis(E.lado.clone().negate(),E.dir,E.n));// base destra (sem espelhar)
     b.position.copy(E.c).add(E.dir.clone().multiplyScalar(E.dmax*.97)).add(E.n.clone().multiplyScalar(.0002));b.userData={larg:E.larg*.9,unha:k};b.scale.set(E.larg*.9,.0001,1);mesh.add(b);return b})};
+
+/* ================= VISUALIZAÇÃO GUIADA: roteiro novo para cada tema digitado =================
+   1) (desativado: o app não depende do Claude)
+   2) No app do GitHub (sem IA), o roteiro é montado na hora a partir das suas palavras, com novas
+      categorias e frases sorteadas, então muda a cada vez e usa o que você escreveu. */
+const VG_MAIS=[
+ {k:/viag|praia|mar\b|montanha|natureza|floresta|campo|cachoeira|paris|europa|ferias|férias/i,cena:t=>[`Imagine-se vivendo isto: ${t}.`,'Você chega ao lugar e respira um ar diferente, novo.','Repare na luz: a cor do céu, as sombras, o brilho nas superfícies.','Escute os sons: vento, água, vozes ao longe, passos.','Sinta o chão sob os pés e a temperatura do ar na pele.','Caminhe devagar, sem pressa de chegar a lugar nenhum.','Encontre um ponto bonito e pare. Deixe o olhar descansar no horizonte.','Perceba como o seu corpo fica mais leve longe da correria.','Guarde uma imagem desse lugar como uma foto dentro de você.'],af:['Eu mereço descanso e beleza.','Eu crio momentos que me fazem bem.','O mundo é grande e cheio de possibilidades para mim.']},
+ {k:/aprend|idioma|ingl[eê]s|espanhol|m[uú]sica|viol[aã]o|piano|curso|faculdade|ler\b|leitura/i,cena:t=>[`Imagine você daqui a alguns meses, depois de se dedicar a isto: ${t}.`,'Veja você praticando com calma, um pouco por dia.','Repare no momento em que algo que era difícil fica natural.','Sinta a satisfação de entender, de conseguir, de fazer sem esforço.','Imagine alguém te pedindo ajuda nisso, e você explicando com tranquilidade.','Lembre que todo especialista já foi iniciante, exatamente como você é agora.','Veja o caderno, o aplicativo ou o instrumento, e sinta carinho por esse caminho.'],af:['Eu aprendo um pouco a cada dia.','Errar faz parte de aprender.','Minha mente é curiosa e capaz.']},
+ {k:/sa[uú]de|cura|curar|dor|doen|recupera|cirurgia|tratamento|imunidade/i,cena:t=>[`Traga à mente o que você deseja para o seu corpo: ${t}.`,'Imagine uma luz morna e dourada entrando com a respiração.','Ela percorre o seu corpo devagar, da cabeça aos pés.','Onde existe tensão ou desconforto, a luz para um pouco e suaviza.','Imagine as suas células trabalhando a seu favor, com paciência.','Veja você daqui a um tempo, mais disposta, fazendo algo que gosta.','Agradeça ao seu corpo por tudo o que ele já atravessou.'],af:['Meu corpo sabe se cuidar, e eu cuido dele.','Eu respeito o meu tempo de recuperação.','A cada dia eu me fortaleço um pouco.']},
+ {k:/recome|mudan|mudar|nova fase|nova cidade|novo emprego|sair de|terminar|término/i,cena:t=>[`Pense na mudança que você deseja: ${t}.`,'Imagine uma porta à sua frente. Do outro lado está a sua nova fase.','Antes de abrir, agradeça ao que ficou para trás e ao que te ensinou.','Abra a porta e dê o primeiro passo. Repare em como o chão é firme.','Veja o novo ambiente: as pessoas, os lugares, as rotinas que você escolheu.','Perceba que você leva com você tudo o que aprendeu.','Sinta a coragem crescendo a cada passo.'],af:['Recomeçar é um ato de coragem.','Eu confio em quem eu estou me tornando.','Cada fim abre espaço para algo novo.']},
+ {k:/falar em p[uú]blico|apresenta|palestra|coragem|timidez|vergonha|medo de/i,cena:t=>[`Imagine a situação que hoje te dá frio na barriga: ${t}.`,'Você respira fundo três vezes antes de começar. Os pés firmes no chão.','Repare nos rostos à sua frente: são pessoas curiosas, não juízes.','Você começa devagar, e a sua voz sai mais firme do que esperava.','Se esquecer algo, você faz uma pausa, respira e retoma. Ninguém percebe.','No final, você sente o alívio e o orgulho de ter feito mesmo com medo.'],af:['Eu posso sentir medo e agir mesmo assim.','Minha voz importa.','Cada vez que eu enfrento, fica mais fácil.']},
+ {k:/gratid|agradec|paz|calma|serenidade|tranquil/i,cena:t=>[`Traga ao coração o seu tema: ${t}.`,'Pense em três coisas boas que aconteceram nesta semana, mesmo pequenas.','Reviva uma delas com detalhes: onde você estava, quem estava junto.','Sinta o calor que essa lembrança traz ao peito.','Pense em alguém que te faz bem e envie, em silêncio, um obrigada.','Agradeça também a você, por continuar tentando todos os dias.'],af:['Eu reconheço o que há de bom na minha vida.','A gratidão me deixa leve.','Eu tenho mais do que percebo.']},
+ {k:/amor|namor|casament|parceir|crush|paix[aã]o|relacionamento amoroso/i,cena:t=>[`Pense no amor que você deseja viver: ${t}.`,'Imagine uma relação em que você pode ser exatamente quem é.','Veja um momento simples: um café, uma conversa, risadas sem pressa.','Sinta o respeito, a confiança e o carinho dos dois lados.','Repare como você continua inteira, com os seus sonhos e o seu espaço.','Lembre que o primeiro amor é o que você tem por você mesma.'],af:['Eu mereço um amor gentil.','Eu ofereço e recebo carinho com liberdade.','Eu me amo, e isso orienta as minhas escolhas.']},
+ {k:/criativ|arte|desenh|pintur|escrever|escrita|projeto|ideia|neg[oó]cio|empreend/i,cena:t=>[`Imagine o seu projeto ganhando vida: ${t}.`,'Veja o espaço onde você cria: a mesa, a luz, os materiais.','As ideias chegam com facilidade, uma puxando a outra.','Você trabalha concentrada, perdendo a noção do tempo.','Imagine o resultado pronto, e alguém se emocionando com ele.','Sinta orgulho do caminho, não só do resultado.'],af:['Eu sou criativa.','Minhas ideias merecem existir.','Eu termino o que começo, um passo de cada vez.']}];
+VG_TEMAS.unshift(...VG_MAIS);
+// roteiro "geral" mais rico: usa as suas palavras e sorteia frases diferentes a cada vez
+const VG_POOL={entrada:['Agora traga à mente o tema que você escolheu: {t}.','Pense, com carinho, no que você escreveu: {t}.','Deixe surgir na sua mente uma cena ligada a isto: {t}.'],
+ visao:['Imagine isso acontecendo do jeito que você mais deseja.','Veja essa cena como se fosse um filme, com você no papel principal.','Imagine o dia em que isso já faz parte da sua vida.'],
+ sentidos:['Repare nas cores à sua volta e na luz do lugar.','Escute os sons dessa cena: vozes, música, silêncio.','Sinta a temperatura do ar e a textura do que você toca.','Perceba os cheiros desse momento.','Note a sua postura: ombros soltos, cabeça erguida, respiração tranquila.'],
+ emocao:['Que emoção aparece? Alegria, alívio, orgulho? Deixe que ela cresça.','Sinta essa emoção se espalhando pelo peito, pelos braços, pelo rosto.','Perceba o sorriso que aparece sem esforço.'],
+ acao:['Veja o que você faz nessa cena, passo a passo, com calma.','Repare em quem está com você e em como essas pessoas te olham.','Imagine alguém dizendo: estou muito feliz por você.'],
+ obstaculo:['Se surgir uma dificuldade, veja você respirando e encontrando uma saída.','Imagine um tropeço no caminho e você se levantando com mais experiência.'],
+ ponte:['Agora volte ao presente e pense: qual é um pequeno passo que eu posso dar hoje em direção a isso?','Escolha um gesto simples para amanhã que te aproxime disso.']};
+function vgSorteia(arr,n){const a=arr.slice();for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a.slice(0,n)}
+VG_GEN.cena=t=>{const P=VG_POOL,f=s=>s.replace(/\{t\}/g,t);return [f(vgSorteia(P.entrada,1)[0]),f(vgSorteia(P.visao,1)[0]),...vgSorteia(P.sentidos,3),...vgSorteia(P.acao,2).map(f),...vgSorteia(P.emocao,2),f(vgSorteia(P.obstaculo,1)[0]),f(vgSorteia(P.ponte,1)[0])]};
+VG_GEN.af=['Eu mereço viver o que desejo.','Eu confio no meu caminho.','Eu tenho tudo de que preciso para dar o próximo passo.','Eu escolho agir com coragem e gentileza.','Cada dia me aproxima do que importa para mim.'].sort(()=>Math.random()-.5).slice(0,3);
+// também sorteia um pouco a ordem/variações nas categorias fixas
+// IA (só na prévia do claude.ai): escreve um roteiro único
+let VG_SAMPLE=null;/* o app não usa o Claude: roteiros são gerados no próprio aparelho */
+async function vgRoteiroIA(tema,min){const n=(S.name||'').split(' ')[0];const linhas=min<=5?26:min<=10?40:52;
+  const prompt=`Escreva o roteiro de uma VISUALIZAÇÃO GUIADA em português do Brasil, para uma mulher${n?' chamada '+n:''}, sobre o tema que ela digitou: "${tema}".
+Regras: segunda pessoa (você), tom calmo e acolhedor, frases curtas (uma ideia por frase, até 25 palavras), concreto e sensorial, sem promessas médicas, sem misticismo exagerado.
+Estrutura: (1) acomodar o corpo e respirar; (2) relaxar partes do corpo; ${min>=10?'(3) descer uma escada de 5 degraus contando de cinco a um; ':''}(4) um lugar seguro; (5) a CENA DO TEMA, bem específica para "${tema}", com detalhes de visão, som, toque, emoção, ações e uma pequena dificuldade superada; (6) três afirmações em primeira pessoa ligadas ao tema; (7) ${/dorm|sono|ins[oô]nia/i.test(tema)?'deixar a pessoa adormecer, sem acordá-la':'voltar contando de um a cinco e abrir os olhos'}.
+Escreva cerca de ${linhas} frases. Responda SOMENTE com JSON no formato {"linhas":["frase 1","frase 2", ...]}.`;
+  const r=await VG_SAMPLE.json(prompt,{modelTier:'default',cache:false});const L=(r&&r.linhas||[]).filter(s=>typeof s==='string'&&s.trim()).map(s=>s.trim());
+  if(L.length<8)throw new Error('roteiro curto');const fala=L.reduce((a,s)=>a+s.length/13,0);return {linhas:L,pausa:Math.max(2.5,(min*60-fala)/L.length),sono:/dorm|sono|ins[oô]nia/i.test(tema),ia:true}}
+const _vgComecarIA=vgComecar;
+vgComecar=async function(){const D=vgD();const tema=((document.getElementById('vgtema')||{}).value||D.ult||'').trim();
+  if(VG_SAMPLE&&tema){D.ult=tema;save();VG.gerando=true;render();
+    try{VG.rIA=await vgRoteiroIA(tema,D.min)}catch(e){VG.rIA=null;if(e&&e.code==='not_granted')VG_SAMPLE=null;toast('Não deu para gerar com IA agora; usei o roteiro do app')}
+    VG.gerando=false}
+  _vgComecarIA();if(VG.rIA){VG.r=VG.rIA;VG.rIA=null;VG.i=0;render();vgPasso()}};
+const _vAgVisualIA=vAgVisual;vAgVisual=function(){if(VG.gerando)return `<section class="vgplay"><div class="vgorb"></div><p class="vgfrase">Escrevendo um roteiro só para o seu tema…</p><p class="muted">Isso leva alguns segundos.</p></section>`;
+  let h=_vAgVisualIA();if(!VG.on)h=h.replace('<p class="muted" style="font-size:12px;margin:10px 0 0">',`<p class="muted" style="font-size:12px;margin:10px 0 0">${VG_SAMPLE?'✨ Aqui na prévia, o Claude escreve um roteiro novo só para o seu tema. ':'O roteiro é montado na hora com as suas palavras, e as frases mudam a cada vez. '}`);
+  if(VG.on&&VG.r&&VG.r.ia)h=h.replace('<div class="vgorb"></div>','<div class="vgorb"></div><p class="muted" style="margin:-14px 0 10px;font-size:12px">✨ roteiro escrito para o seu tema</p>');return h};
+
+/* ================= VISUALIZAÇÃO: PRÊMIO MÁXIMO DA LOTOFÁCIL ================= */
+const VG_LOTO={k:/lotof[aá]cil|loteria|pr[eê]mio m[aá]ximo|ganhar na lot/i,cena:t=>[
+ 'Agora imagine uma noite comum. Você está em casa, com o Vader enrolado no sofá e o Zorro andando pela sala.',
+ 'Você pega o celular para conferir o resultado da Lotofácil, sem muita expectativa.',
+ 'Você abre o aplicativo e começa a comparar os números com o seu volante, um por um.',
+ 'O primeiro bate. O segundo também. Você sente o coração acelerar.',
+ 'Dez acertos. Doze. Treze. Você para, respira, e confere de novo, devagar.',
+ 'Quinze acertos. Todos os números. O prêmio máximo é seu.',
+ 'Repare na sua reação: talvez você leve a mão à boca, talvez ria sozinha, talvez as lágrimas venham.',
+ 'Sinta o corpo inteiro tremer de emoção. Deixe essa alegria existir, sem pressa.',
+ 'O Vader levanta a cabeça e te olha, curioso. O Zorro vem se esfregar nas suas pernas, como se soubesse.',
+ 'Você abraça os dois e diz baixinho: a nossa vida vai mudar.',
+ 'Então você respira fundo e decide agir com calma e em silêncio. Você não conta para ninguém ainda.',
+ 'Você assina o verso do bilhete, escreve o seu CPF e guarda o papel num lugar seguro, protegido.',
+ 'Nos dias seguintes, você organiza tudo com tranquilidade, como quem planeja uma viagem importante.',
+ 'Você reserva um Airbnb aconchegante em outro estado, num lugar onde ninguém te conhece.',
+ 'Imagine você arrumando as malas: as suas roupas, os seus livros, as caixas de transporte do Vader e do Zorro.',
+ 'Os dois entram nas caixinhas e você conversa com eles durante a viagem, com voz calma.',
+ 'Você chega ao Airbnb. A luz é bonita, o ambiente é limpo e silencioso. Os gatos exploram cada canto.',
+ 'Você deixa a caminha deles, a água e a ração arrumadas. Agora esse é o seu ponto de partida.',
+ 'No dia marcado, você vai a uma agência da Caixa, com os seus documentos e o bilhete guardado com cuidado.',
+ 'Você é recebida numa sala reservada. As pessoas são discretas e respeitosas.',
+ 'Você entrega o bilhete, apresenta os documentos e acompanha cada etapa com serenidade.',
+ 'Você escuta as orientações sobre segurança, sigilo e investimentos, e faz as suas perguntas com calma.',
+ 'Imagine o momento em que o valor aparece na sua conta. Você olha o número e sente uma paz profunda.',
+ 'Você não volta para a vida antiga. Você sai da agência pronta para começar de novo.',
+ 'Nas semanas seguintes, você conversa com especialistas de confiança e monta um plano para viver de rendimentos.',
+ 'Você aplica o dinheiro com prudência, de forma diversificada, para que ele trabalhe por você todos os meses.',
+ 'Você escolhe um lar definitivo para você, o Vader e o Zorro: luminoso, tranquilo, com janelas para eles tomarem sol.',
+ 'Agora imagine a sua nova rotina. Você acorda sem despertador, toma café com calma e os gatos dormem ao seu lado.',
+ 'Você monta um cantinho de estudos lindo, com uma mesa grande, livros, cadernos e uma janela com vista.',
+ 'Você estuda o que sempre quis, no seu ritmo, por prazer e por propósito.',
+ 'Você treina, dorme bem, cuida da sua saúde e tem tempo para as pessoas que ama.',
+ 'Repare na sensação de liberdade: nenhuma pressa, nenhum boleto te assustando, o tempo inteiro é seu.',
+ 'Você ajuda quem você quer ajudar, com sabedoria, sem colocar a sua paz em risco.',
+ 'Olhe ao redor dessa nova vida e sinta gratidão por cada detalhe.'],
+ af:['Eu sou digna de abundância e de uma vida tranquila.','Eu cuido do meu dinheiro com sabedoria e calma.','Eu uso a minha liberdade para estudar, crescer e viver em paz com quem eu amo.']};
+VG_TEMAS.unshift(VG_LOTO);
+// sugestão pronta na tela e, na prévia, usa este roteiro escrito (não pede para a IA reescrever)
+const _vAgVisualL=vAgVisual;vAgVisual=function(){let h=_vAgVisualL();if(!VG.on&&!VG.gerando)h=h.replace("<button onclick=\"vgSug('Passar no concurso do Banco do Brasil')\">","<button onclick=\"vgSug('Ganhar o prêmio máximo da Lotofácil')\">🍀 Ganhar o prêmio máximo da Lotofácil</button><button onclick=\"vgSug('Passar no concurso do Banco do Brasil')\">");return h};
+const _vgRoteiroIAL=vgRoteiroIA;vgRoteiroIA=async function(tema,min){if(VG_LOTO.k.test(tema))throw {code:'roteiro_proprio'};return _vgRoteiroIAL(tema,min)};
+const _toastL=toast;toast=function(m){if(/Não deu para gerar com IA/.test(m)&&VG_LOTO.k.test(vgD().ult||''))return;return _toastL(m)};
 
 boot();setTimeout(()=>{try{evRemind();evBadge()}catch(e){}},1500);
 
