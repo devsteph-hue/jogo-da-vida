@@ -1,4 +1,4 @@
-<!doctype html><html lang="pt-BR"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<!doctype html><html lang="pt-BR"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"><script type="importmap">{"imports":{"three":"./three.module.min.js"}}</script>
 <title>Jogo da Vida</title>
 <meta name="apple-mobile-web-app-capable" content="yes"><meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="default"><meta name="apple-mobile-web-app-title" content="Jogo da Vida">
@@ -260,6 +260,163 @@ main{padding-bottom:130px}
 
 @media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
 .now.nowwide{grid-template-columns:1fr}.now.nowwide img{height:160px;min-height:0;border-right:0;border-bottom:2.5px solid var(--ol);object-position:50% 35%}.ic.sc.sc-mae{object-fit:cover;object-position:center}
+
+/* escolher e editar treinos */
+.pbtns{display:flex;gap:6px;align-items:center;flex-wrap:wrap;justify-content:flex-end}
+.pbtns .go{margin:0}
+.mini{background:var(--sf2);color:var(--tx);font-weight:800;font-size:12.5px;border-radius:11px;padding:7px 10px;border:2.5px solid var(--ol)!important;box-shadow:2px 3px 0 var(--ol)}
+.mini:active{transform:translate(2px,3px);box-shadow:0 0 0 var(--ol)}
+.mini.warn{background:#F6C9C9;color:#2A2230}
+.pname{width:100%;font:inherit;font-weight:800;font-size:17px;padding:8px 10px;border-radius:12px;border:2.5px solid var(--ol);background:var(--bg);color:var(--tx);margin:4px 0 8px}
+.addex{margin-top:10px;padding:10px;border-radius:16px;background:var(--sf2)}
+.addex h3{margin:4px 0 8px;font-size:14px}
+.chips{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:8px}
+.chips button{background:var(--sf);color:var(--tx);font-weight:700;font-size:13px;border-radius:12px;padding:7px 10px;border:2px solid var(--ol)}
+.chips button:active{transform:translate(1px,2px)}
+.pfoot{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}
+.newplan{width:100%;margin:0 0 14px;padding:12px;border-radius:18px;border:2.5px dashed var(--ol);background:transparent;color:var(--tx);font-weight:800;font-size:15px}
+.reset{display:block;margin:6px auto 18px;background:none;color:var(--mu);text-decoration:underline;font-size:13px}
+.pempty{color:var(--mu);font-size:13.5px;margin:6px 0}
+
+/* escolher a fase do programa */
+.pill.dl{position:static;display:inline-block}
+.fases{list-style:none;padding:0;margin:6px 0 0}
+.fases li{display:grid;grid-template-columns:1fr auto;gap:8px;align-items:center;padding:8px 10px;border-radius:12px;margin-bottom:6px;background:var(--sf);border:1.5px solid var(--ln)}
+.fases li.esc{border:2.5px solid var(--ol);background:var(--pe)}
+.fases li b{display:block;font-size:13.5px}
+.fases li small{font-size:11.5px;color:var(--mu);display:block}
+.fases li.esc small{color:var(--tx)}
+.fases .tag{display:inline-block;font-size:10.5px;font-weight:800;border-radius:10px;padding:1px 8px;margin-left:6px;background:#CFE6F5;color:#2A2230;border:1.5px solid var(--ol);vertical-align:middle}
+.fases .tag.eu{background:#FFE08A}
+.sugere{margin:8px 0 0;padding:8px 10px;border-radius:12px;background:var(--sf);border:1.5px dashed var(--ol);font-size:13px}
+.sugere .mini{margin-left:6px}
+/* casinha (tamagotchi) */
+.tabs button{min-width:0;padding:6px 7px}
+.tcena{position:relative;height:330px;border:2.5px solid var(--ol);border-radius:24px;overflow:hidden;box-shadow:var(--sh);margin-bottom:14px;
+  background:linear-gradient(#FBE3CF 0 62%,#E9C9A8 62% 100%)}
+[data-theme=dark] .tcena{background:linear-gradient(#3A3358 0 62%,#2C2742 62% 100%)}
+.tjanela{position:absolute;left:50%;top:18px;width:120px;height:90px;transform:translateX(-50%);border:4px solid var(--ol);border-radius:14px;background:linear-gradient(#BFE3FA,#E8F6FF)}
+.tjanela::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,transparent 48%,var(--ol) 48% 52%,transparent 52%),linear-gradient(transparent 48%,var(--ol) 48% 52%,transparent 52%)}
+.tchao{position:absolute;left:0;right:0;bottom:0;height:38%;background:repeating-linear-gradient(90deg,transparent 0 46px,rgba(0,0,0,.06) 46px 48px)}
+.tchar{position:absolute;bottom:14px;background:none;border:0;padding:0;cursor:pointer;display:flex;flex-direction:column;align-items:center;transition:transform .2s}
+.tchar .tsvg{display:block;filter:drop-shadow(0 4px 0 rgba(0,0,0,.12))}
+.tchar .tsvg .ol{stroke:var(--ol);stroke-width:2.5}
+.tchar .tsvg .tl{fill:none;stroke:#2A2230;stroke-width:3;stroke-linecap:round}
+.t-eu{left:50%;margin-left:-62px;width:124px;bottom:8px}.t-eu .tsvg{width:124px;height:174px}
+.t-preto{left:4%;width:104px}.t-preto .tsvg{width:104px;height:104px}
+.t-frajola{right:4%;width:100px}.t-frajola .tsvg{width:100px;height:100px}
+.t-guardiao{right:6%;bottom:auto;top:96px;width:86px}.t-guardiao .tsvg{width:86px;height:86px}
+.t-guardiao::before{content:"";position:absolute;bottom:18px;left:-6px;right:-6px;height:12px;border-radius:8px;background:#B07A52;border:2.5px solid var(--ol)}
+.tchar.sel .tnome{background:var(--pe);border-color:var(--ol)}
+.tnome{font-size:11.5px;font-weight:800;padding:1px 8px;border-radius:10px;background:var(--sf);border:2px solid var(--ln);color:var(--tx);margin-top:-4px;white-space:nowrap}
+.tchar .tsvg{animation:tbob 2.6s ease-in-out infinite}
+.t-preto .tsvg{animation-delay:-.7s}.t-frajola .tsvg{animation-delay:-1.4s}.t-guardiao .tsvg{animation-delay:-2s}
+.tchar .cauda{transform-origin:146px 150px;animation:tcauda 1.8s ease-in-out infinite}
+.m-sono .tsvg{animation:none;transform:translateY(4px)}
+.m-triste .tsvg{animation-duration:4s}
+@keyframes tbob{0%,100%{transform:translateY(0)}50%{transform:translateY(-5px)}}
+@keyframes tcauda{0%,100%{transform:rotate(0)}50%{transform:rotate(-12deg)}}
+.zz{position:absolute;top:0;right:4px;font-size:18px;color:var(--li);animation:tzz 2s infinite}.zz i{font-style:normal;font-size:13px}
+@keyframes tzz{0%{opacity:0;transform:translateY(6px)}50%{opacity:1}100%{opacity:0;transform:translateY(-14px)}}
+.a-comer .tsvg,.a-racao .tsvg,.a-sache .tsvg,.a-petisco .tsvg{animation:tnham .35s 5}
+.a-carinho .tsvg,.a-escovar .tsvg{animation:twig .5s 4}
+.a-brincar .tsvg{animation:tpulo .45s 4}
+.a-banho .tsvg{animation:twig .3s 6}
+.a-roupa .tsvg{animation:tgira .7s 1}
+@keyframes tnham{50%{transform:scale(1.06,.94)}}
+@keyframes twig{25%{transform:rotate(-4deg)}75%{transform:rotate(4deg)}}
+@keyframes tpulo{50%{transform:translateY(-26px)}}
+@keyframes tgira{50%{transform:scaleX(-1)}}
+#tfx{position:absolute;inset:0;pointer-events:none}
+#tfx span{position:absolute;font-size:22px;animation:tsobe 1.4s ease-out forwards;opacity:0}
+@keyframes tsobe{0%{opacity:0;transform:translateY(0) scale(.6)}20%{opacity:1}100%{opacity:0;transform:translateY(-90px) scale(1.2)}}
+.tfala{position:absolute;left:12px;top:12px;max-width:52%;background:var(--sf);border:2.5px solid var(--ol);border-radius:16px 16px 16px 4px;padding:7px 10px;font-size:12.5px;line-height:1.35;box-shadow:2px 3px 0 var(--ol);z-index:2}
+.tfala b{display:block;font-size:11px;color:var(--pe2)}
+.tcard,.tpanel{background:var(--sf);border:2.5px solid var(--ol);border-radius:22px;box-shadow:var(--sh);padding:12px 14px;margin-bottom:14px}
+.ttop{display:flex;justify-content:space-between;align-items:center;gap:8px}.ttop h2{margin:0;font-size:20px}
+.tbar{display:grid;grid-template-columns:24px 1fr 64px;gap:8px;align-items:center;margin:6px 0}
+.tbar div{height:12px;border-radius:8px;background:var(--sf2);border:2px solid var(--ol);overflow:hidden}.tbar i{display:block;height:100%;transition:width .5s}
+.tbar small{color:var(--mu);font-weight:700}
+.tacoes{display:grid;grid-template-columns:repeat(auto-fill,minmax(88px,1fr));gap:8px;margin-top:10px}
+.tacoes button{display:flex;flex-direction:column;align-items:center;gap:2px;padding:10px 4px;border-radius:16px;background:var(--sf2);color:var(--tx);font-weight:800;font-size:12.5px;border:2.5px solid var(--ol);box-shadow:2px 3px 0 var(--ol)}
+.tacoes button i{font-style:normal;font-size:24px}
+.tacoes button:active{transform:translate(2px,3px);box-shadow:0 0 0 var(--ol)}
+.tpanel h3{margin:0 0 8px;font-size:15px}
+.troupas{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
+.troupas button{background:var(--sf2);border:2px solid var(--ln);border-radius:14px;padding:4px 2px;color:var(--tx);font-size:11px;font-weight:800}
+.troupas button.on{border:2.5px solid var(--ol);background:var(--pe)}
+.troupas button[disabled]{opacity:.55}
+.troupas .tsvg{width:100%;height:80px}.troupas .tsvg .ol{stroke:var(--ol);stroke-width:2.5}.troupas .tsvg .tl{fill:none;stroke:#2A2230;stroke-width:3;stroke-linecap:round}
+.tcores{display:flex;gap:10px}.tcores button{width:34px;height:34px;border-radius:50%;border:2.5px solid var(--ol)}.tcores button.on{outline:3px solid var(--pe);outline-offset:2px}
+/* 3D e mini jogo */
+.v3box{height:340px;border-radius:18px;background:radial-gradient(circle at 50% 35%,#FFF4E8,#F6D7BE);border:2px solid var(--ln);overflow:hidden;display:grid;place-items:center}
+[data-theme=dark] .v3box{background:radial-gradient(circle at 50% 35%,#3A3358,#24203A)}
+.v3c{width:100%;height:100%;display:block;touch-action:pan-y;cursor:grab}
+.v3msg{color:var(--mu);font-size:13px;text-align:center;padding:0 16px}
+.v3acoes{grid-template-columns:repeat(3,1fr)}
+.jogo{position:fixed;inset:0;z-index:50;background:#FBE3CF}
+.jcv{position:absolute;inset:0;width:100%;height:100%;display:block;touch-action:none}
+.jhud{position:absolute;left:12px;right:12px;top:calc(env(safe-area-inset-top,0px) + 12px);display:flex;align-items:center;gap:12px;z-index:2}
+.jhud>b{font-size:30px;font-weight:900;color:#2A2230;text-shadow:0 2px 0 #fff}
+.jhud span{background:#fff;border:2.5px solid #2A2230;border-radius:14px;padding:3px 10px;font-weight:800;color:#2A2230}
+.jhud .mini{margin-left:auto}
+.jmsg{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:min(86vw,360px);background:var(--sf);color:var(--tx);border:2.5px solid var(--ol);border-radius:22px;box-shadow:var(--sh);padding:16px 18px;text-align:center;z-index:3}
+.jmsg h2{margin:0 0 6px}.jmsg p{margin:6px 0}.jmsg .go{margin:10px auto 0;display:block;max-width:none;width:100%}
+
+/* casinha 3D */
+.tcena.c3on{height:380px}
+.tcena.c3on>:not(.c3box):not(.tfala){display:none!important}
+.c3box{position:absolute;inset:0;display:grid;place-items:center}
+.c3c{width:100%;height:100%;display:block;touch-action:pan-y}
+.tcena.c3on .tfala{max-width:52%;font-size:11.5px;display:-webkit-box;-webkit-line-clamp:4;-webkit-box-orient:vertical;overflow:hidden;padding:6px 9px}
+.c3chips{display:flex;gap:6px;flex-wrap:wrap;margin:-4px 0 14px}
+.c3chips button{background:var(--sf);color:var(--tx);font-weight:800;font-size:13px;border-radius:14px;padding:7px 12px;border:2.5px solid var(--ol);box-shadow:2px 3px 0 var(--ol)}
+.c3chips button.on{background:var(--pe)}
+.c3chips .jbtn{margin-left:auto;background:#FFE08A}
+.r3{display:grid;grid-template-columns:repeat(2,1fr);gap:8px}
+.r3 button{display:flex;align-items:center;gap:8px;background:var(--sf2);border:2px solid var(--ln);border-radius:14px;padding:8px;color:var(--tx);font-size:12.5px;font-weight:800;text-align:left}
+.r3 button.on{border:2.5px solid var(--ol);background:var(--pe)}.r3 button[disabled]{opacity:.55}
+.r3 i{width:28px;height:28px;border-radius:50%;border:2px solid var(--ol);flex:none}
+/* biblioteca de treinos */
+.tlib{margin-bottom:6px}.tlib h2{margin:0}
+.tcats button.on{background:var(--pe)}
+.tlc{background:var(--sf);border:2px solid var(--ln);border-radius:18px;padding:10px 12px;margin-bottom:10px}
+.tlc.sug{border:2.5px solid var(--ol);box-shadow:var(--sh)}
+.tlt b{font-size:15.5px;margin-right:6px}.tlt .pill{margin-right:4px;background:var(--sf2)}.tlt .pill.sg{background:#FFE08A}
+.tle{font-size:12.5px;color:var(--mu);margin:6px 0 0}
+/* programa 24 semanas + Barney */
+.rcp{background:linear-gradient(135deg,#FFF1E2,var(--sf));border:2.5px solid var(--ol);border-radius:22px;box-shadow:var(--sh);padding:12px 14px;margin-bottom:16px}
+[data-theme=dark] .rcp{background:var(--sf)}
+.rcp h2{margin:6px 0 0;font-size:21px}
+.rgrade{display:grid;grid-template-columns:repeat(8,1fr);gap:4px;margin:8px 0}
+.rgrade i{font-style:normal;text-align:center;font-size:11px;font-weight:800;padding:4px 0;border-radius:8px;background:color-mix(in srgb,var(--c) 22%,transparent);color:var(--tx);border:1.5px solid transparent}
+.rgrade i.dsc{background:#D9D9DE;color:#555}.rgrade i.ok{background:var(--c);color:#fff}.rgrade i.ag{border:2.5px solid var(--ol)}
+.rdia{font-size:13.5px;margin:6px 0}
+.rcp .chips button.on{background:var(--pe)}
+.rlist{list-style:none;padding:0;margin:8px 0 0}
+.rlist li{display:grid;grid-template-columns:1fr auto 52px;gap:8px;align-items:center;padding:6px 0;border-top:1px solid var(--ln);font-size:13.5px}
+.rlist li:first-child{border-top:0}.rlist small{display:block;color:var(--pe2);font-size:11.5px;font-weight:700}
+.rlist b{white-space:nowrap}.rlist em{font-style:normal;color:var(--mu);font-size:12px;text-align:right}
+.rtxt{font-size:13px;line-height:1.45;margin:6px 0}.rtxt li{margin-bottom:6px}
+.rset{display:flex;justify-content:space-between;align-items:center;gap:8px;flex-wrap:wrap;margin-top:10px;font-size:13px}
+.rset input{font:inherit;padding:4px 6px;border-radius:8px;border:2px solid var(--ol);background:var(--bg);color:var(--tx)}
+.rnota{font-size:13px;font-weight:800;color:var(--pe2);margin:4px 0}
+.barney blockquote{margin:10px 0;padding:12px 14px;border-left:5px solid #4FA3E0;background:var(--sf2);border-radius:12px;font-size:15px;line-height:1.5}
+.barney .chips button.on{background:#CFE6F5}
+.eu3d{border-radius:inherit;overflow:hidden;background:linear-gradient(#2D3354,#1E2236);flex:none;cursor:grab}.eu3d canvas{width:100%;height:100%;display:block;touch-action:pan-y}
+.rvar button{font-size:12.5px}.rvar button.on{background:#FFE08A!important}
+.rpasso{font-size:15px;margin:12px 0 6px}
+.rslots{display:grid;grid-template-columns:repeat(auto-fill,minmax(110px,1fr));gap:8px}
+.rslots button{text-align:left;background:var(--sf);color:var(--tx);border:2.5px solid var(--ol);border-radius:16px;padding:9px 10px;box-shadow:2px 3px 0 var(--ol)}
+.rslots button.on{background:var(--pe)}.rslots b{display:block;font-size:14px}.rslots small{display:block;font-size:11.5px;color:var(--tx);opacity:.75;line-height:1.25}.rslots em{display:block;font-style:normal;font-size:10.5px;font-weight:800;color:var(--pe2);margin-top:2px}
+.rslots button.on em{color:#2A2230}
+.rvc{background:var(--sf);border:2px solid var(--ln);border-radius:16px;padding:10px 12px;margin-bottom:8px;cursor:pointer}
+.rvc.on{border:2.5px solid var(--ol);box-shadow:var(--sh);cursor:default}
+.rvt{display:flex;gap:8px;align-items:flex-start}.rvt b{font-size:14.5px;margin-right:6px}.rradio{font-size:18px;line-height:1;color:var(--pe2)}
+.rlist.rimg li{grid-template-columns:64px 1fr auto 38px;gap:6px}.rlist.rimg em{font-size:11px}
+.rlist .rvid{display:block;font-size:11px;font-weight:800;color:var(--pe2);text-decoration:none;margin-top:2px}
+.rthumbs{display:flex;gap:4px;overflow-x:auto;margin:8px 0 2px;padding-bottom:2px}.rthumbs .demo.sm{width:52px;height:40px;border-radius:8px}.rthumbs svg.fig.sm{width:40px;height:40px}
+.r3.rl .ric{width:auto;height:auto;border:0;font-style:normal;font-size:22px;background:none}
 </style></head><body>
 <main id="main"></main>
 <nav class="tabs" aria-label="Seções"><div>
@@ -932,6 +1089,783 @@ function planFor(mode,i){const P=progAt();const p=S.plans[mode][i];const ex=p.ex
   return {name:p.name,ex:rot.map(e=>{const q=exParams(e,P,mode);return {...e,sets:q.sets,reps:q.reps[1],range:q.reps,rest:q.rest,unit:q.unit}})}}
 function todayPlan(mode){const n=S.history.filter(h=>h.mode===mode).length;return n%Math.max(1,S.plans[mode].length)}
 function curGym(d){d=d||new Date();const dow=d.getDay(),work=(dow>=1&&dow<=5)||(dow===6&&S.workSat);return work&&d.getDate()<=15?(S.gymQ1||'casa'):S.gymMode}
+
+
+/* ================= ESCOLHER E MONTAR OS TREINOS ================= */
+// TED = treino aberto para edição {mode,i}; TADD = mostrando a lista para adicionar exercício
+let TED=null,TADD=false;
+const EX_CORPO=['agachamento','afundo','flexao','prancha','ponte','abdominal','polichinelo','saltoagach','escalador','mergulho','barra','superman'];
+const EX_ACAD=['legpress','terra','elevacao','panturrilha','supino','remada','puxada','desenvolvimento','rosca','triceps','extensora'];
+function cargaPadrao(mode,id){if(mode!=='academia'||BODYW.has(id)||EXTYPE[id]==='tempo'||EXTYPE[id]==='cardio')return '';return ['rosca','desenvolvimento'].includes(id)?'2×5 kg':'10 kg'}
+// "Treino de hoje": o que você escolheu para hoje vale; senão segue o rodízio (A, B, C...)
+const _todayPlan=todayPlan;
+todayPlan=function(mode){const pk=(S.pick||{})[mode];const n=S.plans[mode].length;if(pk&&pk.k===dkey(new Date())&&pk.i<n)return pk.i;return n?_todayPlan(mode):0};
+function pickToday(mode,i){S.pick=S.pick||{};S.pick[mode]={k:dkey(new Date()),i};save();render();toast('Esse é o seu treino de hoje')}
+function tEdit(mode,i){TED=TED&&TED.mode===mode&&TED.i===i?null:{mode,i};TADD=false;render()}
+function tRename(mode,i,v){v=(v||'').trim();if(!v)return;S.plans[mode][i].name=v;save()}
+function tMove(mode,i,j,dir){const L=S.plans[mode][i].ex,k=j+dir;if(k<0||k>=L.length)return;[L[j],L[k]]=[L[k],L[j]];save();render()}
+function tDelEx(mode,i,j){const L=S.plans[mode][i].ex;L.splice(j,1);save();render()}
+function tAddEx(mode,i,id){const L=S.plans[mode][i].ex;if(L.some(e=>e.id===id))return;L.push({id,sets:3,reps:12,rest:60,load:cargaPadrao(mode,id)});save();render();toast(EX[id].n+' adicionado')}
+function tNewPlan(mode){const L=S.plans[mode];const letra=String.fromCharCode(65+L.length);L.push({name:(mode==='casa'?'Calistenia · ':'')+letra+' · Meu treino',ex:[]});TED={mode,i:L.length-1};TADD=true;save();render()}
+function tDelPlan(mode,i){const L=S.plans[mode];if(L.length<=1){toast('Deixe pelo menos um treino');return}if(!confirm('Excluir o treino "'+L[i].name+'"?'))return;L.splice(i,1);if(S.pick&&S.pick[mode]&&S.pick[mode].i>=L.length)delete S.pick[mode];TED=null;save();render()}
+function tReset(mode){if(!confirm('Voltar os treinos de '+(mode==='casa'?'calistenia':'academia')+' para os originais? Suas mudanças nesses treinos serão perdidas.'))return;S.plans[mode]=defaultPlans()[mode];if(S.pick)delete S.pick[mode];TED=null;save();render()}
+const _startWS=startWS;startWS=function(i,mode){mode=mode||curGym();if(!S.plans[mode][i].ex.length){toast('Adicione pelo menos um exercício');return}_startWS(i,mode)};
+function vPlano(mode,i,tp){const ed=TED&&TED.mode===mode&&TED.i===i;const raw=S.plans[mode][i];const p=raw.ex.length?planFor(mode,i):{name:raw.name,ex:[]};const hoje=i===tp;
+  const topo=`${hoje?'<span class="pill tdy">Treino de hoje</span>':''}<div class="pt">${ed?'':`<h2>${esc(p.name)}</h2>`}<div class="pbtns">${ed?'':`${hoje?'':`<button class="mini" onclick="pickToday('${mode}',${i})">Fazer hoje</button>`}<button class="mini" onclick="tEdit('${mode}',${i})">Editar</button><button class="go" onclick="startWS(${i},'${mode}')">Começar</button>`}</div></div>`;
+  if(!ed)return `<article class="plan ${hoje?'today':''}">${topo}${p.ex.length?`<ul class="exl">${p.ex.map(e=>`<li>${demo(e.id,"sm")}<div><b>${EX[e.id].n}</b><small>${e.sets} × ${repTxt(e.range)}${e.unit==='s'?' s':''}${e.load?' · '+esc(e.load):''} · descanso ${e.rest}s</small></div>
+      <div class="ed"><button aria-label="Menos carga" onclick="edExId('${mode}',${i},'${e.id}',-1)">−</button><button aria-label="Mais carga" onclick="edExId('${mode}',${i},'${e.id}',1)">+</button></div></li>`).join('')}</ul>`:'<p class="pempty">Sem exercícios ainda. Toque em Editar para escolher.</p>'}</article>`;
+  // modo edição: nome, ordem, tirar e pôr exercícios
+  const L=raw.ex;const tem=new Set(L.map(e=>e.id));
+  const grupo=(t,ids)=>{const f=ids.filter(id=>EX[id]&&!tem.has(id));return f.length?`<h3>${t}</h3><div class="chips">${f.map(id=>`<button onclick="tAddEx('${mode}',${i},'${id}')">+ ${EX[id].n}</button>`).join('')}</div>`:''};
+  return `<article class="plan ${hoje?'today':''}">${topo}<input class="pname" value="${esc(raw.name)}" aria-label="Nome do treino" onchange="tRename('${mode}',${i},this.value)">
+   ${L.length?`<ul class="exl">${L.map((e,j)=>`<li>${demo(e.id,"sm")}<div><b>${EX[e.id].n}</b><small>${j+1}º exercício${e.load?' · '+esc(e.load):''}</small></div>
+     <div class="ed"><button aria-label="Subir" onclick="tMove('${mode}',${i},${j},-1)">↑</button><button aria-label="Descer" onclick="tMove('${mode}',${i},${j},1)">↓</button><button aria-label="Tirar do treino" onclick="tDelEx('${mode}',${i},${j})">✕</button></div></li>`).join('')}</ul>`:'<p class="pempty">Escolha os exercícios abaixo.</p>'}
+   ${TADD?`<div class="addex">${grupo('Peso do corpo',EX_CORPO)}${grupo('Academia',EX_ACAD)}<button class="mini" onclick="TADD=false;render()">Fechar lista</button></div>`:`<div class="pfoot"><button class="mini" onclick="TADD=true;render()">+ Adicionar exercício</button></div>`}
+   <div class="pfoot"><button class="go" onclick="tEdit('${mode}',${i})">Pronto</button><button class="mini warn" onclick="tDelPlan('${mode}',${i})">Excluir treino</button></div>
+   <p class="muted" style="font-size:12.5px;margin:8px 0 0">Séries, repetições e descanso seguem a fase do programa. A carga você ajusta com − e + fora da edição.</p></article>`}
+const _vTreino=vTreino;
+vTreino=function(){const mode=TMODE||curGym();const html=_vTreino();const tp=todayPlan(mode);
+  // troca os cartões dos treinos pelos novos (com Editar / Fazer hoje) e acrescenta "Criar treino" e "Restaurar"
+  const ini=html.indexOf('<article class="plan'),fim=html.indexOf('<h2 class="sh">Últimos treinos');
+  if(ini<0||fim<0)return html;
+  const cards=S.plans[mode].map((_,i)=>vPlano(mode,i,tp)).join('')+`<button class="newplan" onclick="tNewPlan('${mode}')">+ Criar treino novo</button>`;
+  return html.slice(0,ini)+cards+html.slice(fim)+`<button class="reset" onclick="tReset('${mode}')">Restaurar os treinos originais de ${mode==='casa'?'calistenia':'academia'}</button>`};
+
+
+/* ================= ESCOLHER A FASE DO PROGRAMA DE 2 ANOS ================= */
+// O programa sugere a fase pela data (temporadas de 66 dias). Você pode escolher outra;
+// a escolha vale até você voltar para a sugestão. Semana de descanso e temporada seguem a data.
+const _progAt=progAt;
+progAt=function(d){const P=_progAt(d);const sugIdx=(P.season-1)%FASES.length;
+  if(S.fase==null||!FASES[S.fase])return {...P,sugIdx,escIdx:sugIdx,escolhida:false};
+  const F=FASES[S.fase];return {...P,phase:F[0],obj:F[1],sets:F[2],reps:F[3],rest:F[4],sugIdx,escIdx:S.fase,escolhida:S.fase!==sugIdx,sugNome:FASES[sugIdx][0]}};
+function escolherFase(i){const sug=(_progAt().season-1)%FASES.length;if(i===sug){S.fase=null;toast('Seguindo a sugestão do programa')}else{S.fase=i;toast('Fase '+FASES[i][0]+' escolhida')}save();render()}
+function vFases(){const P=progAt();const fmtR=r=>r>=120?(r/60).toString().replace('.',',')+' min':r+' s';
+  const lista=FASES.map((f,i)=>{const a=new Date(S.start+'T12:00:00');a.setDate(a.getDate()+(i%NSEAS())*66);const esc=i===P.escIdx,sug=i===P.sugIdx;
+    return `<li class="${esc?'esc':''}"><div><b>${i+1}. ${f[0]}${sug?'<span class="tag">Sugerida agora</span>':''}${esc&&!sug?'<span class="tag eu">Sua escolha</span>':''}</b>
+      <small>${f[2]} × ${repTxt(f[3])} · descanso ${fmtR(f[4])}</small><small>${f[1]}${i<NSEAS()?' · no programa: '+a.toLocaleDateString('pt-BR',{month:'short',year:'numeric'}):''}</small></div>
+      ${esc?'<span class="pill">Em uso</span>':`<button class="mini" onclick="escolherFase(${i})">${sug?'Usar sugestão':'Escolher'}</button>`}</li>`}).join('');
+  return `<details class="pall" ${P.escolhida?'open':''}><summary>Escolher a fase do treino (programa de 2 anos)</summary>
+    <p class="muted" style="font-size:12.5px;margin:4px 0 6px">O programa sugere uma fase por temporada de 66 dias, mas você pode escolher qualquer uma. Séries, repetições e descanso de todos os treinos mudam junto.</p><ol class="fases">${lista}</ol></details>`}
+const _vTreino2=vTreino;
+vTreino=function(){let html=_vTreino2();const P=progAt();
+  // troca a lista fixa do programa pela lista para escolher
+  html=html.replace(/<details class="pall">[\s\S]*?<\/details>/,vFases());
+  if(P.escolhida)html=html.replace('<div class="ptop">',`<div class="ptop"><span class="pill" style="background:#FFE08A">Fase escolhida por você</span>`)
+    .replace(/(<details class="pall")/,`<div class="sugere">O programa sugere <b>${esc(P.sugNome)}</b> para esta temporada.<button class="mini" onclick="escolherFase(${P.sugIdx})">Voltar para a sugestão</button></div>$1`);
+  return html};
+
+
+/* ================= CASINHA: estilo Tamagotchi =================
+   Você, o gato preto peludo, a frajola e o guardião siamês.
+   Fome, limpeza, carinho e energia caem com o tempo (horas reais) e sobem
+   com os cuidados aqui — e também quando você cumpre os hábitos de verdade:
+   refeições alimentam você, skincare/cabelo deixam você limpinha, sono dá energia,
+   e "Cuidar dos gatos" alimenta e limpa os gatinhos. Nada disso mexe no seu XP. */
+const TAMA_DEF={t:0,sel:'eu',applied:{},
+  eu:{nome:'Você',fome:80,limpeza:80,carinho:80,energia:80,roupa:'basico'},
+  preto:{nome:'Pretinho',fome:80,limpeza:80,carinho:80,energia:80,coleira:'#E25C74'},
+  frajola:{nome:'Frajola',fome:80,limpeza:80,carinho:80,energia:80,coleira:'#7C66E8'},
+  guardiao:{nome:'Sião',fome:90,limpeza:90,carinho:90,energia:90,coleira:'#FFD27A'}};
+// queda por hora de cada barra
+const TDECAY={eu:{fome:5,limpeza:2.5,carinho:2,energia:3},preto:{fome:4,limpeza:2,carinho:3,energia:1.5},frajola:{fome:4,limpeza:2,carinho:3,energia:1.5},guardiao:{fome:2,limpeza:1,carinho:1.5,energia:1}};
+const TQUEM=[['eu','Você'],['preto','Gato preto'],['frajola','Frajola'],['guardiao','Guardião']];
+const ROUPAS=[['basico','Básico',1],['pijama','Pijama',1],['academia','Academia',1],['moletom','Moletom',2],['vestido','Vestido florido',3],['trabalho','Trabalho',4],['festa','Festa',5],['praia','Praia',6]];
+const COLEIRAS=['#E25C74','#7C66E8','#2BA981','#FFD27A','#4FA3E0','#F2875A'];
+let TFX=null;// efeito a mostrar depois do desenho {who,kind}
+function tama(){if(!S.tama)S.tama=JSON.parse(JSON.stringify(TAMA_DEF));for(const k of Object.keys(TAMA_DEF))if(S.tama[k]==null)S.tama[k]=JSON.parse(JSON.stringify(TAMA_DEF[k]));
+  const T=S.tama,now=Date.now();if(!T.t)T.t=now;const h=Math.min(72,(now-T.t)/36e5);
+  if(h>0.01){for(const [w] of TQUEM)for(const st in TDECAY[w])T[w][st]=Math.max(0,T[w][st]-TDECAY[w][st]*h);T.t=now}
+  // hábitos de verdade cuidam da casinha (uma vez por hábito por dia)
+  const k=dkey(new Date()),d=S.days[k];if(d&&d.done){const ap=T.applied;const once=(id,fn)=>{const key=k+':'+id;if(d.done[id]&&!ap[key]){ap[key]=1;fn()}};
+    const up=(w,st,v)=>{T[w][st]=Math.min(100,T[w][st]+v)};
+    for(const id of Object.keys(d.done)){if(/^ref_|^refeic|almoco|jantar|lanche|cafe/.test(id))once(id,()=>up('eu','fome',35))}
+    once('pele_am',()=>up('eu','limpeza',30));once('pele_pm',()=>up('eu','limpeza',30));once('cabelo',()=>up('eu','limpeza',25));
+    once('acordar',()=>up('eu','energia',40));once('dormir',()=>up('eu','energia',30));once('treino',()=>{up('eu','carinho',25);up('eu','energia',-10)});
+    once('mae',()=>up('eu','carinho',20));once('gatos',()=>{for(const g of['preto','frajola']){up(g,'fome',50);up(g,'limpeza',40);up(g,'carinho',20)}});
+    // limpa marcas antigas (mais de 10 dias)
+    for(const key of Object.keys(ap))if(key.slice(0,10)<dkey(new Date(Date.now()-864e6)))delete ap[key]}
+  return T}
+function tMood(p){const v=(p.fome+p.limpeza+p.carinho+p.energia)/4;return p.energia<15?'sono':v>=65?'feliz':v>=35?'ok':'triste'}
+/* ---------- desenhos ---------- */
+function tEyes(x,y,m,cor,gato,tc){const L=`class="tl"${tc?` style="stroke:${tc}"`:''}`;if(m==='sono')return `<path d="M${x-9} ${y} q9 6 18 0" ${L}/><path d="M${x+22} ${y} q9 6 18 0" ${L}/>`;
+  if(m==='feliz')return `<path d="M${x-9} ${y+2} q9 -9 18 0" ${L}/><path d="M${x+22} ${y+2} q9 -9 18 0" ${L}/>`;
+  const r=gato?7:5.5,ry=gato?8:6;const pu=gato?`<ellipse cx="${x}" cy="${y}" rx="2.4" ry="${ry-1}" fill="#111"/><ellipse cx="${x+31}" cy="${y}" rx="2.4" ry="${ry-1}" fill="#111"/>`:`<circle cx="${x}" cy="${y}" r="3.2" fill="#2A1A12"/><circle cx="${x+31}" cy="${y}" r="3.2" fill="#2A1A12"/>`;
+  const so=m==='triste'?`<path d="M${x-9} ${y-11} l14 4" ${L}/><path d="M${x+40} ${y-11} l-14 4" ${L}/>`:'';
+  return `<ellipse cx="${x}" cy="${y}" rx="${r}" ry="${ry}" fill="${cor}"/><ellipse cx="${x+31}" cy="${y}" rx="${r}" ry="${ry}" fill="${cor}"/>${pu}<circle cx="${x+2}" cy="${y-3}" r="1.8" fill="#fff"/><circle cx="${x+33}" cy="${y-3}" r="1.8" fill="#fff"/>${so}`}
+function tRoupa(r){// tronco (y 150–215) e pernas (215–265)
+  const C={basico:['#F7F7F2','#8FB4DA','#7FA6CF'],pijama:['#C9B8F5','#C9B8F5','#B4A2EC'],academia:['#2BA981','#2A2E45','#20243A'],moletom:['#F2875A','#5B6C8F','#4D5D7E'],vestido:['#FFB4C8','#FFB4C8','#FFB4C8'],trabalho:['#2E3550','#2E3550','#262C44'],festa:['#151621','#151621','#151621'],praia:['#4FA3E0','#F6E7C8','#F6E7C8']}[r]||['#eee','#88a','#77a'];
+  const [top,calca,sombra]=C;let s='';
+  if(r==='vestido'||r==='festa'){s+=`<path d="M78 150 q22 -10 44 0 l14 75 q-36 12 -72 0z" fill="${top}" class="ol"/>`;
+    if(r==='vestido')s+=`<g fill="#fff"><circle cx="90" cy="180" r="3"/><circle cx="110" cy="196" r="3"/><circle cx="97" cy="210" r="3"/><circle cx="116" cy="168" r="3"/></g>`;else s+=`<path d="M86 152 q14 12 28 0" fill="none" stroke="#FFD27A" stroke-width="2"/>`;
+    s+=`<rect x="86" y="224" width="11" height="34" rx="5" fill="#D9A07A" class="ol"/><rect x="103" y="224" width="11" height="34" rx="5" fill="#D9A07A" class="ol"/>`}
+  else{s+=`<rect x="85" y="205" width="14" height="52" rx="6" fill="${calca}" class="ol"/><rect x="101" y="205" width="14" height="52" rx="6" fill="${sombra}" class="ol"/>`;
+    if(r==='praia')s=`<rect x="86" y="214" width="11" height="44" rx="5" fill="#D9A07A" class="ol"/><rect x="103" y="214" width="11" height="44" rx="5" fill="#D9A07A" class="ol"/><path d="M84 200 h32 v14 q-16 6 -32 0z" fill="${top}" class="ol"/>`;
+    const lar=r==='moletom'?28:24;s+=`<path d="M${100-lar} 152 q${lar} -12 ${lar*2} 0 l${r==='moletom'?4:0} 56 h-${lar*2+(r==='moletom'?8:0)}z" fill="${r==='praia'?'#D9A07A':top}" class="ol"/>`;
+    if(r==='praia')s+=`<path d="M82 160 q9 10 18 0 q9 10 18 0 v8 q-18 10 -36 0z" fill="${top}" class="ol"/>`;
+    if(r==='trabalho')s+=`<path d="M100 152 l-8 22 l8 -6 l8 6z" fill="#F7F7F2"/><path d="M100 168 v40" stroke="#151621" stroke-width="1.5"/>`;
+    if(r==='pijama')s+=`<g fill="#FFE08A"><path d="M90 172 l2 4 4 1 -3 3 1 4 -4 -2 -4 2 1 -4 -3 -3 4 -1z"/><path d="M108 190 l2 4 4 1 -3 3 1 4 -4 -2 -4 2 1 -4 -3 -3 4 -1z"/></g>`;
+    if(r==='moletom')s+=`<path d="M90 190 h20 v12 h-20z" fill="#E56F3F" class="ol"/>`;
+    if(r==='academia')s+=`<path d="M80 172 h40" stroke="#8FE3C8" stroke-width="3"/>`}
+  // tênis
+  s+=`<ellipse cx="91" cy="262" rx="10" ry="6" fill="${r==='festa'?'#151621':'#fff'}" class="ol"/><ellipse cx="109" cy="262" rx="10" ry="6" fill="${r==='festa'?'#151621':'#fff'}" class="ol"/>`;
+  return s}
+function tAvatar(p,m,acao){const pele='#D9A07A',cab='#1C1416';const braco=r=>`<path d="M${r?122:78} 156 q${r?16:-16} 22 ${r?8:-8} 46" fill="none" stroke="${p.roupa==='basico'||p.roupa==='praia'||p.roupa==='vestido'||p.roupa==='festa'?pele:p.roupa==='pijama'?'#C9B8F5':p.roupa==='academia'?pele:p.roupa==='moletom'?'#F2875A':'#2E3550'}" stroke-width="11" stroke-linecap="round"/><circle cx="${r?130:70}" cy="203" r="6" fill="${pele}" class="ol"/>`;
+  return `<svg viewBox="0 0 200 280" class="tsvg" aria-hidden="true">
+  <path d="M60 70 q-14 70 6 120 q34 14 68 0 q20 -50 6 -120z" fill="${cab}"/>
+  ${tRoupa(p.roupa)}${braco(0)}${braco(1)}
+  <rect x="93" y="126" width="14" height="22" rx="5" fill="${pele}"/>
+  <circle cx="100" cy="88" r="44" fill="${pele}" class="ol"/>
+  <path d="M56 88 q2 -52 44 -52 q44 0 44 52 q-10 -26 -30 -30 q-8 12 -30 14 q-20 -2 -28 16z" fill="${cab}"/>
+  ${tEyes(84,92,m,'#fff',false)}
+  <g fill="#8A5A3C" opacity=".55"><circle cx="78" cy="106" r="1.3"/><circle cx="84" cy="109" r="1.3"/><circle cx="116" cy="109" r="1.3"/><circle cx="122" cy="106" r="1.3"/><circle cx="96" cy="104" r="1.1"/><circle cx="104" cy="104" r="1.1"/></g>
+  <ellipse cx="74" cy="110" rx="7" ry="4" fill="#F49A9A" opacity=".55"/><ellipse cx="126" cy="110" rx="7" ry="4" fill="#F49A9A" opacity=".55"/>
+  <path d="M100 98 q-3 8 0 10" fill="none" stroke="#9C6646" stroke-width="2" stroke-linecap="round"/><circle cx="103.5" cy="107" r="2.2" fill="none" stroke="#C9CDD6" stroke-width="1.4"/>
+  ${m==='triste'?'<path d="M90 120 q10 -7 20 0" class="tl"/>':m==='sono'?'<ellipse cx="100" cy="118" rx="4" ry="3" fill="#7A3B3B"/>':'<path d="M88 115 q12 12 24 0 z" fill="#7A3B3B" stroke="#2A2230" stroke-width="2"/><path d="M91 116 h18" stroke="#fff" stroke-width="3"/>'}
+  ${acao==='banho'?'<path d="M58 44 q42 -30 84 0 q6 10 -6 12 h-72 q-12 -2 -6 -12z" fill="#fff" class="ol"/><circle cx="70" cy="40" r="8" fill="#fff" class="ol"/><circle cx="130" cy="40" r="8" fill="#fff" class="ol"/>':''}
+  </svg>`}
+function tGato(tipo,p,m){// preto peludo | frajola | guardiao (siamês filhote)
+  const sia=tipo==='guardiao',fraj=tipo==='frajola',pelo=sia?'#F3E3C3':'#17171F',ponta=sia?'#5B3A29':'#17171F',olho=sia?'#5CC3F2':tipo==='preto'?'#F5C542':'#9BD35A';
+  const fofo=tipo==='preto'?Array.from({length:26},(_,i)=>{const a=i/26*Math.PI*2;return `<circle cx="${(100+Math.cos(a)*50).toFixed(1)}" cy="${(140+Math.sin(a)*38).toFixed(1)}" r="9" fill="${pelo}"/>`}).join('')+Array.from({length:18},(_,i)=>{const a=i/18*Math.PI*2;return `<circle cx="${(100+Math.cos(a)*40).toFixed(1)}" cy="${(84+Math.sin(a)*34).toFixed(1)}" r="8" fill="${pelo}"/>`}).join(''):'';
+  const sc=sia?.82:1;
+  return `<svg viewBox="0 0 200 200" class="tsvg" aria-hidden="true"><g transform="translate(${100-100*sc} ${200-200*sc}) scale(${sc})">
+   <path class="cauda" d="M146 150 q46 -6 34 -60 q-4 -14 -14 -6 q8 40 -24 50z" fill="${ponta}" ${tipo==='preto'?'stroke="'+pelo+'" stroke-width="10" stroke-linejoin="round"':''}/>
+   ${fofo}<ellipse cx="100" cy="142" rx="50" ry="38" fill="${pelo}" class="ol"/>
+   ${fraj?'<path d="M80 118 q20 34 40 0 q4 30 -20 48 q-24 -18 -20 -48z" fill="#fff"/>':''}
+   <ellipse cx="78" cy="176" rx="13" ry="8" fill="${fraj?'#fff':ponta}" class="ol"/><ellipse cx="122" cy="176" rx="13" ry="8" fill="${fraj?'#fff':ponta}" class="ol"/>
+   <path d="M60 64 l-6 -40 l34 22z" fill="${ponta}" class="ol"/><path d="M140 64 l6 -40 l-34 22z" fill="${ponta}" class="ol"/>
+   <path d="M62 58 l-3 -22 l18 12z" fill="#F4A6B4"/><path d="M138 58 l3 -22 l-18 12z" fill="#F4A6B4"/>
+   <circle cx="100" cy="84" r="44" fill="${pelo}" class="ol"/>
+   ${sia?'<ellipse cx="100" cy="96" rx="26" ry="24" fill="#8A5E44" opacity=".85"/>':''}
+   ${fraj?'<path d="M76 92 q24 -14 48 0 q6 24 -24 34 q-30 -10 -24 -34z" fill="#fff"/><path d="M100 50 q4 16 0 30 q-4 -14 0 -30z" fill="#fff"/>':''}
+   ${tEyes(84,82,m,olho,true,sia?'':'#E8E3F0')}
+   <path d="M96 99 h8 l-4 5z" fill="#F4A6B4" stroke="#2A2230" stroke-width="1.2"/>
+   ${(()=>{const st=tipo==='preto'?' style="stroke:#E8E3F0"':'';return m==='triste'?`<path d="M92 112 q8 -6 16 0" class="tl"${st}/>`:`<path d="M92 106 q4 6 8 0 q4 6 8 0" class="tl"${st}/>`})()}
+   <g stroke="${tipo==='preto'?'#bbb':'#555'}" stroke-width="1.3"><path d="M70 100 l-28 -4"/><path d="M70 106 l-28 4"/><path d="M130 100 l28 -4"/><path d="M130 106 l28 4"/></g>
+   <path d="M70 124 q30 12 60 0" fill="none" stroke="${p.coleira}" stroke-width="6" stroke-linecap="round"/><circle cx="100" cy="132" r="5" fill="#FFD27A" class="ol"/>
+   ${sia?'<path d="M66 128 q-24 30 -10 58 q20 -10 32 -30z" fill="#4FA3E0" class="ol" opacity=".9"/><path d="M100 30 l5 10 11 1 -8 8 2 11 -10 -5 -10 5 2 -11 -8 -8 11 -1z" fill="#FFD27A" class="ol"/>':''}
+  </g></svg>`}
+/* ---------- tela ---------- */
+function tBar(ic,n,v){const c=v<25?'var(--bad)':v<50?'#F5C542':'var(--mi)';return `<div class="tbar"><span>${ic}</span><div><i style="width:${Math.round(v)}%;background:${c}"></i></div><small>${n}</small></div>`}
+function tFala(T){const fome=TQUEM.filter(([w])=>w!=='guardiao'&&T[w].fome<30).map(([w])=>w==='eu'?'você':T[w].nome);
+  if(fome.length)return `Miau! ${fome.join(' e ')} ${fome.length>1?'estão':'está'} com fome.`;
+  const suj=TQUEM.filter(([w])=>w!=='guardiao'&&T[w].limpeza<30).map(([w])=>w==='eu'?'você':T[w].nome);if(suj.length)return `Hora de um banho: ${suj.join(' e ')}.`;
+  try{const B=buildDay(new Date()),d=day();const f=B.filter(b=>!d.done[b.id]).length;const st=streak();
+    if(f===0)return 'Você cumpriu todas as missões de hoje. Estou orgulhoso! 💙';
+    if(new Date().getHours()>=18&&f>0)return `Ainda faltam ${f} missões hoje. Eu protejo sua ofensiva de ${st} ${st===1?'dia':'dias'}, mas preciso da sua ajuda!`;
+    return ['Estou de guarda. Pode focar no que importa.','Um passo de cada vez, humana.','Cuidar de si também é missão.',`Sua ofensiva: ${st} ${st===1?'dia':'dias'}. Continue!`][new Date().getMinutes()%4]}catch(e){return 'Estou de guarda.'}}
+function vCasinha(){const T=tama(),sel=T.sel||'eu',p=T[sel],L=level(totalXP()).l;
+  const pers=w=>{const q=T[w],m=tMood(q);return `<button class="tchar t-${w} ${sel===w?'sel':''} m-${m}" onclick="tSel('${w}')" aria-label="${w==='eu'?'Você':esc(q.nome)}">
+     ${w==='eu'?tAvatar(q,m,TFX&&TFX.who==='eu'&&TFX.kind==='banho'?'banho':''):tGato(w,q,m)}${m==='sono'?'<b class="zz">z<i>z</i></b>':''}<span class="tnome">${w==='eu'?esc(S.name||'Você'):esc(q.nome)}</span></button>`};
+  const acoes=sel==='eu'?[['comer','🍲','Comer'],['banho','🛁','Banho'],['dormir','😴','Descansar'],['roupa','👗','Trocar roupa']]
+    :sel==='guardiao'?[['petisco','🐟','Petisco'],['carinho','💗','Carinho'],['escovar','🪮','Escovar'],['conselho','🛡','Conselho']]
+    :[['racao','🥣','Ração'],['sache','🐟','Sachê'],['brincar','🧶','Brincar'],['carinho','💗','Carinho'],['escovar','🪮','Escovar'],['banho','🛁','Banho'],['caixa','🧹','Limpar caixinha']];
+  let extra='';
+  if(T.aba==='roupa'&&sel==='eu')extra=`<div class="tpanel"><h3>Guarda-roupa</h3><div class="troupas">${ROUPAS.map(([id,n,lv])=>{const ok=L>=lv;return `<button class="${p.roupa===id?'on':''}" ${ok?`onclick="tRoupaSet('${id}')"`:'disabled'}>${tAvatar({...p,roupa:id},'feliz','')}<span>${ok?n:'🔒 Nível '+lv}</span></button>`}).join('')}</div><p class="muted" style="font-size:12.5px">Roupas novas liberam conforme você sobe de nível no jogo.</p></div>`;
+  if(sel!=='eu')extra+=`<div class="tpanel"><h3>Coleira</h3><div class="tcores">${COLEIRAS.map(c=>`<button style="background:${c}" class="${p.coleira===c?'on':''}" aria-label="Coleira ${c}" onclick="tColeira('${c}')"></button>`).join('')}</div></div>`;
+  return `<header class="ph"><h1>Casinha</h1><p class="muted">Cuide de você e dos gatinhos. Seus hábitos de verdade também cuidam deles.</p><p class="muted" style="font-size:11px;margin:2px 0 8px">Gatos 3D: modelo “cat” de artofaria (Sketchfab).</p></header>
+  <section class="tcena"><div class="tjanela"></div><div class="tchao"></div>
+    <div class="tfala"><b>${esc(T.guardiao.nome)}</b> ${esc(tFala(T))}</div>
+    ${pers('guardiao')}${pers('preto')}${pers('eu')}${pers('frajola')}<div id="tfx"></div></section>
+  <section class="tcard"><div class="ttop"><h2>${sel==='eu'?esc(S.name||'Você'):esc(p.nome)}</h2>${sel==='eu'?'':`<button class="mini" onclick="tRenomear('${sel}')">Renomear</button>`}</div>
+    <p class="muted" style="margin:0 0 8px;font-size:13px">${sel==='eu'?'Sua personagem':sel==='preto'?'Gato preto peludo':sel==='frajola'?'Frajola':'Guardião siamês: vigia sua ofensiva e te lembra das missões'} · ${{feliz:'feliz 😊',ok:'tranquilo 🙂',triste:'precisando de você 🥺',sono:'com sono 😴'}[tMood(p)]}</p>
+    ${tBar('🍖','Fome',p.fome)}${tBar('🫧','Limpeza',p.limpeza)}${tBar('💗','Carinho',p.carinho)}${tBar('⚡','Energia',p.energia)}
+    <div class="tacoes">${acoes.map(([id,ic,n])=>`<button onclick="tAcao('${id}')"><i>${ic}</i>${n}</button>`).join('')}</div></section>${extra}`}
+function tSel(w){const T=tama();T.sel=w;T.aba=null;save();render()}
+function tRoupaSet(r){const T=tama();T.eu.roupa=r;TFX={who:'eu',kind:'roupa'};save();render();toast('Roupa trocada ✨')}
+function tColeira(c){const T=tama();T[T.sel].coleira=c;save();render()}
+function tRenomear(w){const T=tama();const n=prompt('Nome do gatinho:',T[w].nome);if(n&&n.trim()){T[w].nome=n.trim().slice(0,18);save();render()}}
+function tAcao(a){const T=tama(),w=T.sel||'eu',p=T[w];const up=(st,v)=>{p[st]=Math.max(0,Math.min(100,p[st]+v))};let msg='';
+  if(a==='roupa'){T.aba=T.aba==='roupa'?null:'roupa';render();return}
+  if(a==='conselho'){toast(tFala(T));TFX={who:w,kind:'carinho'};render();return}
+  const M={comer:[['fome',40],['energia',8]],banho:[['limpeza',55],['carinho',w==='eu'?5:-10]],dormir:[['energia',45],['fome',-5]],racao:[['fome',35]],sache:[['fome',25],['carinho',10]],petisco:[['fome',15],['carinho',12]],
+    brincar:[['carinho',25],['energia',-15],['fome',-5]],carinho:[['carinho',30]],escovar:[['limpeza',25],['carinho',8]],caixa:[['limpeza',35]]}[a]||[];
+  if(p.fome>=97&&['comer','racao','sache','petisco'].includes(a)){toast((w==='eu'?'Você':p.nome)+' está satisfeito(a)');return}
+  M.forEach(([s,v])=>up(s,v));
+  msg={comer:'Nham! 🍲',banho:w==='eu'?'Banho tomado 🫧':p.nome+' odiou o banho, mas está cheiroso(a) 😾',dormir:'Recarregando ⚡',racao:'Crec crec 🥣',sache:'O preferido! 🐟',petisco:'Petisco aceito 🐟',brincar:'Pulos e mais pulos 🧶',carinho:'Prrrrr 💗',escovar:'Pelo lindo 🪮',caixa:'Caixinha limpinha 🧹'}[a];
+  TFX={who:w,kind:a};save();render();toast(msg)}
+function tEfeito(){if(!TFX)return;const fx=TFX;TFX=null;const box=$('#tfx'),el=$('.t-'+fx.who);if(!box||!el)return;
+  el.classList.add('a-'+fx.kind);const em={comer:'🍲',banho:'🫧',dormir:'💤',racao:'🥣',sache:'🐟',petisco:'🐟',brincar:'🧶',carinho:'💗',escovar:'✨',caixa:'✨',roupa:'✨'}[fx.kind]||'💗';
+  const r=el.getBoundingClientRect(),c=box.parentElement.getBoundingClientRect();
+  for(let i=0;i<7;i++){const s=document.createElement('span');s.textContent=em;s.style.left=(r.left-c.left+r.width*(.2+Math.random()*.6))+'px';s.style.top=(r.top-c.top+r.height*.35)+'px';s.style.animationDelay=(i*.12)+'s';box.appendChild(s)}
+  setTimeout(()=>{el.classList.remove('a-'+fx.kind);box.innerHTML=''},2200)}
+/* aba nova + liga no desenho da tela */
+(function(){const nav=document.querySelector('.tabs div');if(nav&&!nav.querySelector('[data-t=casinha]')){const b=document.createElement('button');b.dataset.t='casinha';b.setAttribute('onclick',"go('casinha')");b.innerHTML='<i aria-hidden="true">🐾</i>Casinha';const eu=nav.querySelector('[data-t=eu]');nav.insertBefore(b,eu)}})();
+const _renderCasa=render;
+render=function(){_renderCasa();if(TAB==='casinha'&&S.onboarded&&!EVF){$('#main').innerHTML=vCasinha();$$('.tabs button').forEach(b=>b.classList.toggle('on',b.dataset.t==='casinha'));requestAnimationFrame(tEfeito)}};
+setInterval(()=>{if(TAB==='casinha'&&document.visibilityState==='visible'&&!(S.tama&&S.tama.aba))render()},60000);
+
+
+/* ================= 3D: sua personagem animada + mini jogo "Corrida das estrelas" =================
+   O modelo (personagem.glb, do Avaturn) não traz animações; elas são feitas aqui, girando os ossos.
+   three.js e o modelo ficam no próprio app (funciona sem internet depois da 1ª vez). */
+const V3={T:null,gltf:null,model:null,B:null,R:null,canvas:null,ren:null,scene:null,cam:null,anim:'idle',t0:0,raf:0,rotY:0,loading:null,erro:null};
+async function v3Load(){if(V3.model)return;if(V3.loading)return V3.loading;
+  V3.loading=(async()=>{const THREE=await import('./three.module.min.js');const {GLTFLoader}=await import('./GLTFLoader.js');V3.T=THREE;V3.GL=GLTFLoader;
+    const g=await new Promise((ok,err)=>v3Loader(GLTFLoader).load('personagem.glb',ok,undefined,err));V3.gltf=g;V3.model=g.scene;
+    const B={};g.scene.traverse(o=>{if(o.isBone)B[o.name]=o;if(o.isMesh){o.frustumCulled=false}});V3.B=B;V3.R={};for(const k in B)V3.R[k]=B[k].quaternion.clone();
+    V3.hips0=B.Hips.position.clone()})();
+  try{await V3.loading}catch(e){V3.erro=e;V3.loading=null;throw e}}
+// pose: {Osso:[x,y,z]} em radianos, por cima da pose de repouso (T); o resto volta ao repouso
+const V3E=[0,0,0];
+function v3Pose(P,hipsY){const T=V3.T,B=V3.B,R=V3.R;const q=new T.Quaternion(),e=new T.Euler();
+  for(const k in B){const v=P[k];B[k].quaternion.copy(R[k]);if(v){e.set(v[0]||0,v[1]||0,v[2]||0,'XYZ');B[k].quaternion.multiply(q.setFromEuler(e))}}
+  B.Hips.position.copy(V3.hips0);if(hipsY)B.Hips.position.y+=hipsY}
+const S1=Math.sin;
+const V3ANIM={
+ idle:t=>({P:{LeftArm:[1.22+.03*S1(t*1.6),0,.06],RightArm:[1.22+.03*S1(t*1.6),0,.06],LeftForeArm:[0,0,.15],RightForeArm:[0,0,-.15],Spine1:[.02*S1(t*1.6),0,0],Head:[.03*S1(t*.7),.18*S1(t*.45),0],Neck:[0,0,.03*S1(t*.5)]}}),
+ acenar:t=>({P:{LeftArm:[-.25,-1.5,.25],LeftForeArm:[0,0,1.0+.4*S1(t*8)],LeftHand:[0,0,.15*S1(t*8)],RightArm:[1.22,0,.06],RightForeArm:[0,0,-.15],Head:[0,.2,.08]}}),
+ dancar:t=>{const b=S1(t*7),s=S1(t*3.5);return {P:{Hips:[0,.35*s,0],Spine1:[0,0,.12*s],Spine2:[0,-.2*s,0],LeftArm:[.3+.5*b,0,.6],RightArm:[.3-.5*b,0,.6],LeftForeArm:[0,0,1.2],RightForeArm:[0,0,-1.2],
+   LeftUpLeg:[-.15*Math.max(0,b),0,0],RightUpLeg:[.15*Math.max(0,-b),0,0],LeftLeg:[.35*Math.max(0,b),0,0],RightLeg:[.35*Math.max(0,-b),0,0],Head:[0,.25*s,.1*b]},y:-.03*Math.abs(b)}},
+ alongar:t=>{const s=S1(t*1.4);return {P:{LeftArm:[-1.35,0,.1],RightArm:[-1.35,0,.1],LeftForeArm:[0,0,.25],RightForeArm:[0,0,-.25],Spine1:[0,0,.28*s],Spine2:[-.08,0,.12*s],Head:[-.1,0,.1*s]}}},
+ pular:t=>{const c=(t*1.6)%1,up=c<.25?0:Math.sin((c-.25)/.75*Math.PI);const ag=c<.25?Math.sin(c/.25*Math.PI):0;
+   return {P:{LeftArm:[1.2-2.4*up,0,.2],RightArm:[1.2-2.4*up,0,.2],LeftUpLeg:[-.5*ag,0,0],RightUpLeg:[.5*ag,0,0],LeftLeg:[1.0*ag+.4*up,0,0],RightLeg:[1.0*ag+.4*up,0,0],Spine1:[.25*ag,0,0]},y:.45*up-.12*ag}},
+ comemorar:t=>{const p=S1(t*10);return {P:{LeftArm:[-.9,0,.35],RightArm:[-.9,0,.35],LeftForeArm:[0,0,.6+.4*p],RightForeArm:[0,0,-.6-.4*p],Spine2:[-.1,0,0],Head:[-.15,.3*S1(t*3),0]},y:.06*Math.abs(S1(t*5))}},
+ comer:t=>{const m=S1(t*6);return {P:{RightArm:[1.25,0,-1.1],RightForeArm:[0,0,-2.2-.15*m],RightHand:[0,0,-.3],LeftArm:[1.22,0,.06],LeftForeArm:[0,0,.15],Head:[.08+.05*m,0,0]}}},
+ descansar:t=>({P:{LeftArm:[1.3,0,.1],RightArm:[1.3,0,.1],Spine1:[.12,0,.05],Head:[.35+.04*S1(t*.8),0,.25],Neck:[.1,0,.1]}}),
+ correr:t=>{const w=t*11,s=S1(w),c=Math.cos(w);return {P:{LeftUpLeg:[-.75*s,0,0],RightUpLeg:[-.75*s,0,0],LeftLeg:[.25+.95*Math.max(0,-c),0,0],RightLeg:[.25+.95*Math.max(0,c),0,0],
+   LeftArm:[1.15,0,-.75*s],RightArm:[1.15,0,-.75*s],LeftForeArm:[0,0,1.35],RightForeArm:[0,0,-1.35],Spine1:[.14,.12*s,0],Head:[-.08,0,0]},y:.05*Math.abs(c)}},
+ salto:()=>({P:{LeftUpLeg:[-.9,0,0],RightUpLeg:[.9,0,0],LeftLeg:[1.5,0,0],RightLeg:[1.5,0,0],LeftArm:[-.6,0,.3],RightArm:[-.6,0,.3],LeftForeArm:[0,0,.5],RightForeArm:[0,0,-.5],Spine1:[.2,0,0]}}),
+ tombo:t=>({P:{LeftArm:[.4,0,.6],RightArm:[.4,0,.6],Spine1:[.5,0,0],Head:[.4,0,0],LeftLeg:[.6,0,0],RightLeg:[.6,0,0]}})};
+/* ---------- visor 3D da Casinha ---------- */
+function v3Scene(){const T=V3.T;const sc=new T.Scene();sc.add(new T.HemisphereLight(0xffffff,0x8a6a55,2.1));const d=new T.DirectionalLight(0xffffff,1.7);d.position.set(1.5,3,3);sc.add(d);return sc}
+async function v3Mount(box){box.innerHTML='<p class="v3msg">Carregando sua personagem 3D…</p>';
+  try{await v3Load()}catch(e){box.innerHTML='<p class="v3msg">Não consegui abrir o 3D agora. Confira se o arquivo personagem.glb está no app.</p>';return}
+  const T=V3.T;if(!V3.canvas){V3.canvas=document.createElement('canvas');V3.canvas.className='v3c';V3.ren=new T.WebGLRenderer({canvas:V3.canvas,antialias:true,alpha:true});V3.ren.outputColorSpace=T.SRGBColorSpace;
+    V3.ren.setPixelRatio(Math.min(2,window.devicePixelRatio||1));V3.scene=v3Scene();V3.cam=new T.PerspectiveCamera(28,1,.1,50);
+    const chao=new T.Mesh(new T.CircleGeometry(.75,40),new T.MeshBasicMaterial({color:0x000000,transparent:true,opacity:.12}));chao.rotation.x=-Math.PI/2;chao.position.y=.005;V3.scene.add(chao);
+    // girar arrastando o dedo
+    let x0=null;V3.canvas.addEventListener('pointerdown',e=>{x0=e.clientX;V3.canvas.setPointerCapture(e.pointerId)});V3.canvas.addEventListener('pointermove',e=>{if(x0!=null){V3.rotY+=(e.clientX-x0)*.012;x0=e.clientX}});V3.canvas.addEventListener('pointerup',()=>x0=null)}
+  box.innerHTML='';box.appendChild(V3.canvas);V3.scene.add(V3.model);V3.model.position.set(0,0,0);v3Loop()}
+function v3Loop(){cancelAnimationFrame(V3.raf);const tick=()=>{if(!V3.canvas||!V3.canvas.isConnected||JG.on)return;const w=V3.canvas.clientWidth,h=V3.canvas.clientHeight;
+   if(V3.canvas.width!==Math.round(w*V3.ren.getPixelRatio())){V3.ren.setSize(w,h,false);V3.cam.aspect=w/h;V3.cam.updateProjectionMatrix()}
+   V3.cam.position.set(0,1.0,4.6);V3.cam.lookAt(0,.92,0);
+   const t=(performance.now()-V3.t0)/1000;let a=V3.anim;if(a!=='idle'&&a!=='descansar'&&t>4.2){a=V3.anim='idle'}
+   const f=V3ANIM[a](t);v3Pose(f.P,f.y);V3.model.rotation.y=V3.rotY;V3.ren.render(V3.scene,V3.cam);V3.raf=requestAnimationFrame(tick)};V3.raf=requestAnimationFrame(tick)}
+function v3Play(a){V3.anim=a;V3.t0=performance.now()}
+function v3Card(){return `<section class="tcard v3card"><div class="ttop"><h2>Você em 3D</h2><button class="mini" onclick="jogoAbrir()">🎮 Jogar</button></div>
+  <div id="v3box" class="v3box"></div><p class="muted" style="font-size:12px;margin:4px 0 8px;text-align:center">Arraste para girar</p>
+  <div class="tacoes v3acoes">${[['acenar','👋','Acenar'],['dancar','💃','Dançar'],['alongar','🙆','Alongar'],['pular','🦘','Pular'],['comemorar','🎉','Comemorar'],['descansar','😴','Descansar']].map(([id,ic,n])=>`<button onclick="v3Play('${id}')"><i>${ic}</i>${n}</button>`).join('')}</div></section>`}
+/* ---------- mini jogo: Corrida das estrelas ---------- */
+const JG={on:false};
+function jogoDados(){S.jogo=S.jogo||{rec:0,xp:0,dia:'',xpDia:0,partidas:0};return S.jogo}
+const _totalXPj=totalXP;totalXP=function(){return _totalXPj()+((S.jogo&&S.jogo.xp)||0)};
+async function jogoAbrir(){const ov=document.createElement('div');ov.className='jogo';ov.innerHTML=`<div class="jhud"><b id="jpts">0</b><span>⭐ <b id="jest">0</b></span><button class="mini" id="jsair">Sair</button></div>
+   <div class="jmsg" id="jmsg"><h2>Corrida das estrelas</h2><p>Toque na tela (ou espaço) para pular os novelos e as caixas. Pegue as estrelas!</p><p class="muted">Recorde: <b>${jogoDados().rec}</b></p><button class="go" id="jcomecar">Começar</button></div>`;
+  document.body.appendChild(ov);ov.querySelector('#jsair').onclick=jogoFechar;JG.ov=ov;
+  try{await v3Load()}catch(e){ov.querySelector('#jmsg').innerHTML='<p>Não consegui abrir o 3D agora.</p><button class="go" onclick="jogoFechar()">Voltar</button>';return}
+  const T=V3.T;const cv=document.createElement('canvas');cv.className='jcv';ov.prepend(cv);
+  const ren=new T.WebGLRenderer({canvas:cv,antialias:true});ren.outputColorSpace=T.SRGBColorSpace;ren.setPixelRatio(Math.min(2,window.devicePixelRatio||1));
+  const sc=v3Scene();sc.background=new T.Color(0xFBE3CF);sc.fog=new T.Fog(0xFBE3CF,14,46);
+  const cam=new T.PerspectiveCamera(55,1,.1,80);cam.position.set(0,2.3,4.2);cam.lookAt(0,1.1,-4);
+  // pista
+  const pista=new T.Mesh(new T.PlaneGeometry(3.2,120),new T.MeshStandardMaterial({color:0xE9C9A8}));pista.rotation.x=-Math.PI/2;pista.position.z=-50;sc.add(pista);
+  const grama=new T.Mesh(new T.PlaneGeometry(60,120),new T.MeshStandardMaterial({color:0xB7CFA4}));grama.rotation.x=-Math.PI/2;grama.position.set(0,-.01,-50);sc.add(grama);
+  const faixas=[];const fm=new T.MeshStandardMaterial({color:0xFFF4E8});for(let i=0;i<24;i++){const f=new T.Mesh(new T.PlaneGeometry(.12,1.2),fm);f.rotation.x=-Math.PI/2;f.position.set(0,.005,-i*5);sc.add(f);faixas.push(f)}
+  const arv=[];const tm=new T.MeshStandardMaterial({color:0x8FBF7A}),cm=new T.MeshStandardMaterial({color:0x9C6B4A});for(let i=0;i<16;i++){const g=new T.Group();const c=new T.Mesh(new T.ConeGeometry(.9,2.2,8),tm);c.position.y=1.9;const tr=new T.Mesh(new T.CylinderGeometry(.18,.22,.9,8),cm);tr.position.y=.45;g.add(c,tr);g.position.set((i%2?1:-1)*(3.5+Math.random()*3),0,-i*7);sc.add(g);arv.push(g)}
+  V3.model.rotation.y=Math.PI;V3.model.position.set(0,0,0);sc.add(V3.model);
+  const obsM=[new T.MeshStandardMaterial({color:0xE25C74}),new T.MeshStandardMaterial({color:0x7C66E8}),new T.MeshStandardMaterial({color:0xC89B6D})];
+  const estM=new T.MeshStandardMaterial({color:0xFFD27A,emissive:0xC98A1A,emissiveIntensity:.5});
+  const shp=new T.Shape();for(let i=0;i<10;i++){const r=i%2?.12:.28,a=i/10*Math.PI*2-Math.PI/2;i?shp.lineTo(Math.cos(a)*r,Math.sin(a)*r):shp.moveTo(Math.cos(a)*r,Math.sin(a)*r)}const estG=new T.ExtrudeGeometry(shp,{depth:.08,bevelEnabled:false});estG.center();
+  const st={obj:[],z:0,v:9,pts:0,est:0,y:0,vy:0,no:true,vivo:false,t0:0,prox:8};
+  function novoObj(){const tipo=Math.random()<.55?'novelo':'caixa';let m;if(tipo==='novelo'){m=new T.Mesh(new T.SphereGeometry(.38,18,14),obsM[Math.random()<.5?0:1]);m.position.y=.38}else{m=new T.Mesh(new T.BoxGeometry(.9,.7,.7),obsM[2]);m.position.y=.35}
+    m.position.z=-44;sc.add(m);st.obj.push({m,tipo:'obs',h:tipo==='novelo'?.76:.7});
+    if(Math.random()<.75){const e=new T.Mesh(estG,estM);e.position.set(0,Math.random()<.5?1.0:2.0,-44-(Math.random()<.5?0:3));sc.add(e);st.obj.push({m:e,tipo:'est'})}}
+  function pular(){if(!st.vivo)return;if(st.no){st.vy=7.2;st.no=false;try{beep(880,.08,.15)}catch(e){}}}
+  function key(e){if(e.code==='Space'||e.code==='ArrowUp'){e.preventDefault();pular()}}
+  cv.addEventListener('pointerdown',pular);window.addEventListener('keydown',key);JG.key=key;
+  function comecar(){for(const o of st.obj)sc.remove(o.m);Object.assign(st,{obj:[],v:9,pts:0,est:0,y:0,vy:0,no:true,vivo:true,prox:6});st.t0=performance.now();ov.querySelector('#jmsg').style.display='none'}
+  ov.querySelector('#jcomecar').onclick=comecar;
+  function fim(){st.vivo=false;const J=jogoDados();const pts=Math.round(st.pts)+st.est*25;const k=dkey(new Date());if(J.dia!==k){J.dia=k;J.xpDia=0}
+    const ganho=Math.max(0,Math.min(30-J.xpDia,Math.floor(pts/60)));J.xpDia+=ganho;J.xp+=ganho;J.partidas++;const rec=pts>J.rec;if(rec)J.rec=pts;save();
+    try{beep(rec?1320:330,.25,.25)}catch(e){}
+    const msg=ov.querySelector('#jmsg');msg.style.display='';msg.innerHTML=`<h2>${rec?'Novo recorde! 🎉':'Fim da corrida'}</h2><p><b>${pts}</b> pontos · ⭐ ${st.est} estrelas</p><p class="muted">Recorde: <b>${J.rec}</b>${ganho?` · +${ganho} XP`:(J.xpDia>=30?' · limite de XP do jogo hoje':'')}</p><button class="go" id="jdenovo">Jogar de novo</button>`;
+    msg.querySelector('#jdenovo').onclick=comecar;st.fimT=performance.now();st.rec=rec}
+  let last=performance.now();JG.on=true;
+  const loop=now=>{if(!JG.on)return;const dt=Math.min(.05,(now-last)/1000);last=now;const w=cv.clientWidth,h=cv.clientHeight;
+    if(cv.width!==Math.round(w*ren.getPixelRatio())){ren.setSize(w,h,false);cam.aspect=w/h;cam.updateProjectionMatrix()}
+    const t=(now-st.t0)/1000;
+    if(st.vivo){st.v=9+Math.min(10,t*.18);const dz=st.v*dt;st.pts+=dz*2;
+      for(const f of faixas){f.position.z+=dz;if(f.position.z>5)f.position.z-=120}for(const a of arv){a.position.z+=dz;if(a.position.z>6)a.position.z-=112}
+      st.prox-=dz;if(st.prox<=0){novoObj();st.prox=7+Math.random()*7-Math.min(3,t*.05)}
+      st.vy-=20*dt;st.y=Math.max(0,st.y+st.vy*dt);if(st.y===0){st.vy=0;st.no=true}
+      for(const o of st.obj.slice()){o.m.position.z+=dz;if(o.tipo==='est')o.m.rotation.y+=dt*3;else if(o.m.geometry.type==='SphereGeometry')o.m.rotation.x-=dz/.38;
+        const z=o.m.position.z;if(z>6){sc.remove(o.m);st.obj.splice(st.obj.indexOf(o),1);continue}
+        if(Math.abs(z)<.45){if(o.tipo==='obs'&&st.y<o.h-.05){fim();break}
+          if(o.tipo==='est'&&Math.abs((st.y+1.1)-o.m.position.y)<.75){st.est++;sc.remove(o.m);st.obj.splice(st.obj.indexOf(o),1);try{beep(1500,.06,.12)}catch(e){}}}}
+      ov.querySelector('#jpts').textContent=Math.round(st.pts)+st.est*25;ov.querySelector('#jest').textContent=st.est}
+    const f=st.vivo?(st.no?V3ANIM.correr(t):V3ANIM.salto()):(st.fimT?(st.rec?V3ANIM.comemorar((now-st.fimT)/1000):V3ANIM.tombo()):V3ANIM.acenar(now/1000));
+    v3Pose(f.P,(f.y||0));V3.model.position.y=st.y;ren.render(sc,cam);JG.raf=requestAnimationFrame(loop)};
+  JG.raf=requestAnimationFrame(loop);JG.ren=ren;JG.sc=sc}
+function jogoFechar(){JG.on=false;cancelAnimationFrame(JG.raf);if(JG.key)window.removeEventListener('keydown',JG.key);
+  if(V3.model&&JG.sc){JG.sc.remove(V3.model);V3.model.position.set(0,0,0);V3.model.rotation.y=0}
+  if(JG.ren){JG.ren.dispose();try{JG.ren.forceContextLoss()}catch(e){}}if(JG.ov)JG.ov.remove();JG.ov=null;JG.ren=null;JG.sc=null;render()}
+/* liga na Casinha: o cartão 3D aparece logo abaixo da cena */
+const _vCasinha3=vCasinha;
+
+const _renderV3=render;
+
+// cuidar de você na Casinha também anima a personagem 3D
+
+
+
+/* ================= CASINHA EM 3D: você + Pretinho + Frajola + Sião num quarto =================
+   A cena 2D continua lá embaixo como reserva (se o aparelho não abrir 3D). */
+// texturas sem "blob:" (alguns navegadores/páginas bloqueiam e o modelo ficava cinza)
+function v3Loader(C){const L=new C();L.pluginCallbacks.unshift(p=>v3SemBlob(p));return L}
+function v3SemBlob(parser){return {name:'sem_blob',loadTexture(ti){const T=V3.T,j=parser.json,td=j.textures[ti],src=td.source!=null?td.source:((td.extensions||{}).EXT_texture_webp||{}).source,sd=j.images[src];if(!sd||sd.bufferView===undefined)return null;
+  return parser.getDependency('bufferView',sd.bufferView).then(b=>createImageBitmap(new Blob([b],{type:sd.mimeType||'image/jpeg'}))).then(bmp=>{const t=new T.Texture(bmp);t.flipY=false;t.wrapS=t.wrapT=T.RepeatWrapping;t.needsUpdate=true;return t})}}}
+const ROUPAS3D=[['original','Vermelho de bolinhas',1,'#C8242E'],['azul','Azul céu',1,'#5BA7E0'],['rosa','Rosa com bolinhas',1,'#F49AB8'],['lilas','Pijama de estrelas',2,'#B9A6F0'],['listras','Listrado marinho',3,'#2E3A66'],['menta','Verde menta',4,'#8FDCC0'],['preto','Pretinho básico',5,'#1C1C24'],['dourado','Dourado de festa',6,'#E3B04B']];
+const C3={on:false,raf:0,cats:{},sel:null,fx:[],acts:{},look:null,orig:null,texCache:{}};
+function c3Tex(id){const T=V3.T;if(C3.texCache[id])return C3.texCache[id];const c=document.createElement('canvas');c.width=c.height=512;const g=c.getContext('2d');const r=ROUPAS3D.find(x=>x[0]===id);g.fillStyle=r[3];g.fillRect(0,0,512,512);
+  if(id==='rosa'||id==='dourado'){g.fillStyle=id==='rosa'?'#fff':'#FFF2C2';for(let y=0;y<512;y+=40)for(let x=(y/40%2)*20;x<512;x+=40){g.beginPath();g.arc(x,y,id==='rosa'?7:3,0,7);g.fill()}}
+  if(id==='lilas'){g.fillStyle='#FFE08A';for(let y=20;y<512;y+=64)for(let x=(y/64%2)*32+16;x<512;x+=64){g.beginPath();for(let k=0;k<10;k++){const a=k/10*Math.PI*2-Math.PI/2,rr=k%2?5:12;g.lineTo(x+Math.cos(a)*rr,y+Math.sin(a)*rr)}g.fill()}}
+  if(id==='listras'){g.fillStyle='#F4F1EA';for(let y=0;y<512;y+=32)g.fillRect(0,y,512,12)}
+  const t=new T.CanvasTexture(c);t.flipY=false;t.wrapS=t.wrapT=T.RepeatWrapping;t.colorSpace=T.SRGBColorSpace;return C3.texCache[id]=t}
+function c3Roupa(id){if(!V3.model)return;if(!C3.look){V3.model.traverse(o=>{if(o.isMesh&&/look/.test(o.name)){C3.look=o;C3.orig=o.material.map}})}if(!C3.look)return;
+  C3.look.material.map=id==='original'?C3.orig:c3Tex(id);C3.look.material.needsUpdate=true}
+/* ---------- gatos feitos de formas simples ---------- */
+function c3Gato(tipo){const T=V3.T,G=new T.Group();const sia=tipo==='guardiao',fra=tipo==='frajola';
+  const M=c=>new T.MeshStandardMaterial({color:c,roughness:.85});const pelo=M(sia?0xF1E2C4:0x18171E),ponta=M(sia?0x4E3324:0x18171E),bran=M(0xF7F5F0),rosa=M(0xF2A7B5);
+  const olhoC=sia?0x5CC3F2:tipo==='preto'?0xF5C542:0x9BD35A;
+  const sp=(r,m,x,y,z,sx=1,sy=1,sz=1)=>{const o=new T.Mesh(new T.SphereGeometry(r,20,14),m);o.position.set(x,y,z);o.scale.set(sx,sy,sz);return o};
+  const corpo=new T.Group();G.add(corpo);
+  const tronco=sp(.2,pelo,0,.2,0,1,.95,1.3);corpo.add(tronco);
+  if(fra)corpo.add(sp(.1,bran,0,.27,.2,1,1.1,.55));
+  if(tipo==='preto')for(let i=0;i<34;i++){const a=Math.random()*Math.PI*2,b=Math.random()*Math.PI;const f=sp(.06,pelo,Math.cos(a)*Math.sin(b)*.2,.2+Math.cos(b)*.18,Math.sin(a)*Math.sin(b)*.26);corpo.add(f)}
+  for(const [x,z] of [[-.1,.17],[.1,.17],[-.1,-.16],[.1,-.16]])corpo.add(sp(.045,fra?bran:ponta,x,.03,z,1,.6,1.3));
+  const cab=new T.Group();cab.position.set(0,.42,.18);corpo.add(cab);
+  cab.add(sp(.16,pelo,0,0,0,1.08,.95,1));
+  if(tipo==='preto')for(let i=0;i<18;i++){const a=Math.random()*Math.PI*2,b=Math.random()*Math.PI*.8;cab.add(sp(.045,pelo,Math.cos(a)*Math.sin(b)*.15,Math.cos(b)*.13,Math.sin(a)*Math.sin(b)*.12-.02))}
+  if(sia)cab.add(sp(.1,ponta,0,-.03,.07,1.1,1,.8));
+  if(fra){cab.add(sp(.08,bran,0,-.05,.11,1.2,.8,.7))}
+  for(const s of[-1,1]){const o=new T.Mesh(new T.ConeGeometry(.06,.13,10),ponta);o.position.set(s*.09,.15,0);o.rotation.z=-s*.35;cab.add(o);const i=new T.Mesh(new T.ConeGeometry(.035,.08,8),rosa);i.position.set(s*.088,.145,.025);i.rotation.z=-s*.35;cab.add(i)}
+  const olhos=[];for(const s of[-1,1]){const e=sp(.034,M(olhoC),s*.06,.02,.135,1,1.15,.6);const p=sp(.016,M(0x111111),0,0,.025,.6,1.4,.5);e.add(p);cab.add(e);olhos.push(e)}
+  cab.add(sp(.018,rosa,0,-.035,.155));
+  const cauda=new T.Group();cauda.position.set(0,.22,-.24);corpo.add(cauda);for(let i=0;i<8;i++){const s=sp(tipo==='preto'?.055:.04,i>4&&sia?ponta:(fra&&i===7?bran:(sia?ponta:pelo)),0,i*.05,-i*.012);cauda.add(s)}
+  cauda.rotation.x=-.5;
+  if(sia){const capa=new T.Mesh(new T.CylinderGeometry(.16,.24,.26,20,1,true,Math.PI*.6,Math.PI*.8),new T.MeshStandardMaterial({color:0x4FA3E0,side:T.DoubleSide}));capa.position.set(0,.24,-.06);corpo.add(capa);
+    const sh=new T.Shape();for(let i=0;i<10;i++){const r=i%2?.03:.07,a=i/10*Math.PI*2-Math.PI/2;i?sh.lineTo(Math.cos(a)*r,-Math.sin(a)*r):sh.moveTo(Math.cos(a)*r,-Math.sin(a)*r)}
+    const est=new T.Mesh(new T.ExtrudeGeometry(sh,{depth:.02,bevelEnabled:false}),new T.MeshStandardMaterial({color:0xFFD27A,emissive:0x8a5a10,emissiveIntensity:.4}));est.position.set(0,.2,0);cab.add(est)}
+  const col=new T.Mesh(new T.TorusGeometry(.12,.018,8,24),M(0xE25C74));col.rotation.x=Math.PI/2-.3;col.position.set(0,.33,.12);corpo.add(col);
+  G.userData={tipo,corpo,cab,cauda,olhos,col};G.traverse(o=>{o.userData.who=tipo});return G}
+function c3Sprite(txt){const T=V3.T;const c=document.createElement('canvas');c.width=c.height=128;const g=c.getContext('2d');g.font='96px serif';g.textAlign='center';g.textBaseline='middle';g.fillText(txt,64,70);
+  const s=new T.Sprite(new T.SpriteMaterial({map:new T.CanvasTexture(c),transparent:true,depthWrite:false}));s.scale.set(.42,.42,.42);return s}
+function c3Fx(who,txt,n=6){const o=who==='eu'?V3.model:C3.cats[who];if(!o||!C3.scene)return;const p=new V3.T.Vector3();o.getWorldPosition(p);const alt=who==='eu'?1.7:(who==='guardiao'?.6:.55);
+  for(let i=0;i<n;i++){const s=c3Sprite(txt);s.position.set(p.x+(Math.random()-.5)*.5,p.y+alt*(.4+Math.random()*.5),p.z+.2);C3.scene.add(s);C3.fx.push({s,t0:performance.now()+i*110,v:.5+Math.random()*.4})}}
+function c3Montar(){const T=V3.T,sc=new T.Scene();sc.background=new T.Color(0xFBE3CF);
+  sc.add(new T.HemisphereLight(0xffffff,0x9a7a62,2.0));const d=new T.DirectionalLight(0xfff2e0,1.6);d.position.set(2,4,4);sc.add(d);
+  const M=c=>new T.MeshStandardMaterial({color:c,roughness:.9});
+  const chao=new T.Mesh(new T.PlaneGeometry(10,6),M(0xE2BF98));chao.rotation.x=-Math.PI/2;sc.add(chao);
+  for(let i=-5;i<5;i+=.5){const l=new T.Mesh(new T.PlaneGeometry(.015,6),M(0xC9A27B));l.rotation.x=-Math.PI/2;l.position.set(i,.002,0);sc.add(l)}
+  const parede=new T.Mesh(new T.PlaneGeometry(10,4),M(0xFBE3CF));parede.position.set(0,2,-1.6);sc.add(parede);
+  const jan=new T.Mesh(new T.PlaneGeometry(1.3,1),new T.MeshBasicMaterial({color:0xCDEBFC}));jan.position.set(-.9,2.2,-1.59);sc.add(jan);
+  for(const [w,h,x,y] of [[1.42,.08,-.9,2.7],[1.42,.08,-.9,1.7],[.08,1.08,-1.57,2.2],[.08,1.08,-.23,2.2],[.05,1,-.9,2.2]]){const f=new T.Mesh(new T.BoxGeometry(w,h,.05),M(0x2A2230));f.position.set(x,y,-1.57);sc.add(f)}
+  const tapete=new T.Mesh(new T.CircleGeometry(1.1,40),M(0xF2B8A2));tapete.rotation.x=-Math.PI/2;tapete.position.set(0,.004,.2);sc.add(tapete);
+  const prat=new T.Mesh(new T.BoxGeometry(.9,.07,.4),M(0xB07A52));prat.position.set(1.25,1.25,-1.38);sc.add(prat);
+  const vaso=new T.Mesh(new T.CylinderGeometry(.14,.1,.25,16),M(0xE56F3F));vaso.position.set(-1.9,.125,-1.1);sc.add(vaso);const pl=new T.Mesh(new T.SphereGeometry(.28,12,10),M(0x7FA85F));pl.position.set(-1.9,.42,-1.1);sc.add(pl);
+  for(const x of[-1.55,1.55]){const t=new T.Mesh(new T.CylinderGeometry(.11,.08,.06,20),M(0x7C66E8));t.position.set(x,.03,1.05);sc.add(t);const r=new T.Mesh(new T.CylinderGeometry(.09,.09,.02,16),M(0x9C6B4A));r.position.set(x,.065,1.05);sc.add(r)}
+  sc.add(V3.model);V3.model.position.set(0,0,0);V3.model.rotation.y=0;V3.model.traverse(o=>{o.userData.who='eu'});
+  const pos={preto:[-1.2,0,.25,.5],frajola:[1.2,0,.25,-.5],guardiao:[1.25,1.29,-1.32,-.2]};
+  for(const k in pos){const g=c3Gato(k);const [x,y,z,ry]=pos[k];g.position.set(x,y,z);g.rotation.y=ry;g.scale.setScalar(k==='guardiao'?1.25:1.3);g.userData.base=[x,y,z];sc.add(g);C3.cats[k]=g}
+  C3.scene=sc;C3.cam=new T.PerspectiveCamera(38,1,.1,50);C3.ray=new T.Raycaster()}
+async function c3Abrir(box){C3.box=box;try{await v3Load()}catch(e){box.closest('.tcena').classList.remove('c3on');return}
+  const T=V3.T;if(!C3.ren){C3.canvas=document.createElement('canvas');C3.canvas.className='c3c';C3.ren=new T.WebGLRenderer({canvas:C3.canvas,antialias:true});C3.ren.outputColorSpace=T.SRGBColorSpace;C3.ren.setPixelRatio(Math.min(2,window.devicePixelRatio||1));
+    c3Montar();C3.canvas.addEventListener('pointerup',e=>{const r=C3.canvas.getBoundingClientRect();const m=new T.Vector2((e.clientX-r.left)/r.width*2-1,-(e.clientY-r.top)/r.height*2+1);
+      C3.ray.setFromCamera(m,C3.cam);const hit=C3.ray.intersectObjects([V3.model,...Object.values(C3.cats)],true)[0];const w=hit&&hit.object.userData.who;if(w)tSel(w)})}
+  if(!C3.scene.children.includes(V3.model)){C3.scene.add(V3.model);V3.model.position.set(0,0,0);V3.model.rotation.y=0}
+  c3Roupa((tama().eu.roupa3d)||'original');box.innerHTML='';box.appendChild(C3.canvas);box.closest('.tcena').classList.add('c3on');c3Loop()}
+function c3React(who,a){C3.acts[who]={a,t0:performance.now()};
+  const em={comer:'🍲',banho:'🫧',dormir:'💤',racao:'🥣',sache:'🐟',petisco:'🐟',brincar:'🧶',carinho:'💗',escovar:'✨',caixa:'✨',roupa:'✨'}[a];if(em)c3Fx(who,em,a==='banho'?10:6)}
+function c3Loop(){cancelAnimationFrame(C3.raf);const T=V3.T;const tick=now=>{if(!C3.canvas||!C3.canvas.isConnected||JG.on)return;
+   const w=C3.canvas.clientWidth,h=C3.canvas.clientHeight;if(C3.canvas.width!==Math.round(w*C3.ren.getPixelRatio())){C3.ren.setSize(w,h,false);C3.cam.aspect=w/h;C3.cam.updateProjectionMatrix()}
+   C3.cam.position.set(0,1.55,5.1);C3.cam.lookAt(0,.95,0);const t=now/1000,Tm=tama();
+   // você
+   const ae=C3.acts.eu;let an='idle',tt=t;if(ae){tt=(now-ae.t0)/1000;an={comer:'comer',banho:'alongar',dormir:'descansar',roupa:'comemorar',acenar:'acenar',dancar:'dancar',alongar:'alongar',pular:'pular',comemorar:'comemorar'}[ae.a]||'idle';if(tt>(an==='descansar'?6:4)){delete C3.acts.eu;an='idle';tt=t}}
+   else if(tMood(Tm.eu)==='sono')an='descansar';
+   const f=V3ANIM[an](tt);v3Pose(f.P,f.y);
+   // gatos
+   for(const k in C3.cats){const g=C3.cats[k],u=g.userData,m=tMood(Tm[k]);const act=C3.acts[k];let at=act?(now-act.t0)/1000:0;if(act&&at>3.5){delete C3.acts[k]}
+     const a=C3.acts[k]&&C3.acts[k].a;const ph=t+(k==='frajola'?1.3:k==='guardiao'?2.1:0);
+     u.corpo.position.set(0,0,0);u.corpo.rotation.set(0,0,0);u.cab.rotation.set(m==='triste'?.35:0,.25*Math.sin(ph*.6),0);u.corpo.scale.set(1,1+.025*Math.sin(ph*2.2),1);
+     u.cauda.rotation.set(-.5,.45*Math.sin(ph*(m==='feliz'?3:1.5)),0);const pisc=(Math.sin(ph*1.7)>.985||m==='sono')?.12:1;u.olhos.forEach(o=>o.scale.y=1.15*pisc);
+     if(m==='sono'){u.corpo.scale.set(1.1,.8,1);u.cab.position.y=.34}else u.cab.position.y=.42;
+     if(a==='racao'||a==='sache'||a==='petisco'){u.cab.rotation.x=.55+.15*Math.sin(at*14)}
+     else if(a==='brincar'){u.corpo.position.y=.18*Math.abs(Math.sin(at*5));u.corpo.rotation.y=at*4}
+     else if(a==='carinho'||a==='escovar'){u.corpo.rotation.z=.12*Math.sin(at*10);u.cauda.rotation.y=.8*Math.sin(at*8);u.olhos.forEach(o=>o.scale.y=.15)}
+     else if(a==='banho'){u.corpo.rotation.z=.25*Math.sin(at*30);u.cab.rotation.x=-.2}
+     else if(a==='caixa'){u.corpo.rotation.y=Math.sin(at*3)*.6}
+     if(u.real){u.corpo.rotation.x+=u.cab.rotation.x*.45;if(m==='sono')u.corpo.scale.set(1.05,.85,1.05)}}
+   // efeitos subindo
+   for(const fx of C3.fx.slice()){const e=(now-fx.t0)/1000;if(e<0){fx.s.visible=false;continue}fx.s.visible=true;fx.s.position.y+=fx.v*.016;fx.s.material.opacity=Math.max(0,1-e/1.6);if(e>1.6){C3.scene.remove(fx.s);C3.fx.splice(C3.fx.indexOf(fx),1)}}
+   // destaque de quem está selecionado
+   const sel=Tm.sel||'eu';for(const k in C3.cats)C3.cats[k].userData.col.scale.setScalar(k===sel?1.25:1);
+   C3.ren.render(C3.scene,C3.cam);C3.raf=requestAnimationFrame(tick)};C3.raf=requestAnimationFrame(tick)}
+/* liga na tela da Casinha */
+const _vCasinhaC3=vCasinha;
+vCasinha=function(){let h=_vCasinhaC3();const T=tama();
+  // cena 3D por cima da 2D (que fica de reserva)
+  h=h.replace('<section class="tcena">','<section class="tcena c3on"><div id="c3box" class="c3box"><p class="v3msg">Carregando a casinha em 3D…</p></div>');
+  // nomes clicáveis embaixo da cena
+  const chips=`<div class="c3chips">${TQUEM.map(([w])=>`<button class="${(T.sel||'eu')===w?'on':''}" onclick="tSel('${w}')">${w==='eu'?esc(S.name||'Você'):esc(T[w].nome)}</button>`).join('')}<button class="jbtn" onclick="jogoAbrir()">🎮 Jogar</button></div>`;
+  h=h.replace('<section class="tcard">',chips+'<section class="tcard">');
+  // você: brincadeiras extras e guarda-roupa 3D
+  if((T.sel||'eu')==='eu'){h=h.replace('<div class="tacoes">','<div class="tacoes">'+[['acenar','👋','Acenar'],['dancar','💃','Dançar'],['pular','🦘','Pular']].map(([id,ic,n])=>`<button onclick="c3Brinca('${id}')"><i>${ic}</i>${n}</button>`).join(''));
+    if(T.aba==='roupa'){const L=level(totalXP()).l;h=h.replace(/<div class="tpanel"><h3>Guarda-roupa<\/h3>[\s\S]*?<\/div><p class="muted"[^>]*>[^<]*<\/p><\/div>/,
+      `<div class="tpanel"><h3>Guarda-roupa</h3><div class="r3">${ROUPAS3D.map(([id,n,lv,c])=>{const ok=L>=lv;return `<button class="${(T.eu.roupa3d||'original')===id?'on':''}" ${ok?`onclick="c3RoupaSet('${id}')"`:'disabled'}><i style="background:${c}"></i><span>${ok?n:'🔒 Nível '+lv}</span></button>`}).join('')}</div><p class="muted" style="font-size:12.5px">Roupas novas liberam conforme você sobe de nível.</p></div>`)}}
+  return h};
+function c3Brinca(a){c3React('eu',a)}
+function c3RoupaSet(id){const T=tama();T.eu.roupa3d=id;save();c3Roupa(id);c3React('eu','roupa');render();toast('Roupa trocada ✨')}
+const _renderC3=render;
+render=function(){_renderC3();const box=document.getElementById('c3box');if(box&&!JG.on){if(C3.ren&&V3.model){box.innerHTML='';box.appendChild(C3.canvas);if(!C3.scene.children.includes(V3.model)){C3.scene.add(V3.model);V3.model.position.set(0,0,0);V3.model.rotation.y=0}c3Roupa((tama().eu.roupa3d)||'original');c3Loop()}else c3Abrir(box)}};
+const _tAcaoC3=tAcao;tAcao=function(a){const w=tama().sel||'eu';if(a!=='roupa'&&a!=='conselho')c3React(w,a);if(a==='conselho')c3Fx('guardiao','🛡',4);_tAcaoC3(a)};
+const _tSelC3=tSel;tSel=function(w){_tSelC3(w);c3Fx(w,'✨',3)};
+
+/* ================= BIBLIOTECA DE TREINOS: escolha entre inferiores, superiores, glúteo, core... ================= */
+const TLIB={academia:[
+ {id:'a_inf',cat:'Inferiores',n:'Inferiores completo',ex:['agachamento','legpress','afundo','extensora','elevacao','panturrilha']},
+ {id:'a_sup',cat:'Superiores',n:'Superiores completo',ex:['supino','puxada','desenvolvimento','remada','rosca','triceps']},
+ {id:'a_glu',cat:'Glúteos',n:'Glúteo em foco',ex:['elevacao','agachamento','afundo','terra','ponte']},
+ {id:'a_cos',cat:'Superiores',n:'Costas e bíceps',ex:['puxada','remada','barra','rosca','superman']},
+ {id:'a_pei',cat:'Superiores',n:'Peito, ombro e tríceps',ex:['supino','desenvolvimento','flexao','triceps','mergulho']},
+ {id:'a_pos',cat:'Inferiores',n:'Posterior e glúteo',ex:['terra','elevacao','afundo','ponte','panturrilha']},
+ {id:'a_qua',cat:'Inferiores',n:'Quadríceps',ex:['agachamento','legpress','extensora','afundo','panturrilha']},
+ {id:'a_core',cat:'Core',n:'Abdômen e core',ex:['prancha','abdominal','escalador','superman']},
+ {id:'a_full',cat:'Corpo todo',n:'Corpo todo',ex:['agachamento','supino','remada','afundo','desenvolvimento','prancha']}],
+ casa:[
+ {id:'c_inf',cat:'Inferiores',n:'Pernas e glúteo em casa',ex:['agachamento','afundo','ponte','saltoagach','abdominal']},
+ {id:'c_sup',cat:'Superiores',n:'Braços, peito e costas em casa',ex:['flexao','mergulho','barra','superman','prancha']},
+ {id:'c_glu',cat:'Glúteos',n:'Glúteo em casa',ex:['ponte','afundo','agachamento','superman']},
+ {id:'c_core',cat:'Core',n:'Abdômen em casa',ex:['prancha','abdominal','escalador','superman','ponte']},
+ {id:'c_hiit',cat:'Cardio',n:'HIIT queima calorias',ex:['polichinelo','saltoagach','escalador','flexao','abdominal','prancha']},
+ {id:'c_full',cat:'Corpo todo',n:'Corpo todo em casa',ex:['polichinelo','agachamento','flexao','afundo','ponte','prancha']}]};
+const TCICLO={academia:['a_inf','a_sup','a_glu','a_cos','a_pei','a_full'],casa:['c_inf','c_sup','c_core','c_glu','c_hiit','c_full']};
+let TCAT='Todos';
+function tSugerido(mode){const L=TLIB[mode],C=TCICLO[mode];const ult=S.history.filter(h=>h.mode===mode).slice(-1)[0];
+  const i=ult?C.findIndex(id=>L.find(t=>t.id===id).n===ult.plan):-1;if(i>=0)return C[(i+1)%C.length];return C[S.history.filter(h=>h.mode===mode).length%C.length]}
+function tCarga(mode,id){for(const p of S.plans[mode]||[])for(const e of p.ex)if(e.id===id&&e.load)return e.load;return cargaPadrao(mode,id)}
+function tPlanoLib(mode,t){const P=progAt();return {name:t.n,ex:t.ex.map(id=>{const q=exParams({id},P,mode);return {id,sets:q.sets,reps:q.reps[1],range:q.reps,rest:q.rest,unit:q.unit,load:tCarga(mode,id)}})}}
+function tComecarLib(mode,id){const t=TLIB[mode].find(x=>x.id===id);const p=tPlanoLib(mode,t);const P=progAt();
+  WS={plan:p.name,mode,phase:P.phase,ex:p.ex.map(e=>({...e,done:0})),i:0,reps:0,t0:Date.now(),rest:null,sets:0,repsT:0};TAB='treino';window.scrollTo(0,0);render()}
+function tSalvarLib(mode,id){const t=TLIB[mode].find(x=>x.id===id);if(S.plans[mode].some(p=>p.name===t.n)){toast('Esse já está nos seus treinos');return}
+  S.plans[mode].push({name:t.n,ex:t.ex.map(e=>({id:e,sets:3,reps:12,rest:60,load:tCarga(mode,e)}))});save();render();toast('Adicionado aos seus treinos')}
+function vBiblioteca(mode){const L=TLIB[mode],sug=tSugerido(mode);const cats=['Todos',...new Set(L.map(t=>t.cat))];if(!cats.includes(TCAT))TCAT='Todos';
+  const lista=L.filter(t=>TCAT==='Todos'||t.cat===TCAT).sort((a,b)=>(b.id===sug)-(a.id===sug));
+  return `<section class="tlib"><h2>Qual treino hoje?</h2><p class="muted" style="margin:2px 0 8px;font-size:13px">O <b>sugerido</b> segue o rodízio (inferiores, superiores, glúteo...), mas você escolhe o que quiser.</p>
+   <div class="chips tcats">${cats.map(c=>`<button class="${c===TCAT?'on':''}" onclick="TCAT='${c}';render()">${c}</button>`).join('')}</div>
+   ${lista.map(t=>`<article class="tlc ${t.id===sug?'sug':''}"><div class="tlt"><div><b>${esc(t.n)}</b><span class="pill">${t.cat}</span>${t.id===sug?'<span class="pill sg">Sugerido hoje</span>':''}</div></div>
+     <p class="tle">${t.ex.map(id=>EX[id].n).join(' · ')}</p><div class="pfoot"><button class="go" onclick="tComecarLib('${mode}','${t.id}')">Começar</button><button class="mini" onclick="tSalvarLib('${mode}','${t.id}')">Salvar nos meus treinos</button></div></article>`).join('')}</section>
+   <h2 class="sh">Meus treinos</h2>`}
+const _vTreinoLib=vTreino;
+vTreino=function(){const h=_vTreinoLib();const mode=TMODE||curGym();const i=h.indexOf('<article class="plan');return i<0?h:h.slice(0,i)+vBiblioteca(mode)+h.slice(i)};
+
+
+/* ================= PROGRAMA "RECOMPOSIÇÃO CORPORAL · 24 SEMANAS" (do PDF da Jully) ================= */
+// exercícios novos: nome, dica e de qual exercício existente pegam a animação/foto (base)
+const RX={
+ r_supino_halt:['Supino reto com halteres','supino','Halteres na linha do peito, escápulas encaixadas no banco. Desça controlado e empurre sem travar os cotovelos.'],
+ r_remada_polia:['Remada sentada na polia','remada','Peito aberto, puxe levando os cotovelos para trás e junte as escápulas. Volte devagar.'],
+ r_desenv_halt:['Desenvolvimento com halteres','desenvolvimento','Abdômen firme, empurre os halteres acima da cabeça sem arquear a lombar.'],
+ r_elev_lateral:['Elevação lateral ★','desenvolvimento','Cotovelo levemente flexionado e fixo. Suba puxando pelos cotovelos até a linha do ombro, nunca acima. Desça em 2 segundos. Se doer no pescoço, está pesado.'],
+ r_triceps_corda:['Tríceps na corda ★','triceps','Cotovelos colados e imóveis, só o antebraço se move. No fim, abra a corda para fora. Se o corpo balança, tire carga.'],
+ r_terra_romeno:['Levantamento terra romeno ★','terra','Joelhos levemente destravados e fixos. Empurre o quadril para trás; a barra desce raspando a coxa. Costas retas do começo ao fim.'],
+ r_flexora:['Cadeira flexora','extensora','Quadril colado no banco. Dobre os joelhos até o fim e volte devagar.'],
+ r_abdutora:['Cadeira abdutora ★','extensora','Incline o tronco à frente (~45°), abra até o limite confortável e segure 1 segundo aberta. Volte resistindo.'],
+ r_miniband:['Caminhada lateral com miniband ★','afundo','Elástico acima dos joelhos, semiagachada. Passos para o lado sem deixar os joelhos fecharem.'],
+ r_deadbug:['Dead bug','abdominal','Lombar colada no chão o tempo todo enquanto braço e perna opostos se estendem.'],
+ r_esteira:['Esteira inclinada ou bicicleta','polichinelo','Intensidade em que você ainda consegue conversar.'],
+ r_prancha_lateral:['Prancha lateral','prancha','Corpo em linha reta, quadril alto, antebraço sob o ombro.'],
+ r_elev_pernas:['Elevação de pernas deitado','abdominal','Lombar colada no chão. Suba as pernas e desça devagar sem encostar no chão.'],
+ r_supino_incl:['Supino inclinado com halteres','supino','Banco a ~30°. Desça os halteres na linha do peito alto e empurre controlado.'],
+ r_supino_maq:['Supino reto na máquina','supino','Costas apoiadas, empurre sem travar os cotovelos e volte devagar.'],
+ r_triceps_overhead:['Tríceps acima da cabeça ★','triceps','Cotovelos apontados para a frente e parados. Desça o peso atrás da nuca até alongar bem a parte de trás do braço. É o principal para o "tchauzinho".'],
+ r_remada_barra:['Remada curvada com barra','remada','Tronco inclinado e costas retas. Puxe a barra até o umbigo levando os cotovelos para trás.'],
+ r_remada_unil:['Remada unilateral com halter','remada','Mão e joelho apoiados no banco. Puxe o halter até o quadril, sem girar o tronco.'],
+ r_pulldown_est:['Pulldown com braço estendido','puxada','Braços quase retos, leve a barra até as coxas usando as costas.'],
+ r_crucifixo_inv:['Crucifixo inverso','remada','Tronco inclinado, abra os braços para os lados com cotovelos levemente dobrados.'],
+ r_rosca_martelo:['Rosca martelo','rosca','Palmas viradas uma para a outra, cotovelos parados ao lado do corpo.'],
+ r_hip_thrust:['Elevação pélvica com barra (hip thrust) ★','elevacao','Costas no banco na ponta das escápulas. Suba até o tronco ficar paralelo ao chão, contraia o glúteo e enrole a pelve. Se sentir na lombar, reduza a amplitude.'],
+ r_abdutora_incl:['Cadeira abdutora (tronco inclinado) ★','extensora','Tronco inclinado à frente. Abra, segure 1 segundo e volte devagar.'],
+ r_core_mix:['Core: prancha, dead bug e pallof press','prancha','10 minutos alternando os três, com a lombar protegida.'],
+ r_desenv_maq:['Desenvolvimento na máquina','desenvolvimento','Costas apoiadas, empurre para cima sem arquear.'],
+ r_peck_deck:['Crucifixo na máquina (peck deck)','supino','Cotovelos levemente dobrados, feche os braços à frente do peito e volte devagar.'],
+ r_elev_lat_polia:['Elevação lateral unilateral na polia ★','desenvolvimento','Um braço por vez, suba até a linha do ombro e desça em 2 segundos.'],
+ r_triceps_testa:['Tríceps testa com barra W ★','triceps','Cotovelos apontados para cima e parados. Desça a barra até perto da testa e estenda.'],
+ r_rosca_inv:['Rosca inversa','rosca','Pegada com as palmas para baixo, cotovelos colados ao corpo.'],
+ r_bulgaro:['Búlgaro com halteres','afundo','Pé de trás apoiado no banco. Desça reto e suba empurrando com a perna da frente.'],
+ r_stiff:['Stiff com halteres ★','terra','Joelhos quase retos, quadril para trás, halteres raspando as pernas. Costas retas.'],
+ r_abducao_polia:['Abdução de quadril em pé na polia ★','afundo','Perna estendida saindo para o LADO, não para trás. Tronco firme.'],
+ r_pelvica_unil:['Elevação pélvica unilateral ★','ponte','Uma perna no chão, a outra no ar. Suba o quadril sem deixar ele cair para o lado.'],
+ r_coice:['Coice na polia','ponte','Perna vai para trás com o glúteo, sem arquear a lombar.'],
+ r_pant_sentado:['Panturrilha sentado','panturrilha','Suba o máximo, segure 1 segundo no topo e desça alongando.']};
+for(const id in RX){const [n,b,tip]=RX[id];EX[id]={...EX[b],n,tip};if(typeof EXI!=='undefined'&&EXI[b])EXI[id]=EXI[b]}
+SEC.push('r_prancha_lateral');
+// [exercício, séries, reps mín, reps máx, descanso s, unidade (texto), observação]
+const RP={
+ A:['Treino A · Superiores',[['r_supino_halt',3,8,12,90],['puxada',3,8,12,90],['r_remada_polia',3,10,12,90],['r_desenv_halt',3,10,12,60],['r_elev_lateral',3,12,15,45],['r_triceps_corda',3,12,15,45],['rosca',2,10,12,45]]],
+ B:['Treino B · Inferiores + core',[['agachamento',3,8,12,120],['r_terra_romeno',3,8,10,120],['legpress',3,10,12,90],['r_flexora',3,10,12,60],['r_abdutora',3,15,20,45],['panturrilha',3,15,20,45],['r_miniband',2,15,15,45,'passos / lado'],['prancha',3,30,45,45,'segundos'],['r_deadbug',3,10,10,45,'repetições / lado']]],
+ C:['Treino C · Cardio leve + core',[['r_esteira',1,25,30,0,'min (ritmo de conversa)'],['r_prancha_lateral',3,20,30,30,'segundos / lado'],['r_elev_pernas',3,12,12,30]]],
+ push:['Push · Peito, ombro e tríceps',[['r_supino_incl',4,8,10,90],['r_supino_maq',3,10,12,90],['r_desenv_halt',4,8,10,90],['r_elev_lateral',4,15,15,45],['r_triceps_overhead',4,10,12,60],['r_triceps_corda',3,12,15,45]]],
+ pull:['Pull · Costas e bíceps',[['puxada',4,8,10,90],['r_remada_barra',4,8,10,120],['r_remada_unil',3,10,10,60,'repetições / lado'],['r_pulldown_est',3,12,15,45],['r_crucifixo_inv',3,15,15,45],['rosca',3,10,12,45],['r_rosca_martelo',3,10,12,45]]],
+ legs:['Legs · Pernas e glúteo',[['agachamento',4,6,10,150],['r_hip_thrust',4,8,12,120],['r_terra_romeno',3,10,10,120],['r_abdutora_incl',4,12,15,60],['extensora',3,12,15,60],['r_flexora',3,12,12,60],['panturrilha',4,15,15,45],['r_core_mix',1,10,10,0,'min']]],
+ sup:['Superior · Ombro e tríceps (mais leve)',[['r_desenv_maq',3,10,12,75],['r_remada_polia',3,10,12,75],['r_peck_deck',3,12,12,60],['r_elev_lat_polia',4,12,15,45,'repetições / lado'],['r_triceps_testa',3,10,12,60],['r_rosca_inv',3,12,12,45]]],
+ inf:['Inferior · Glúteo e posterior',[['r_hip_thrust',4,10,12,90],['r_bulgaro',3,10,10,90,'repetições / perna'],['r_stiff',3,10,12,90],['r_abdutora',3,15,20,45],['r_abducao_polia',3,12,15,45,'repetições / lado'],['r_pelvica_unil',3,10,10,60,'repetições / lado'],['r_coice',3,12,12,45,'repetições / lado'],['r_pant_sentado',3,15,20,45]]]};
+const RISO=new Set(['r_elev_lateral','r_triceps_corda','r_triceps_overhead','r_triceps_testa','r_flexora','extensora','rosca','r_rosca_martelo','r_rosca_inv','r_crucifixo_inv','r_pulldown_est','r_peck_deck','r_elev_lat_polia','r_abdutora','r_abdutora_incl','r_abducao_polia','r_coice','panturrilha','r_pant_sentado']);
+const RFASE=[[1,8,'Adaptação','Aprender os movimentos e construir a base. Termine cada série com 2 a 3 repetições sobrando.','#3E9B5F'],[9,16,'Hipertrofia','O volume sobe e entram os isolamentos. É aqui que o crescimento acontece.','#3D7BD8'],[17,24,'Ênfase','Mesma estrutura, esforço concentrado em ombro, tríceps e glúteo médio.','#D6475F']];
+function rcp(){S.recomp=S.recomp||{on:true,start:null};if(!S.recomp.start){const d=new Date();d.setDate(d.getDate()-((d.getDay()+6)%7));S.recomp.start=dkey(d)}return S.recomp}
+function rcpSemana(d){const R=rcp();d=d||new Date();const s=new Date(R.start+'T12:00:00');return Math.floor((new Date(dkey(d)+'T12:00:00')-s)/(7*864e5))+1}
+function rcpFase(w){return RFASE.find(f=>w>=f[0]&&w<=f[1])||RFASE[2]}
+function rcpDia(d){d=d||new Date();const w=rcpSemana(d),dow=d.getDay();if(w<=8)return {1:'A',2:'B',3:'C',4:'A',5:'B'}[dow]||null;return {1:'push',2:'pull',3:'legs',5:'sup',6:'inf'}[dow]||null}
+function rcpOpcoes(w){return w<=8?['A','B','C']:['push','pull','legs','sup','inf']}
+function rcpTreino(k,w){const desc=w%8===0;let L=RP[k][1].map(x=>[...x]);
+  if(w>=17){// Fase 3: os 4 ajustes do PDF
+    const lat=['r_elev_lateral',4,15,20,45,null,'Carga leve'];
+    if(k==='push'){L=L.map(x=>x[0]==='r_elev_lateral'?lat:x)}
+    if(k==='pull'){L.push(lat);L.push(['r_triceps_overhead',3,10,12,60])}
+    if(k==='sup'){L=L.map(x=>x[0]==='r_elev_lat_polia'?['r_elev_lat_polia',4,15,20,45,'repetições / lado','Carga leve']:x);L.push(['r_triceps_overhead',3,10,12,60])}
+    const abd=x=>(x[0]==='r_abdutora'||x[0]==='r_abdutora_incl')?[x[0],4,15,20,x[4],null,'Pausa de 1 s no ponto mais aberto']:x;
+    if(k==='legs'){L=L.map(abd);L.unshift(['r_bulgaro',3,10,10,90,'repetições / perna']);L.unshift(['r_pelvica_unil',3,10,10,60,'repetições / lado'])}
+    if(k==='inf'){L=L.map(abd);const u=L.filter(x=>x[0]==='r_pelvica_unil'||x[0]==='r_bulgaro');L=[...u,...L.filter(x=>!u.includes(x))]}
+    L=L.map(x=>RISO.has(x[0])?[x[0],x[1],x[2],x[3],x[4],x[5]||null,(x[6]?x[6]+' · ':'')+'Última série até a falha técnica']:x)}
+  if(desc)L=L.map(x=>[x[0],Math.max(1,Math.ceil(x[1]/2)),...x.slice(2)]);
+  return {nome:RP[k][0],desc,ex:L}}
+function rcpComecar(k){const w=Math.min(24,Math.max(1,rcpSemana()));const t=rcpTreino(k,w);const F=rcpFase(w);
+  WS={plan:'Recomp · '+t.nome,mode:'academia',phase:F[2],ex:t.ex.map(([id,sets,lo,hi,rest,un,nota])=>({id,sets,reps:hi,range:[lo,hi],rest,unit:(un&&/seg/.test(un))?'s':'rep',unitTxt:un||null,nota:nota||null,load:tCarga('academia',id),done:0})),i:0,reps:0,t0:Date.now(),rest:null,sets:0,repsT:0};
+  TAB='treino';window.scrollTo(0,0);render()}
+const _vSessaoR=vSessao;vSessao=function(){let h=_vSessaoR();const e=WS&&WS.ex[WS.i];if(!e)return h;
+  if(e.unitTxt)h=h.replace(/ (segundos|repetições)(?= · |<\/p>)/,' '+e.unitTxt);if(e.nota)h=h.replace('<p class="tg">',`<p class="rnota">⚑ ${esc(e.nota)}</p><p class="tg">`);return h};
+let RK=null;// treino do programa que você escolheu ver
+function vRecomp(){const R=rcp();if(!R.on)return `<button class="mini" style="margin-bottom:12px" onclick="rcp().on=true;save();render()">Mostrar meu programa de 24 semanas</button>`;
+  const w=rcpSemana(),wc=Math.min(24,Math.max(1,w)),F=rcpFase(wc),hojeK=rcpDia(),ops=rcpOpcoes(wc),k=RK&&ops.includes(RK)?RK:(hojeK||ops[0]);const t=rcpTreino(k,wc);
+  const feitos=new Set(S.history.filter(x=>/^Recomp/.test(x.plan)).map(x=>rcpSemana(new Date(x.at))));
+  const grade=Array.from({length:24},(_,i)=>{const n=i+1,f=rcpFase(n);return `<i class="${n%8===0?'dsc':''} ${n===wc?'ag':''} ${feitos.has(n)?'ok':''}" style="--c:${f[4]}">${feitos.has(n)?'✓':String(n).padStart(2,'0')}</i>`}).join('');
+  const nomeDia=['domingo','segunda','terça','quarta','quinta','sexta','sábado'][new Date().getDay()];
+  return `<section class="rcp"><div class="ptop"><span class="pill" style="background:${F[4]};color:#fff">Fase ${RFASE.indexOf(F)+1} · ${F[2]}</span>${wc%8===0?'<span class="pill dl">Semana de descarga: metade das séries</span>':''}</div>
+   <h2>Recomposição corporal</h2><p class="muted" style="margin:2px 0 6px;font-size:13px">${w>24?'<b>Ciclo de 24 semanas concluído!</b> Refaça fotos e medidas e recomece na Fase 2 com as cargas novas.':w<1?'O programa começa na data que você escolheu.':`Semana <b>${wc}</b> de 24 · ${F[3]}`}</p>
+   <div class="rgrade">${grade}</div>
+   <p class="rdia">${hojeK?`Hoje (${nomeDia}) o programa pede <b>${RP[hojeK][0]}</b>.`:`Hoje (${nomeDia}) é <b>descanso</b> no programa, mas você pode fazer qualquer um.`}</p>
+   <div class="chips">${ops.map(o=>`<button class="${o===k?'on':''}" onclick="RK='${o}';render()">${o===hojeK?'★ ':''}${RP[o][0].split(' · ')[0]}</button>`).join('')}</div>
+   <article class="tlc sug"><div class="tlt"><b>${esc(t.nome)}</b>${k===hojeK?'<span class="pill sg">Sugerido hoje</span>':''}</div>
+    <ul class="rlist">${t.ex.map(([id,s,lo,hi,rest,un,nota])=>`<li><span>${esc(EX[id].n)}${nota?`<small>${esc(nota)}</small>`:''}</span><b>${s} × ${lo===hi?lo:lo+'–'+hi}${un?' '+esc(un.replace('repetições ','')):''}</b><em>${rest?(rest>=120?(rest/60+'').replace('.',',')+' min':rest+' s'):'—'}</em></li>`).join('')}</ul>
+    <div class="pfoot"><button class="go" onclick="rcpComecar('${k}')">Começar ${esc(RP[k][0].split(' · ')[0])}</button></div></article>
+   <details class="pall"><summary>Leia antes: 4 coisas que mudam tudo</summary><ol class="rtxt"><li><b>Não existe emagrecimento localizado.</b> Abdução não derrete o culote; ela constrói o glúteo médio por baixo.</li><li><b>O culote é a gordura mais teimosa.</b> Ela sai por último. O caminho rápido é o contorno: preencher a depressão acima dele com glúteo médio.</li><li><b>Parte do culote é osso.</b> Isso não muda; o músculo em volta muda, e bastante.</li><li><b>O problema não é peso a mais, é músculo a menos.</b> Ombro largo afina a cintura visualmente; o tríceps é dois terços do braço.</li></ol></details>
+   <details class="pall"><summary>Regra de progressão</summary><p class="rtxt">Bateu o topo da faixa de repetições em todas as séries, com técnica limpa? Suba a carga na próxima sessão: 2,5 kg em pernas e compostos, 1 a 2 kg em isolamentos. É normal voltar para a base da faixa. Nas 4 primeiras semanas, termine cada série com 2 a 3 repetições sobrando.</p></details>
+   <details class="pall"><summary>Cardio, comida e sono</summary><p class="rtxt"><b>Cardio:</b> 2 a 3 sessões de 25 a 35 min, ritmo de conversa, depois da musculação ou em dias sem perna. <b>Proteína:</b> cerca de 100 a 140 g por dia, em 3 ou 4 refeições, comendo em manutenção ou leve superávit. <b>Sono:</b> 7 a 8 horas. <b>Expectativa:</b> o contorno do glúteo médio muda por volta do mês 3; fotos a cada 4 semanas, mesma luz e lugar.</p></details>
+   <div class="rset"><label>Comecei o programa em <input type="date" value="${R.start}" onchange="if(this.value){rcp().start=this.value;save();render()}"></label><button class="reset" style="margin:0" onclick="rcp().on=false;save();render()">Esconder programa</button></div></section>`}
+const _vTreinoR=vTreino;vTreino=function(){const h=_vTreinoR();const i=h.indexOf('<section class="prog">');return i<0?vRecomp()+h:h.slice(0,i)+vRecomp()+h.slice(i)};
+
+/* ================= GATOS: Vader, Zorro e Barney ================= */
+TAMA_DEF.preto.nome='Vader';TAMA_DEF.frajola.nome='Zorro';TAMA_DEF.guardiao.nome='Barney';
+const _tamaN=tama;tama=function(){const T=_tamaN();if(!T.nomesV){T.nomesV=1;if(T.preto.nome==='Pretinho')T.preto.nome='Vader';if(T.frajola.nome==='Frajola')T.frajola.nome='Zorro';if(T.guardiao.nome==='Sião')T.guardiao.nome='Barney'}return T};
+
+/* ================= BARNEY: conselhos de psicologia, filosofia e vida ================= */
+const BARNEY={
+ 'Ansiedade':['Quando a cabeça corre para o futuro, traga ela para os pés: sinta o chão, nomeie 3 coisas que você vê e 2 que você ouve. Ansiedade mora no "e se"; o corpo mora no agora.',
+   'Preocupação útil vira plano; a inútil vira ruminação. Pergunte: "isso tem um próximo passo que depende de mim?" Se tem, faça o menor deles. Se não tem, anote e solte.',
+   'Respirar mais devagar que o medo é um jeito de avisar ao corpo que você está segura. Solte o ar mais longo do que puxou. Quer fazer comigo lá na aba Calma?'],
+ 'Autoestima':['Fale com você como falaria com a sua melhor amiga num dia ruim. Autocompaixão não é moleza: estudos mostram que ela deixa a gente mais persistente, não menos.',
+   'Seu corpo não é um projeto de punição. Você treina para construir, não para se apagar. Força, ombro, glúteo: tudo isso é sobre ganhar, não perder.',
+   'Comparação é olhar o bastidor seu com o palco dos outros. Compare você com você de 4 semanas atrás, com foto, na mesma luz.'],
+ 'Disciplina':['Motivação é visita; disciplina é a moradora. Não espere ter vontade: combine com você uma versão mínima (5 minutos) e comece. A vontade costuma chegar no meio.',
+   'Você não sobe ao nível das suas metas, você cai ao nível dos seus sistemas. Deixe a roupa do treino separada e o caminho fácil.',
+   'Falhou um dia? Regra de ouro: nunca falhe dois seguidos. Um dia perdido é acidente; dois começam um hábito novo.'],
+ 'Filosofia':['Epicteto ensinava que não são as coisas que nos perturbam, mas o julgamento que fazemos delas. Antes de reagir, pergunte: o que aqui está sob meu controle?',
+   'Marco Aurélio, imperador e cansado como todo mundo, escrevia para si mesmo de manhã: hoje vou encontrar gente difícil, e mesmo assim vou fazer a minha parte bem feita.',
+   'Sêneca dizia que sofremos mais na imaginação do que na realidade. O medo ensaia mil vezes uma cena que, se vier, vem uma vez só.',
+   'Para os estoicos, a pergunta não é "por que isso aconteceu comigo?", e sim "o que eu faço com isso agora?". A liberdade mora na resposta.',
+   'Camus imaginava Sísifo feliz: a pedra volta a rolar, mas o sentido está em empurrar. Rotina não é prisão quando é você quem escolhe por quê.',
+   'Aristóteles via a virtude como hábito: a gente se torna corajosa fazendo atos corajosos. Você se torna disciplinada fazendo o pequeno de hoje.'],
+ 'Tristeza':['Tristeza não é defeito, é sinal de que algo importa. Não precisa resolver agora; às vezes o certo é se cuidar como quem cuida de um gato doente: calor, comida, descanso.',
+   'Em dia pesado, troque a meta por uma versão gentil: um banho, uma refeição de verdade, uma mensagem para alguém. Isso já é vitória.',
+   'Se a tristeza fica pesada por muitos dias seguidos, conversar com um psicólogo é cuidado, não fraqueza. Eu sou um gato sábio, mas não substituo gente que estudou para isso. 💙'],
+ 'Raiva':['A raiva sobe como onda e passa em poucos minutos se você não alimentar. Antes de responder, saia 90 segundos, beba água, solte o ar devagar.',
+   'Raiva costuma estar guardando outra coisa: cansaço, mágoa, medo, fome. Pergunte para ela: "o que você está protegendo?"',
+   'Você não controla o que sentiu, mas controla o que faz nos próximos 5 minutos. Esse é o seu poder.'],
+ 'Foco':['Uma coisa de cada vez. Escolha a próxima tarefa, esconda o celular em outro cômodo e faça 25 minutos. Multitarefa é só trocar de distração rápido.',
+   'Comece pelo pedaço mais fácil da tarefa difícil. O cérebro odeia começar, mas adora terminar o que já começou.',
+   'Cansaço mental pede pausa de verdade: 5 minutos olhando longe, alongando, sem tela. A pausa faz parte do trabalho.']};
+const BARNEY_CAT=Object.keys(BARNEY);let BTOP=null,BIDX=0;
+function barneyAuto(){try{const k=dkey(new Date()),m=((S.mood||{})[k]||{}).m,d=day(),f=buildDay(new Date()).filter(b=>!d.done[b.id]).length,h=new Date().getHours();
+  if(m&&m<=2)return 'Tristeza';if((S.calm&&S.calm.log||[]).some(x=>dkey(new Date(x.t))===k))return 'Raiva';if(h>=18&&f>3)return 'Disciplina';if(h<12)return 'Foco';return 'Filosofia'}catch(e){return 'Filosofia'}}
+function barneyConselho(cat){cat=cat||BTOP||barneyAuto();BTOP=cat;const L=BARNEY[cat];BIDX=(BIDX+1+Math.floor(Math.random()*(L.length-1)))%L.length;return L[BIDX%L.length]}
+let BTXT=null;
+function vBarney(){const T=tama();const txt=BTXT||(BTXT=barneyConselho());
+  return `<div class="tpanel barney"><h3>🛡 Conselhos do ${esc(T.guardiao.nome)}</h3><div class="chips">${BARNEY_CAT.map(c=>`<button class="${c===BTOP?'on':''}" onclick="BTOP='${c}';BTXT=barneyConselho('${c}');render()">${c}</button>`).join('')}</div>
+   <blockquote>${esc(txt)}</blockquote><div class="pfoot"><button class="mini" onclick="BTXT=barneyConselho();render()">Outro conselho</button>${BTOP==='Ansiedade'||BTOP==='Raiva'?`<button class="mini" onclick="go('calma')">Ir para a Calma</button>`:''}</div>
+   <p class="muted" style="font-size:12px;margin:8px 0 0">O Barney inspira, mas não substitui psicólogo nem médico. Se estiver difícil, procure alguém de confiança.</p></div>`}
+const _vCasinhaB=vCasinha;vCasinha=function(){let h=_vCasinhaB();const T=tama();if((T.sel||'eu')==='guardiao')h+=vBarney();return h};
+const _tAcaoB=tAcao;tAcao=function(a){if(a==='conselho'&&(tama().sel==='guardiao')){BTXT=barneyConselho();c3Fx&&c3Fx('guardiao','💭',4);render();setTimeout(()=>{const p=document.querySelector('.barney');if(p)p.scrollIntoView({behavior:'smooth',block:'center'})},50);return}_tAcaoB(a)};
+// o balão do Barney na cena também traz conselhos de vez em quando
+const _tFalaB=tFala;tFala=function(T){const base=_tFalaB(T);if(/fome|banho|missões|orgulhoso/.test(base))return base;const L=BARNEY[barneyAuto()];return new Date().getMinutes()%2?L[new Date().getHours()%L.length]:base};
+
+/* ================= corrida de verdade (animação do Mixamo que veio no modelo) ================= */
+const _jogoAbrirR=jogoAbrir;jogoAbrir=async function(){await _jogoAbrirR();if(V3.gltf&&V3.gltf.animations&&V3.gltf.animations.length&&!V3.mixer){V3.mixer=new V3.T.AnimationMixer(V3.model);V3.run=V3.mixer.clipAction(V3.gltf.animations[0])}};
+const _v3PoseR=v3Pose;v3Pose=function(P,y){if(JG.on&&V3.run&&P===V3RUN_MARK)return;if(V3.run&&V3.run.isRunning())V3.run.stop();_v3PoseR(P,y)};
+const V3RUN_MARK={};const _correr=V3ANIM.correr;
+V3ANIM.correr=t=>{if(JG.on&&V3.run){if(!V3.run.isRunning())V3.run.play();const now=performance.now();V3.mixer.update(Math.min(.05,(now-(V3.lastMix||now))/1000)*1.15);V3.lastMix=now;V3.model.traverse(o=>{if(o.isBone&&o.name==='Hips'){o.position.x=V3.hips0.x;o.position.z=V3.hips0.z}});return {P:V3RUN_MARK}}return _correr(t)};
+
+/* ================= aba Eu: sua personagem em 3D (com a roupa escolhida na Casinha) ================= */
+const E3={ren:null,canvas:null,scene:null,cam:null,raf:0,rot:0};
+async function e3Mount(img){const box=document.createElement('div');box.className='eu3d';const r=img.getBoundingClientRect();box.style.width=(r.width||130)+'px';box.style.height=(r.height||230)+'px';
+  img.replaceWith(box);try{await v3Load()}catch(e){box.replaceWith(img);return}
+  const T=V3.T;if(!E3.ren){E3.canvas=document.createElement('canvas');E3.ren=new T.WebGLRenderer({canvas:E3.canvas,antialias:true,alpha:true});E3.ren.outputColorSpace=T.SRGBColorSpace;E3.ren.setPixelRatio(Math.min(2,window.devicePixelRatio||1));
+    E3.scene=new T.Scene();E3.scene.add(new T.HemisphereLight(0xffffff,0x8a6a55,2.1));const d=new T.DirectionalLight(0xffffff,1.6);d.position.set(1.5,3,3);E3.scene.add(d);E3.cam=new T.PerspectiveCamera(26,1,.1,50);
+    let x0=null;E3.canvas.addEventListener('pointerdown',e=>{x0=e.clientX;E3.canvas.setPointerCapture(e.pointerId)});E3.canvas.addEventListener('pointermove',e=>{if(x0!=null){E3.rot+=(e.clientX-x0)*.015;x0=e.clientX}});E3.canvas.addEventListener('pointerup',()=>x0=null)}
+  if(!box.isConnected)return;box.appendChild(E3.canvas);E3.scene.add(V3.model);V3.model.position.set(0,0,0);c3Roupa((tama().eu.roupa3d)||'original');
+  cancelAnimationFrame(E3.raf);const tick=now=>{if(!E3.canvas.isConnected||JG.on)return;const w=E3.canvas.clientWidth,h=E3.canvas.clientHeight;
+    if(E3.canvas.width!==Math.round(w*E3.ren.getPixelRatio())){E3.ren.setSize(w,h,false);E3.cam.aspect=w/h;E3.cam.updateProjectionMatrix()}
+    const dist=(1.05/Math.tan(13*Math.PI/180))*Math.max(1,.62/E3.cam.aspect);E3.cam.position.set(0,.93,dist);E3.cam.lookAt(0,.93,0);
+    const f=V3ANIM.idle(now/1000);v3Pose(f.P,f.y);V3.model.rotation.y=E3.rot+.25*Math.sin(now/2600);E3.ren.render(E3.scene,E3.cam);E3.raf=requestAnimationFrame(tick)};E3.raf=requestAnimationFrame(tick)}
+const _renderE3=render;render=function(){_renderE3();if(TAB==='eu'&&!JG.on){const img=document.querySelector('img[alt="Sua personagem de corpo inteiro"]');if(img){if(img.complete&&img.naturalWidth)e3Mount(img);else img.addEventListener('load',()=>e3Mount(img),{once:true})}}};
+
+/* ================= VARIAÇÕES: vários Treinos A, vários B, vários C... (você escolhe; o app sugere a próxima) ================= */
+Object.assign(RX,{r_bike:['Bicicleta ergométrica','polichinelo','Ritmo em que você ainda consegue conversar.'],r_escada:['Escada (simulador)','polichinelo','Passos firmes, sem se apoiar demais no corrimão.'],r_caminhada:['Caminhada rápida ao ar livre','polichinelo','Passo acelerado, braços soltos, ritmo de conversa.']});
+for(const id of['r_bike','r_escada','r_caminhada']){const [n,b,tip]=RX[id];EX[id]={...EX[b],n,tip};if(typeof EXI!=='undefined'&&EXI[b])EXI[id]=EXI[b]}
+const RPV={
+ A:[RP.A,['Treino A · Superiores (máquinas)',[['r_supino_maq',3,8,12,90],['puxada',3,8,12,90],['r_remada_unil',3,10,12,90,'repetições / lado'],['r_desenv_maq',3,10,12,60],['r_elev_lat_polia',3,12,15,45,'repetições / lado'],['r_triceps_overhead',3,12,15,45],['r_rosca_martelo',2,10,12,45]]],
+       ['Treino A · Superiores (halteres e polia)',[['r_supino_incl',3,8,12,90],['r_pulldown_est',3,12,15,60],['r_remada_polia',3,10,12,90],['r_desenv_halt',3,10,12,60],['r_elev_lateral',3,12,15,45],['r_triceps_testa',3,10,12,45],['rosca',2,10,12,45]]]],
+ B:[RP.B,['Treino B · Glúteo e posterior + core',[['r_hip_thrust',3,8,12,120],['r_stiff',3,8,10,120],['r_bulgaro',3,10,10,90,'repetições / perna'],['r_flexora',3,10,12,60],['r_abdutora',3,15,20,45],['r_pant_sentado',3,15,20,45],['r_abducao_polia',2,15,15,45,'repetições / lado'],['r_prancha_lateral',3,20,30,45,'segundos / lado'],['r_deadbug',3,10,10,45,'repetições / lado']]],
+       ['Treino B · Quadríceps e glúteo médio + core',[['legpress',3,10,12,120],['agachamento',3,8,12,120],['r_terra_romeno',3,8,10,120],['extensora',3,12,15,60],['r_abdutora_incl',3,15,20,45],['r_miniband',2,15,15,45,'passos / lado'],['panturrilha',3,15,20,45],['prancha',3,30,45,45,'segundos'],['r_elev_pernas',3,12,12,45]]]],
+ C:[RP.C,['Treino C · Bicicleta + core',[['r_bike',1,25,30,0,'min (ritmo de conversa)'],['r_deadbug',3,10,10,30,'repetições / lado'],['prancha',3,30,40,30,'segundos']]],
+       ['Treino C · Caminhada ou escada + core',[['r_caminhada',1,30,35,0,'min (ritmo de conversa)'],['r_prancha_lateral',3,20,30,30,'segundos / lado'],['r_elev_pernas',3,12,12,30]]]],
+ push:[RP.push,['Push · máquinas',[['r_supino_maq',4,8,10,90],['r_peck_deck',3,12,12,60],['r_desenv_maq',4,8,10,90],['r_elev_lat_polia',4,15,15,45,'repetições / lado'],['r_triceps_overhead',4,10,12,60],['r_triceps_testa',3,10,12,45]]],
+       ['Push · halteres',[['r_supino_halt',4,8,10,90],['r_supino_incl',3,10,12,90],['r_desenv_halt',4,8,10,90],['r_elev_lateral',4,15,15,45],['r_triceps_overhead',4,10,12,60],['r_triceps_corda',3,12,15,45]]]],
+ pull:[RP.pull,['Pull · polia',[['puxada',4,8,10,90],['r_remada_polia',4,10,12,90],['r_pulldown_est',3,12,15,45],['r_crucifixo_inv',3,15,15,45],['rosca',3,10,12,45],['r_rosca_inv',3,12,12,45]]],
+       ['Pull · peso livre',[['barra',3,5,8,120],['r_remada_barra',4,8,10,120],['r_remada_unil',3,10,10,60,'repetições / lado'],['r_crucifixo_inv',3,15,15,45],['r_rosca_martelo',3,10,12,45],['rosca',3,10,12,45]]]],
+ legs:[RP.legs,['Legs · glúteo em foco',[['r_hip_thrust',4,8,12,120],['agachamento',4,6,10,150],['r_stiff',3,10,12,120],['r_abdutora_incl',4,12,15,60],['r_pelvica_unil',3,10,10,60,'repetições / lado'],['r_flexora',3,12,12,60],['r_pant_sentado',4,15,15,45],['r_core_mix',1,10,10,0,'min']]],
+       ['Legs · quadríceps em foco',[['legpress',4,8,12,120],['r_bulgaro',3,10,10,90,'repetições / perna'],['r_terra_romeno',3,10,10,120],['extensora',4,12,15,60],['r_abdutora',4,12,15,60],['r_flexora',3,12,12,60],['panturrilha',4,15,15,45],['r_core_mix',1,10,10,0,'min']]]],
+ sup:[RP.sup,['Superior · halteres',[['r_desenv_halt',3,10,12,75],['r_remada_unil',3,10,12,75,'repetições / lado'],['r_supino_incl',3,10,12,60],['r_elev_lateral',4,12,15,45],['r_triceps_overhead',3,10,12,60],['r_rosca_martelo',3,12,12,45]]],
+       ['Superior · polia',[['r_desenv_maq',3,10,12,75],['puxada',3,10,12,75],['r_peck_deck',3,12,12,60],['r_elev_lat_polia',4,12,15,45,'repetições / lado'],['r_triceps_corda',3,12,15,60],['r_rosca_inv',3,12,12,45]]]],
+ inf:[RP.inf,['Inferior · unilateral',[['r_pelvica_unil',4,10,12,60,'repetições / lado'],['r_bulgaro',3,10,10,90,'repetições / perna'],['r_stiff',3,10,12,90],['r_abducao_polia',3,12,15,45,'repetições / lado'],['r_abdutora',3,15,20,45],['r_coice',3,12,12,45,'repetições / lado'],['r_pant_sentado',3,15,20,45]]],
+       ['Inferior · máquinas',[['r_hip_thrust',4,10,12,90],['legpress',3,10,12,90],['r_flexora',3,12,12,60],['r_abdutora_incl',4,15,20,45],['r_abducao_polia',3,12,15,45,'repetições / lado'],['extensora',3,12,15,60],['panturrilha',3,15,20,45]]]]};
+const RVN=['Original do PDF','Variação 2','Variação 3'];
+let RV=null;// variação escolhida (null = a sugerida)
+function rcpVarSug(k){const n=S.history.filter(h=>new RegExp('^Recomp · '+k+'\\d · ').test(h.plan)).length;return n%RPV[k].length}
+// rcpTreino passa a aceitar a variação; os ajustes da Fase 3 continuam valendo
+const _rcpTreinoV=rcpTreino;
+rcpTreino=function(k,w,vi){vi=vi==null?rcpVarSug(k):vi;const orig=RP[k];RP[k]=RPV[k][vi];try{const t=_rcpTreinoV(k,w);
+  if(k==='legs'&&w>=17){const vis=new Set();t.ex=t.ex.filter(x=>{if(['r_pelvica_unil','r_bulgaro'].includes(x[0])){if(vis.has(x[0]))return false;vis.add(x[0])}return true})}
+  return {...t,vi}}finally{RP[k]=orig}};
+rcpComecar=function(k,vi){const w=Math.min(24,Math.max(1,rcpSemana()));vi=vi==null?rcpVarSug(k):vi;const t=rcpTreino(k,w,vi);const F=rcpFase(w);
+  WS={plan:'Recomp · '+k+(vi+1)+' · '+t.nome,mode:'academia',phase:F[2],ex:t.ex.map(([id,sets,lo,hi,rest,un,nota])=>({id,sets,reps:hi,range:[lo,hi],rest,unit:(un&&/seg/.test(un))?'s':'rep',unitTxt:un||null,nota:nota||null,load:tCarga('academia',id),done:0})),i:0,reps:0,t0:Date.now(),rest:null,sets:0,repsT:0};
+  TAB='treino';window.scrollTo(0,0);render()};
+// troca o cartão do treino escolhido por um com as variações
+const _vRecompV=vRecomp;
+vRecomp=function(){let h=_vRecompV();if(!rcp().on)return h;const wc=Math.min(24,Math.max(1,rcpSemana())),ops=rcpOpcoes(wc),hojeK=rcpDia(),k=RK&&ops.includes(RK)?RK:(hojeK||ops[0]);
+  const sug=rcpVarSug(k),vi=RV!=null&&RV<RPV[k].length?RV:sug;const nomeK=x=>x.length===1?'Treino '+x:RP[x][0].split(' · ')[0];const sub=x=>RP[x][0].split(' · ').slice(1).join(' · ');
+  const tabela=t=>`<ul class="rlist rimg">${t.ex.map(([id,s,lo,hi,rest,un,nota])=>`<li>${demo(id,'sm')}<span>${esc(EX[id].n)}<a class="rvid" href="${ytLink(id)}" target="_blank" rel="noopener" onclick="event.stopPropagation()">▶ como fazer</a>${nota?`<small>${esc(nota)}</small>`:''}</span><b>${s} × ${lo===hi?lo:lo+'–'+hi}${un?' '+esc(un.replace('repetições ','')):''}</b><em>${rest?(rest>=120?(rest/60+'').replace('.',',')+' min':rest+' s'):'—'}</em></li>`).join('')}</ul>`;
+  const passo1=`<h3 class="rpasso">1. Escolha o treino</h3><div class="rslots">${ops.map(o=>`<button class="${o===k?'on':''}" onclick="RK='${o}';RV=null;render()"><b>${o===hojeK?'★ ':''}${nomeK(o)}</b><small>${esc(sub(o))}</small>${o===hojeK?'<em>pedido para hoje</em>':''}</button>`).join('')}</div>`;
+  const passo2=`<h3 class="rpasso">2. Escolha qual ${esc(nomeK(k))} fazer</h3>`+RPV[k].map((v,i)=>{const t=rcpTreino(k,wc,i),on=i===vi;const rot=k.length===1?k+(i+1):nomeK(k)+' '+(i+1);
+    return `<article class="rvc ${on?'on':''}" onclick="${on?'':`RV=${i};render()`}"><div class="rvt"><span class="rradio">${on?'●':'○'}</span><div><b>${esc(rot)} · ${i===0?'Original do PDF':esc(v[0].split(' · ')[1]||RVN[i])}</b>${i===sug?'<span class="pill sg">Próxima da vez</span>':''}</div></div>
+      ${on?tabela(t)+`<div class="pfoot"><button class="go" onclick="event.stopPropagation();rcpComecar('${k}',${i})">Fazer o ${esc(rot)} agora</button></div>`:`<div class="rthumbs">${t.ex.map(x=>demo(x[0],'sm')).join('')}</div><p class="tle">${t.ex.map(x=>EX[x[0]].n.replace(' ★','')).join(' · ')}</p>`}</article>`}).join('')
+    +`<p class="muted" style="font-size:12px;margin:4px 0 10px">A variação 1 é igual ao seu PDF. As outras trabalham os mesmos músculos e mantêm os ★, com outros aparelhos. "Próxima da vez" vai alternando a cada treino feito, mas você escolhe a que quiser.</p>`;
+  return h.replace(/<div class="chips">[\s\S]*?<\/article>/,passo1+passo2)};
+function i_sug(k,hojeK,vi,sug){return (k===hojeK&&vi===sug)?'<span class="pill sg">Sugerido hoje</span>':vi===sug?'<span class="pill sg">Próxima da vez</span>':''}
+const _rkClick=window.onclick;// ao trocar de treino (A/B/C), volta para a variação sugerida
+document.addEventListener('click',e=>{const b=e.target.closest('.rcp .chips:not(.rvar) button');if(b)RV=null},true);
+
+/* ================= gatos 3D de verdade (modelo "cat" de artofaria, Sketchfab) =================
+   Um modelo só, pintado de três jeitos: Zorro (frajola, como veio), Vader (todo preto, mais fofo) e Barney (siamês filhote). */
+async function c3GatoModelo(){if(C3.gatoM)return C3.gatoM;const T=V3.T;const L=v3Loader(V3.GL);
+  const g=await new Promise((ok,err)=>{if(window.GATO64){const b=atob(window.GATO64),u=new Uint8Array(b.length);for(let i=0;i<b.length;i++)u[i]=b.charCodeAt(i);L.parse(u.buffer,'',ok,err)}else L.load('gato.glb',ok,undefined,err)});
+  return C3.gatoM=g.scene}
+function c3Pintar(m,tipo){let mesh;m.traverse(o=>{if(o.isMesh)mesh=o});mesh.geometry.computeBoundingBox();const bb=mesh.geometry.boundingBox;
+  m.traverse(o=>{if(!o.isMesh)return;o.material=o.material.clone();const U={bmin:{value:bb.min},bmax:{value:bb.max},tipo:{value:tipo}};o.material.customProgramCacheKey=()=>'gato'+tipo;
+    o.material.onBeforeCompile=sh=>{Object.assign(sh.uniforms,U);sh.vertexShader=sh.vertexShader.replace('#include <common>','#include <common>\nvarying vec3 vP;').replace('#include <begin_vertex>','#include <begin_vertex>\nvP=position;');
+      sh.fragmentShader=sh.fragmentShader.replace('#include <common>','#include <common>\nvarying vec3 vP;uniform vec3 bmin;uniform vec3 bmax;uniform int tipo;').replace('#include <map_fragment>',`#include <map_fragment>
+       vec3 q=(vP-bmin)/(bmax-bmin);float mx=max(diffuseColor.r,max(diffuseColor.g,diffuseColor.b)),mn=min(diffuseColor.r,min(diffuseColor.g,diffuseColor.b));bool olho=(mx-mn)>0.18&&mx>0.25;
+       if(tipo==1){ if(!olho) diffuseColor.rgb=min(diffuseColor.rgb,vec3(0.03)); else diffuseColor.rgb=vec3(0.95,0.75,0.15); }
+       if(tipo==2){ float pt=0.0; pt=max(pt,1.0-smoothstep(0.20,0.34,q.y)); pt=max(pt,1.0-smoothstep(0.18,0.30,q.x)); pt=max(pt,(1.0-smoothstep(0.36,0.44,q.x))*smoothstep(0.66,0.74,q.y));
+         pt=max(pt,smoothstep(0.84,0.93,q.x)*smoothstep(0.45,0.6,q.y)); pt=max(pt,smoothstep(0.80,0.88,q.y)*step(0.62,q.x));
+         diffuseColor.rgb=olho?vec3(0.25,0.62,0.95):mix(vec3(0.80,0.72,0.58),vec3(0.10,0.06,0.045),pt); }`)}})}
+async function c3GatosReais(){try{const base=await c3GatoModelo();const T=V3.T;
+  for(const k in C3.cats){const g=C3.cats[k],u=g.userData;if(u.real)continue;
+    const m=base.clone(true);c3Pintar(m,k==='frajola'?0:k==='preto'?1:2);
+    const box=new T.Box3().setFromObject(m),s=box.getSize(new T.Vector3()),c=box.getCenter(new T.Vector3());const esc=.85/Math.max(s.x,s.z);
+    const piv=new T.Group();m.position.set(-c.x,-box.min.y,-c.z);piv.add(m);piv.scale.setScalar(esc*(k==='preto'?1.12:1));piv.rotation.y=-Math.PI/2;
+    // tira as formas antigas (corpo, cabeça, rabo), mantém coleira e, no Barney, capa e estrela
+    const manter=[];u.corpo.traverse(o=>{if(o===u.col)manter.push(o)});
+    const capa=[];if(k==='guardiao')u.corpo.traverse(o=>{if(o.isMesh&&(o.geometry.type==='CylinderGeometry'))capa.push(o)});
+    const est=[];if(k==='guardiao')u.cab.traverse(o=>{if(o.isMesh&&o.geometry.type==='ExtrudeGeometry')est.push(o)});
+    u.corpo.clear();u.corpo.add(piv);
+    const h=s.y*esc*(k==='preto'?1.12:1),len=Math.max(s.x,s.z)*esc;u.col.position.set(0,h*.6,len*.28);u.col.scale.setScalar(.42);u.col.rotation.set(Math.PI/2-.35,0,0);u.corpo.add(u.col);
+    if(k==='guardiao'){for(const o of est){o.position.set(0,h*1.12,len*.36);o.scale.setScalar(.9);u.corpo.add(o)}}
+    u.cab=new T.Group();u.cauda=new T.Group();u.olhos=[];u.real=true;g.traverse(o=>{o.userData.who=k})}
+  }catch(e){/* sem o arquivo do gato: ficam os gatinhos de formas simples */}}
+// liga: depois que a casinha monta, troca os gatos
+const _c3MontarG=c3Montar;c3Montar=function(){_c3MontarG();c3GatosReais()};
+
+/* ================= mais variações de cada letra + fotos dos exercícios ================= */
+const _V=(n,L)=>[n,L];
+RPV.A.push(
+ _V('Treino A · Ombro em foco',[['r_desenv_halt',3,10,12,75],['r_elev_lateral',4,12,15,45],['r_elev_lat_polia',3,12,15,45,'repetições / lado'],['puxada',3,8,12,90],['r_supino_halt',3,8,12,90],['r_triceps_overhead',3,12,15,45],['rosca',2,10,12,45]]),
+ _V('Treino A · Costas em foco',[['puxada',3,8,12,90],['r_remada_barra',3,8,10,120],['r_remada_unil',3,10,10,60,'repetições / lado'],['r_pulldown_est',3,12,15,45],['r_supino_maq',3,10,12,90],['r_elev_lateral',3,12,15,45],['r_triceps_corda',3,12,15,45],['r_rosca_martelo',2,10,12,45]]),
+ _V('Treino A · Tríceps em foco',[['r_supino_incl',3,8,12,90],['puxada',3,8,12,90],['r_desenv_maq',3,10,12,60],['r_elev_lateral',3,12,15,45],['r_triceps_overhead',3,10,12,60],['r_triceps_testa',3,10,12,45],['mergulho',3,8,12,60],['r_rosca_inv',2,12,12,45]]));
+RPV.B.push(
+ _V('Treino B · Glúteo médio em foco + core',[['r_abdutora_incl',4,15,20,45,null,'Pausa de 1 s aberta'],['r_abducao_polia',3,12,15,45,'repetições / lado'],['r_miniband',3,15,15,45,'passos / lado'],['r_hip_thrust',3,10,12,90],['agachamento',3,8,12,120],['r_pelvica_unil',3,10,10,60,'repetições / lado'],['r_prancha_lateral',3,20,30,45,'segundos / lado'],['r_deadbug',3,10,10,45,'repetições / lado']]),
+ _V('Treino B · Unilateral + core',[['r_bulgaro',3,10,10,90,'repetições / perna'],['afundo',3,10,10,90,'repetições / perna'],['r_pelvica_unil',3,10,10,60,'repetições / lado'],['r_stiff',3,10,12,90],['r_abdutora',3,15,20,45],['r_pant_sentado',3,15,20,45],['prancha',3,30,45,45,'segundos'],['r_elev_pernas',3,12,12,45]]),
+ _V('Treino B · Máquinas + core',[['legpress',3,10,12,90],['r_flexora',3,10,12,60],['extensora',3,12,15,60],['r_abdutora',3,15,20,45],['r_hip_thrust',3,10,12,90],['panturrilha',3,15,20,45],['prancha',3,30,45,45,'segundos'],['r_deadbug',3,10,10,45,'repetições / lado']]));
+RPV.C.push(
+ _V('Treino C · Escada + core oblíquo',[['r_escada',1,20,25,0,'min (ritmo de conversa)'],['r_prancha_lateral',3,20,30,30,'segundos / lado'],['r_deadbug',3,10,10,30,'repetições / lado'],['r_elev_pernas',3,12,12,30]]),
+ _V('Treino C · Caminhada + glúteo leve',[['r_caminhada',1,25,30,0,'min (ritmo de conversa)'],['r_miniband',2,15,15,30,'passos / lado'],['ponte',3,15,15,30],['prancha',3,30,40,30,'segundos']]));
+RPV.push.push(
+ _V('Push · ombro em foco',[['r_desenv_halt',4,8,10,90],['r_elev_lateral',4,15,15,45],['r_elev_lat_polia',3,12,15,45,'repetições / lado'],['r_supino_incl',3,8,10,90],['r_triceps_overhead',4,10,12,60],['mergulho',3,8,12,60]]),
+ _V('Push · tríceps em foco',[['r_supino_maq',3,10,12,90],['r_desenv_maq',3,10,12,75],['r_elev_lateral',4,15,15,45],['r_triceps_overhead',4,10,12,60],['r_triceps_testa',3,10,12,60],['r_triceps_corda',3,12,15,45],['mergulho',2,10,12,60]]));
+RPV.pull.push(
+ _V('Pull · dorsal (o "V")',[['puxada',4,8,10,90],['r_pulldown_est',4,12,15,45],['r_remada_unil',3,10,10,60,'repetições / lado'],['r_crucifixo_inv',3,15,15,45],['rosca',3,10,12,45]]),
+ _V('Pull · postura e ombro de trás',[['r_remada_polia',4,10,12,90],['r_crucifixo_inv',4,15,15,45],['puxada',3,10,12,90],['superman',3,12,12,45],['r_rosca_martelo',3,10,12,45]]));
+RPV.legs.push(
+ _V('Legs · glúteo médio em foco',[['r_pelvica_unil',3,10,10,60,'repetições / lado'],['r_bulgaro',3,10,10,90,'repetições / perna'],['r_abdutora_incl',4,15,20,60,null,'Pausa de 1 s aberta'],['r_abducao_polia',3,12,15,45,'repetições / lado'],['r_hip_thrust',4,8,12,120],['r_flexora',3,12,12,60],['panturrilha',4,15,15,45],['r_core_mix',1,10,10,0,'min']]),
+ _V('Legs · posterior em foco',[['r_terra_romeno',4,8,10,120],['r_stiff',3,10,12,90],['r_flexora',4,12,12,60],['r_hip_thrust',3,10,12,90],['r_abdutora',3,15,20,45],['r_pant_sentado',4,15,15,45],['r_core_mix',1,10,10,0,'min']]));
+RPV.sup.push(
+ _V('Superior · costas e ombro',[['puxada',3,10,12,75],['r_remada_unil',3,10,12,75,'repetições / lado'],['r_elev_lateral',4,12,15,45],['r_crucifixo_inv',3,15,15,45],['r_triceps_overhead',3,10,12,60],['rosca',3,12,12,45]]),
+ _V('Superior · braços',[['r_desenv_halt',3,10,12,75],['r_triceps_testa',3,10,12,60],['r_triceps_overhead',3,10,12,60],['r_rosca_martelo',3,10,12,45],['r_rosca_inv',3,12,12,45],['r_elev_lat_polia',4,12,15,45,'repetições / lado']]));
+RPV.inf.push(
+ _V('Inferior · glúteo médio',[['r_abdutora_incl',4,15,20,45,null,'Pausa de 1 s aberta'],['r_abducao_polia',3,12,15,45,'repetições / lado'],['r_miniband',3,15,15,45,'passos / lado'],['r_pelvica_unil',3,10,10,60,'repetições / lado'],['r_hip_thrust',4,10,12,90],['r_pant_sentado',3,15,20,45]]),
+ _V('Inferior · posterior',[['r_stiff',3,10,12,90],['r_terra_romeno',3,8,10,120],['r_flexora',3,12,12,60],['r_coice',3,12,12,45,'repetições / lado'],['r_hip_thrust',4,10,12,90],['panturrilha',3,15,20,45]]));
+
+/* ================= roupas 3D de verdade (looks exportados do Avaturn) =================
+   Cada look tem a roupa (roupaN.glb) e a lista de pele visível do corpo com ela (roupaN.idx):
+   o Avaturn esconde a pele que fica por baixo de cada roupa, e é isso que evita a pele "vazar". */
+const LOOKS=[['6','Vestido vermelho de bolinhas','👗'],['12','Jaqueta de couro e jeans','🧥'],['10','Academia: top e legging','🏋️'],['8','Vestido nude','👗'],['9','Uniforme azul-marinho','🩺'],['11','Macacão espacial','🚀'],['7','Capa de bruxa','🧙']];
+const LK={};
+function v3Bytes(nome){const b64=window.ROUPAS64&&window.ROUPAS64[nome];if(b64){const b=atob(b64),u=new Uint8Array(b.length);for(let i=0;i<b.length;i++)u[i]=b.charCodeAt(i);return Promise.resolve(u.buffer)}return fetch(nome).then(r=>{if(!r.ok)throw new Error(nome);return r.arrayBuffer()})}
+async function v3Look(id){if(!V3.model)return;const T=V3.T;
+  if(!V3.corpo){V3.model.traverse(o=>{if(o.isSkinnedMesh){if(/body/.test(o.name))V3.corpo=o;if(/look/.test(o.name)&&!o.userData.roupa)V3.lookOrig=o}});V3.ossos={};V3.corpo.skeleton.bones.forEach(b=>V3.ossos[b.name]=b)}
+  if(!LK[id]){const [glb,idx]=await Promise.all([id==='6'?null:v3Bytes('roupa'+id+'.glb'),v3Bytes('roupa'+id+'.idx')]);
+    const ib=new Uint8Array(idx),arr=ib[0]===4?new Uint32Array(ib.slice(1).buffer):new Uint16Array(ib.slice(1).buffer);
+    let mesh=null;if(id!=='6'){const g=await new Promise((ok,err)=>v3Loader(V3.GL).parse(glb,'',ok,err));g.scene.traverse(o=>{if(o.isSkinnedMesh)mesh=o});
+      mesh.skeleton=new T.Skeleton(mesh.skeleton.bones.map(b=>V3.ossos[b.name]),mesh.skeleton.boneInverses);mesh.userData.roupa=1;mesh.frustumCulled=false;
+      mesh.material.polygonOffset=true;mesh.material.polygonOffsetFactor=-2;mesh.material.polygonOffsetUnits=-8}
+    LK[id]={mesh,idx:new T.BufferAttribute(arr,1)}}
+  const L=LK[id];if(V3.lookAtual&&V3.lookAtual!==L.mesh&&V3.lookAtual.parent)V3.lookAtual.parent.remove(V3.lookAtual);
+  V3.corpo.geometry.setIndex(L.idx);
+  if(L.mesh){V3.lookOrig.visible=false;V3.lookOrig.parent.add(L.mesh);L.mesh.bind(L.mesh.skeleton,L.mesh.bindMatrix);V3.lookAtual=L.mesh}else{V3.lookOrig.visible=true;V3.lookAtual=null}
+  V3.lookId=id}
+// ao abrir o 3D, já veste o look salvo
+const _v3LoadL=v3Load;v3Load=async function(){await _v3LoadL();const id=(tama().eu.look)||'6';if(V3.lookId!==id){try{await v3Look(id)}catch(e){}}};
+async function c3LookSet(id){const T=tama();T.eu.look=id;save();try{await v3Look(id)}catch(e){toast('Não consegui abrir essa roupa agora');return}c3React('eu','roupa');render();toast('Roupa trocada ✨')}
+// guarda-roupa: looks de verdade + cores do vestido vermelho
+const _vCasinhaL=vCasinha;vCasinha=function(){let h=_vCasinhaL();const T=tama();if((T.sel||'eu')!=='eu'||T.aba!=='roupa')return h;const L=level(totalXP()).l,atual=T.eu.look||'6';
+  const looks=`<h3>Looks</h3><div class="r3 rl">${LOOKS.map(([id,n,ic])=>`<button class="${atual===id?'on':''}" onclick="c3LookSet('${id}')"><i class="ric">${ic}</i><span>${n}</span></button>`).join('')}</div>`;
+  const cores=atual==='6'?`<h3 style="margin-top:12px">Cor do vestido</h3><div class="r3">${ROUPAS3D.map(([id,n,lv,c])=>{const ok=L>=lv;return `<button class="${(T.eu.roupa3d||'original')===id?'on':''}" ${ok?`onclick="c3RoupaSet('${id}')"`:'disabled'}><i style="background:${c}"></i><span>${ok?n:'🔒 Nível '+lv}</span></button>`}).join('')}</div>`:'';
+  return h.replace(/<div class="tpanel"><h3>Guarda-roupa<\/h3>[\s\S]*?<\/p><\/div>/,`<div class="tpanel"><h3>Guarda-roupa</h3>${looks}${cores}<p class="muted" style="font-size:12.5px">Os looks são as roupas que você exportou do Avaturn. As cores do vestido liberam conforme você sobe de nível.</p></div>`)};
+
+
+/* ================= BARNEY: muitos conselhos, sem repetir até passar por todos ================= */
+Object.assign(BARNEY,{
+ 'Ansiedade':BARNEY['Ansiedade'].concat(['Escreva a preocupação num papel. Fora da cabeça, ela fica do tamanho real.','Pergunte: daqui a 5 anos, isso vai importar? Se não, dê a isso 5 minutos de atenção, não 5 horas.','Ansiedade gosta de certezas que não existem. Troque "e se der errado?" por "se der errado, o que eu faço?". Você sempre tem um próximo passo.','Coloque água fria no rosto e nos pulsos. O corpo entende o recado de que pode baixar o ritmo.','Mexa o corpo: 10 minutos de caminhada gastam a adrenalina que a ansiedade deixou sobrando.','Diminua o café quando estiver ansiosa. Às vezes o coração acelerado é cafeína, não perigo.','Você já sobreviveu a 100% dos seus dias difíceis. Esse é um bom histórico.']),
+ 'Autoestima':BARNEY['Autoestima'].concat(['Anote 3 coisas que você fez bem hoje, por menores que sejam. O cérebro precisa de prova, não de discurso.','Você não precisa ser perfeita para merecer descanso, comida boa e carinho.','Seu valor não sobe e desce com a balança, o espelho ou a produtividade do dia.','Elogio recebido se aceita com "obrigada", sem "ah, imagina".','Ninguém repara em você tanto quanto você imagina. Isso é libertador: pode errar em paz.','Cuide do seu corpo como de alguém que você ama, não como de um inimigo que precisa ser corrigido.','Proporção não é tamanho. Você está construindo músculo, não encolhendo.']),
+ 'Disciplina':BARNEY['Disciplina'].concat(['Faça a coisa difícil cedo, antes que o dia invente desculpas.','Combine o novo hábito com um velho: depois do café, 10 agachamentos. Hábito pega carona.','Feito é melhor que perfeito. Um treino de 20 minutos vale mais que o de 1 hora que não aconteceu.','Disciplina também é saber parar. Descanso planejado faz parte do plano.','Diga a regra em voz alta: "eu sou alguém que treina". Identidade sustenta o que a força de vontade não aguenta.','Reduza a fricção: garrafa cheia na mesa, tênis perto da porta, celular longe da cama.','Celebre o pequeno: marcar a missão do dia é um voto a favor de quem você quer ser.']),
+ 'Filosofia':BARNEY['Filosofia'].concat(['Para Epicuro, a felicidade mora em coisas simples: amigos, conversa, pão, sossego. Talvez você já tenha mais do que percebe.','Heráclito dizia que ninguém entra duas vezes no mesmo rio. Você também muda todo dia; não se prenda a quem foi ontem.','Montaigne escreveu que a maior coisa do mundo é saber ser de si mesmo. Tire um tempo só seu hoje.','Simone de Beauvoir lembrava que a gente se torna quem é, não nasce pronta. Você está se fazendo agora.','Sêneca: enquanto adiamos, a vida passa. Viva o que dá para viver hoje.','Os estoicos treinavam imaginar perder o que têm, para valorizar o que têm. Olhe para os seus gatos agora.','Kierkegaard dizia que a vida se entende olhando para trás, mas se vive olhando para a frente. Dê o próximo passo mesmo sem entender tudo.','Lao Tsé: a jornada de mil quilômetros começa com um passo. O seu programa de 24 semanas também.']),
+ 'Tristeza':BARNEY['Tristeza'].concat(['Chorar não é fraqueza, é o corpo descarregando. Depois, beba água.','Abra a janela, pegue um pouco de sol. Luz de manhã ajuda o humor mais do que parece.','Mande mensagem para alguém de quem você gosta. Não precisa explicar nada.','Dias cinzas passam. Você não precisa gostar deles, só atravessar.','Ouvir uma música que você ama é um remédio pequeno e válido.','Seja gentil com o seu ritmo hoje. Metade do plano já é muito.']),
+ 'Raiva':BARNEY['Raiva'].concat(['Escreva tudo o que sente, sem filtro, e não envie. Depois decida com calma.','Raiva é energia. Gaste em algo útil: treino, faxina, caminhada rápida.','Antes de responder, pergunte: eu quero ter razão ou quero resolver?','Diga "eu me senti..." em vez de "você sempre...". A conversa muda de lado.','Se for na hora, aperte as mãos com força por 5 segundos e solte. O corpo solta junto.','Dormir sobre o assunto quase sempre deixa a resposta melhor.']),
+ 'Foco':BARNEY['Foco'].concat(['Defina a única coisa que, feita hoje, faz o dia valer a pena.','Feche as abas que não são da tarefa. Cada aba aberta é um gato pedindo atenção.','Use o timer da aba Foco: 25 minutos de trabalho, 5 de pausa. Repetir 4 vezes já muda o dia.','Água e lanche antes de estudar. Cérebro com fome distrai fácil.','Estude explicando em voz alta, como se ensinasse alguém. O que você explica, você aprende.','Comece mesmo sem vontade. A concentração costuma chegar uns 10 minutos depois.'])});
+const BBAG={};// "saco" de conselhos por tema: só repete depois de usar todos
+barneyConselho=function(cat){cat=cat||BTOP||barneyAuto();BTOP=cat;let b=BBAG[cat];if(!b||!b.length){b=BBAG[cat]=BARNEY[cat].map((_,i)=>i).sort(()=>Math.random()-.5)}return BARNEY[cat][b.pop()]};
+// balão da cena: vai passando por todos os temas, trocando a cada atualização
+let BFALA=null,BFALAT=0;
+tFala=function(T){const base=_tFalaB(T);if(/fome|banho|missões|orgulhoso/.test(base))return base;if(!BFALA||Date.now()-BFALAT>45000){const cats=Object.keys(BARNEY);const c=cats[Math.floor(Math.random()*cats.length)];let b=BBAG['_'+c];if(!b||!b.length)b=BBAG['_'+c]=BARNEY[c].map((_,i)=>i).sort(()=>Math.random()-.5);BFALA=BARNEY[c][b.pop()];BFALAT=Date.now()}return BFALA};
 
 boot();setTimeout(()=>{try{evRemind();evBadge()}catch(e){}},1500);
 
