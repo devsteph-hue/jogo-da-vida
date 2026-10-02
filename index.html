@@ -417,6 +417,32 @@ main{padding-bottom:130px}
 .rlist .rvid{display:block;font-size:11px;font-weight:800;color:var(--pe2);text-decoration:none;margin-top:2px}
 .rthumbs{display:flex;gap:4px;overflow-x:auto;margin:8px 0 2px;padding-bottom:2px}.rthumbs .demo.sm{width:52px;height:40px;border-radius:8px}.rthumbs svg.fig.sm{width:40px;height:40px}
 .r3.rl .ric{width:auto;height:auto;border:0;font-style:normal;font-size:22px;background:none}
+/* quiz concurso */
+.quiz{position:fixed;inset:0;z-index:50;background:var(--bg);display:flex;flex-direction:column}
+.q3d{position:relative;height:34vh;min-height:200px;background:linear-gradient(#2F4A3A,#24392D);border-bottom:2.5px solid var(--ol)}
+.q3d::before{content:"";position:absolute;left:8%;right:8%;top:10%;height:52%;border:6px solid #9C6B4A;border-radius:8px;background:#2E5440;opacity:.9}
+.q3c{position:absolute;inset:0;width:100%;height:100%;display:block}
+.qsair{position:absolute;right:12px;top:calc(env(safe-area-inset-top,0px) + 10px);z-index:2}
+.qbox{flex:1;overflow-y:auto;padding:14px 16px calc(env(safe-area-inset-bottom,0px) + 20px);max-width:620px;width:100%;margin:0 auto;box-sizing:border-box}
+.qbox h2{margin:4px 0 6px}
+.qbig{display:block;width:100%;max-width:none;margin:10px 0 0;padding:13px;font-size:16px}
+.qmats{display:grid;grid-template-columns:repeat(2,1fr);gap:8px;margin-top:12px}
+.qmats button{text-align:left;background:var(--sf);color:var(--tx);border:2.5px solid var(--ol);border-radius:16px;padding:10px;box-shadow:2px 3px 0 var(--ol)}
+.qmats b{display:block;font-size:14.5px}.qmats small{color:var(--mu);font-size:11.5px}
+.qtop{display:flex;justify-content:space-between;align-items:center;gap:8px;margin-bottom:6px;font-size:12.5px}
+.qenun{font-size:16.5px;line-height:1.45;font-weight:700;margin:8px 0 12px}
+.qops{display:grid;gap:8px}
+.qops button{display:flex;gap:10px;align-items:flex-start;text-align:left;background:var(--sf);color:var(--tx);border:2.5px solid var(--ol);border-radius:14px;padding:10px 12px;font-size:14.5px;box-shadow:2px 3px 0 var(--ol)}
+.qops button b{flex:none;width:24px;height:24px;border-radius:50%;display:grid;place-items:center;background:var(--sf2);font-size:13px}
+.qops button.certa{background:#CDEFD9;border-color:#1E7B34}.qops button.errada{background:#F6C9C9;border-color:#B3261E}
+.qops button[disabled]{opacity:1}
+.qexp{margin-top:12px;padding:10px 12px;border-radius:14px;border:2px solid;font-size:14px;line-height:1.45}.qexp.ok{border-color:#1E7B34;background:#EAF7EE}.qexp.no{border-color:#B3261E;background:#FCEDED}
+[data-theme=dark] .qexp.ok{background:#1E3A28}[data-theme=dark] .qexp.no{background:#3A1E22}
+.qexp p{margin:4px 0 0}.qplac{font-size:22px;margin:6px 0}.qplac b{font-size:44px}
+.qreais{margin-top:16px;padding:12px;border:2.5px dashed var(--ol);border-radius:16px}.qreais h3{margin:0 0 4px}
+.qlab{display:block;font-size:13px;font-weight:700;margin:8px 0}.qlab select,.qlab input{display:block;width:100%;margin-top:4px;font:inherit;padding:8px;border-radius:10px;border:2px solid var(--ol);background:var(--bg);color:var(--tx);box-sizing:border-box}
+.qta{width:100%;min-height:180px;font:inherit;font-size:13px;padding:10px;border-radius:12px;border:2px solid var(--ol);background:var(--bg);color:var(--tx);box-sizing:border-box;margin-top:6px}.qta.pq{min-height:60px}
+.qilist{font-size:12.5px;padding-left:20px;max-height:220px;overflow:auto}.qilist li{margin-bottom:4px}.qilist li b{margin-left:6px;color:var(--pe2)}
 </style></head><body>
 <main id="main"></main>
 <nav class="tabs" aria-label="Seções"><div>
@@ -1866,6 +1892,186 @@ barneyConselho=function(cat){cat=cat||BTOP||barneyAuto();BTOP=cat;let b=BBAG[cat
 // balão da cena: vai passando por todos os temas, trocando a cada atualização
 let BFALA=null,BFALAT=0;
 tFala=function(T){const base=_tFalaB(T);if(/fome|banho|missões|orgulhoso/.test(base))return base;if(!BFALA||Date.now()-BFALAT>45000){const cats=Object.keys(BARNEY);const c=cats[Math.floor(Math.random()*cats.length)];let b=BBAG['_'+c];if(!b||!b.length)b=BBAG['_'+c]=BARNEY[c].map((_,i)=>i).sort(()=>Math.random()-.5);BFALA=BARNEY[c][b.pop()];BFALAT=Date.now()}return BFALA};
+
+
+/* ================= QUIZ: CONCURSO DE BANCO (nível médio) com a sua personagem =================
+   80 questões autorais no estilo das provas de escriturário/técnico bancário, com explicação.
+   Acertou: ela comemora. Errou: ela fica pensativa e a explicação aparece. */
+const QZ=[
+// LÍNGUA PORTUGUESA
+['Português','Assinale a alternativa que completa corretamente: "Entreguei o relatório ___ gerente Ana e depois fui ___ agência central."',['a / a','à / a','a / à','à / à','há / à'],3,'"Entregar algo A alguém" + "a gerente" (feminino) = à. "Ir A algum lugar" + "a agência" = à. Nos dois casos há crase.'],
+['Português','Assinale a frase correta segundo a norma-padrão.',['Fazem dois anos que trabalho no banco.','Faz dois anos que trabalho no banco.','Fazem-se dois anos que trabalho no banco.','Fizeram dois anos que trabalho no banco.','Haviam dois anos que trabalho no banco.'],1,'"Fazer" indicando tempo decorrido é impessoal e fica no singular: faz dois anos.'],
+['Português','Assinale a alternativa correta quanto à concordância.',['Haviam muitos clientes na fila.','Houveram reclamações ontem.','Havia muitos clientes na fila.','Devem haver soluções.','Fazem três dias que ele saiu.'],2,'"Haver" no sentido de existir é impessoal: fica no singular, e o auxiliar também ("deve haver").'],
+['Português','Complete conforme a regência culta: "Prefiro poupar ___ gastar."',['do que','a','que','mais do que','de'],1,'"Preferir" pede a preposição A: prefere-se uma coisa A outra. "Preferir mais do que" é considerado erro.'],
+['Português','Assinale a frase com a pontuação correta.',['Os clientes, do banco aguardavam.','Os clientes do banco, aguardavam.','Senhor gerente, o cliente chegou.','O cliente chegou e, pediu ajuda.','O cliente, pediu ajuda.'],2,'O vocativo ("Senhor gerente") é separado por vírgula. Não se separa sujeito do verbo com vírgula.'],
+['Português','Assinale a alternativa de acordo com a colocação pronominal da norma-padrão.',['Não preocupe-se com isso.','Me empreste a caneta, por favor.','Nunca se esqueça da senha.','Quando avisou-me, já era tarde.','Ninguém informou-nos.'],2,'Palavras negativas (nunca, não, ninguém) e conjunções como "quando" atraem o pronome para antes do verbo (próclise). Começar a frase com pronome oblíquo é evitado na norma-padrão.'],
+['Português','Assinale a grafia correta.',['excessão','exceção','esceção','exseção','execeção'],1,'Escreve-se "exceção", com ç. "Excesso" é que tem ss.'],
+['Português','Em "O banco ratificou a decisão da diretoria", "ratificou" significa:',['corrigiu','confirmou','anulou','adiou','questionou'],1,'Ratificar = confirmar. Retificar (com e) = corrigir.'],
+['Português','Complete: "Não sei ___ o sistema caiu."',['porque','por que','porquê','por quê','por quem'],1,'Em pergunta indireta, com sentido de "por qual motivo", usa-se "por que" separado e sem acento.'],
+['Português','Assinale a frase correta quanto à concordância com a partícula "se".',['Aluga-se salas comerciais.','Vende-se casas.','Precisa-se de atendentes.','Precisam-se de atendentes.','Consertam-se de relógios.'],2,'Com verbo que pede preposição ("precisar de"), o "se" indetermina o sujeito e o verbo fica no singular. Já "alugam-se salas" e "vendem-se casas" vão para o plural.'],
+// MATEMÁTICA
+['Matemática','Um produto de R$ 200,00 teve aumento de 10% e, depois, desconto de 10%. Qual o preço final?',['R$ 200,00','R$ 198,00','R$ 202,00','R$ 180,00','R$ 190,00'],1,'200 × 1,10 = 220. Depois 220 × 0,90 = 198. Aumento e desconto da mesma porcentagem não se anulam.'],
+['Matemática','Três caixas atendem 60 clientes em 2 horas. No mesmo ritmo, quantos clientes 5 caixas atendem em 2 horas?',['80','90','100','120','150'],2,'Cada caixa atende 20 clientes em 2 h. Com 5 caixas: 5 × 20 = 100.'],
+['Matemática','Numa agência trabalham 18 mulheres e 12 homens. A razão entre o número de homens e o total de funcionários é:',['2/3','3/2','2/5','3/5','1/2'],2,'Total = 30. Homens/total = 12/30 = 2/5.'],
+['Matemática','Qual o valor de x em 3x + 7 = 25?',['4','5','6','7','8'],2,'3x = 25 − 7 = 18, então x = 6.'],
+['Matemática','Ana e Bia têm juntas R$ 500,00, e Ana tem R$ 100,00 a mais que Bia. Quanto tem Bia?',['R$ 150,00','R$ 200,00','R$ 250,00','R$ 300,00','R$ 400,00'],1,'Bia = x, Ana = x + 100. x + x + 100 = 500 → 2x = 400 → x = 200.'],
+['Matemática','Dois alarmes tocam a cada 12 e a cada 18 minutos. Tocaram juntos às 8h. Quando tocarão juntos de novo?',['8h24','8h30','8h36','8h48','9h12'],2,'Basta o MMC de 12 e 18, que é 36. Logo, 8h36.'],
+['Matemática','Quanto é 15% de 240?',['24','30','36','40','48'],2,'240 × 0,15 = 36.'],
+['Matemática','Na sequência 5, 9, 13, 17, ..., qual é o 10º termo?',['37','40','41','45','49'],2,'É uma PA de razão 4: a10 = 5 + 9 × 4 = 41.'],
+['Matemática','Um item de R$ 80,00 está com 25% de desconto. Quanto custa com o desconto?',['R$ 55,00','R$ 60,00','R$ 64,00','R$ 70,00','R$ 75,00'],1,'25% de 80 = 20. 80 − 20 = 60.'],
+['Matemática','Quanto é 3/4 de 1/2 de 400?',['100','150','200','250','300'],1,'1/2 de 400 = 200; 3/4 de 200 = 150.'],
+// MATEMÁTICA FINANCEIRA
+['Mat. Financeira','Qual o juro de R$ 2.000,00 aplicados a juros simples de 3% ao mês durante 5 meses?',['R$ 150,00','R$ 250,00','R$ 300,00','R$ 320,00','R$ 2.300,00'],2,'J = C × i × t = 2.000 × 0,03 × 5 = 300. (O montante seria R$ 2.300,00.)'],
+['Mat. Financeira','R$ 1.000,00 aplicados a juros compostos de 10% ao mês por 2 meses resultam em qual montante?',['R$ 1.200,00','R$ 1.210,00','R$ 1.100,00','R$ 1.220,00','R$ 1.020,00'],1,'M = 1.000 × 1,1² = 1.000 × 1,21 = 1.210.'],
+['Mat. Financeira','Em juros simples, a taxa de 2% ao mês é proporcional a qual taxa anual?',['12%','20%','22%','24%','26,82%'],3,'Nos juros simples, basta multiplicar: 2% × 12 = 24% ao ano. (26,82% seria a equivalente em juros compostos.)'],
+['Mat. Financeira','Qual a taxa composta bimestral equivalente a 10% ao mês?',['20%','21%','22%','11%','10%'],1,'(1,10)² − 1 = 1,21 − 1 = 0,21 = 21% ao bimestre.'],
+['Mat. Financeira','Um título de R$ 5.000,00 é descontado 3 meses antes do vencimento, com desconto comercial simples de 2% ao mês. Quanto se recebe?',['R$ 4.700,00','R$ 4.800,00','R$ 4.850,00','R$ 4.900,00','R$ 4.600,00'],0,'Desconto = 5.000 × 0,02 × 3 = 300. Valor recebido = 5.000 − 300 = 4.700.'],
+['Mat. Financeira','Que capital, a juros simples de 4% ao mês, gera montante de R$ 2.800,00 em 10 meses?',['R$ 1.800,00','R$ 2.000,00','R$ 2.200,00','R$ 2.400,00','R$ 2.500,00'],1,'M = C × (1 + 0,04 × 10) = 1,4C. 1,4C = 2.800 → C = 2.000.'],
+['Mat. Financeira','Um investimento rendeu 10% no ano, e a inflação foi de 4%. A taxa real de ganho foi de aproximadamente:',['6,00%','5,77%','14,00%','4,40%','10,00%'],1,'Taxa real = (1,10 ÷ 1,04) − 1 ≈ 0,0577 = 5,77%. Não é só subtrair 10 − 4.'],
+['Mat. Financeira','No Sistema de Amortização Constante (SAC), é correto afirmar que:',['as prestações são todas iguais','a amortização cresce a cada mês','a amortização é constante e as prestações diminuem','os juros aumentam ao longo do tempo','não há pagamento de juros'],2,'No SAC, a amortização é igual todo mês. Como o saldo cai, os juros caem e as prestações diminuem.'],
+['Mat. Financeira','Na Tabela Price (Sistema Francês), é correto afirmar que:',['as prestações são iguais, com amortização crescente e juros decrescentes','a amortização é constante','as prestações aumentam','os juros são constantes','a primeira prestação é a menor'],0,'Na Price, as prestações são fixas. No início, a maior parte é juro; com o tempo, a amortização cresce e o juro cai.'],
+['Mat. Financeira','R$ 10.000,00 a juros compostos de 1% ao mês por 2 meses resultam em:',['R$ 10.200,00','R$ 10.201,00','R$ 10.100,00','R$ 10.210,00','R$ 10.020,00'],1,'10.000 × 1,01² = 10.000 × 1,0201 = 10.201.'],
+// CONHECIMENTOS BANCÁRIOS
+['Bancários','Qual é o órgão normativo máximo do Sistema Financeiro Nacional?',['Banco Central do Brasil','Conselho Monetário Nacional (CMN)','Comissão de Valores Mobiliários (CVM)','Copom','Febraban'],1,'O CMN é o órgão normativo máximo: define as diretrizes. O Banco Central executa e fiscaliza.'],
+['Bancários','Quem define a meta da taxa Selic?',['CMN','Copom, do Banco Central','CVM','Tesouro Nacional','Febraban'],1,'O Comitê de Política Monetária (Copom), do Banco Central, define a meta da Selic em reuniões periódicas.'],
+['Bancários','O Fundo Garantidor de Créditos (FGC) garante, por CPF e por instituição (ou conglomerado), até:',['R$ 100 mil','R$ 250 mil','R$ 500 mil','R$ 1 milhão','não há limite'],1,'O limite é de R$ 250 mil por CPF/CNPJ por instituição ou conglomerado. Há também um teto global de R$ 1 milhão a cada 4 anos.'],
+['Bancários','Qual destas aplicações NÃO tem a garantia do FGC?',['CDB','LCI','LCA','Poupança','Ações'],4,'Ações são renda variável e não têm garantia do FGC. CDB, LCI, LCA e poupança têm, dentro do limite.'],
+['Bancários','Qual a ordem das fases da lavagem de dinheiro?',['Integração, ocultação e colocação','Colocação, ocultação e integração','Ocultação, colocação e integração','Colocação, integração e ocultação','Integração, colocação e ocultação'],1,'Colocação (põe o dinheiro no sistema), ocultação (dificulta o rastreio) e integração (o dinheiro volta com aparência legal).'],
+['Bancários','Para qual órgão os bancos comunicam operações suspeitas de lavagem de dinheiro?',['Banco Central','COAF','CVM','Receita Federal','Polícia Federal'],1,'O COAF é a unidade de inteligência financeira do Brasil e recebe as comunicações de operações suspeitas.'],
+['Bancários','O recolhimento compulsório é um instrumento do Banco Central que serve para:',['fixar o preço das ações','controlar a quantidade de dinheiro disponível na economia','cobrar impostos dos bancos','garantir os depósitos dos clientes','financiar o governo'],1,'Ao reter parte dos depósitos, o BC controla a liquidez, isto é, quanto dinheiro os bancos têm para emprestar.'],
+['Bancários','A CVM é responsável por regular e fiscalizar:',['as taxas de câmbio','o mercado de valores mobiliários, como ações e debêntures','os seguros de vida','a política fiscal','a poupança'],1,'A Comissão de Valores Mobiliários cuida do mercado de capitais: ações, debêntures, fundos de investimento etc.'],
+['Bancários','Sobre o Pix, é correto afirmar que:',['funciona só em dias úteis','foi criado e é gerido pelo Banco Central e funciona 24 horas, todos os dias','é gerido pela Febraban','só aceita transferências entre contas do mesmo banco','exige a agência e a conta do recebedor'],1,'O Pix é o pagamento instantâneo criado pelo Banco Central. Funciona 24h por dia, 7 dias por semana, e pode usar chaves.'],
+['Bancários','Qual aplicação tem rendimento isento de Imposto de Renda para pessoa física?',['CDB','Tesouro Selic','LCI','Debênture comum','Fundo DI'],2,'LCI e LCA (e a poupança) são isentas de IR para pessoa física. CDB, Tesouro e fundos pagam IR.'],
+// INFORMÁTICA
+['Informática','No Excel, qual fórmula soma os valores de A1 até A10?',['=SOMA(A1;A10)','=SOMA(A1:A10)','=ADICIONAR(A1:A10)','=TOTAL(A1-A10)','=A1+A10'],1,'Os dois-pontos indicam intervalo: A1:A10 é de A1 até A10. (A1;A10 somaria só as duas células.)'],
+['Informática','No Excel, a fórmula =SE(B2>=7;"Aprovado";"Reprovado") faz o quê?',['soma B2 com 7','mostra "Aprovado" se B2 for maior ou igual a 7; senão, "Reprovado"','conta quantos aprovados há','arredonda B2','dá erro'],1,'A função SE testa uma condição e devolve um valor se for verdadeira e outro se for falsa.'],
+['Informática','Para que serve a função PROCV no Excel?',['procurar um valor numa coluna e trazer um dado da mesma linha','calcular a média','contar células vazias','formatar datas','proteger a planilha'],0,'PROCV faz busca vertical: procura na primeira coluna de uma tabela e retorna o valor da coluna indicada.'],
+['Informática','No Windows, o atalho Ctrl + Z serve para:',['copiar','colar','desfazer a última ação','salvar','fechar a janela'],2,'Ctrl+Z desfaz. Ctrl+C copia, Ctrl+V cola e Ctrl+S salva.'],
+['Informática','Phishing é:',['um tipo de antivírus','uma tentativa de enganar a pessoa para roubar dados, como senhas, por meio de mensagens falsas','um programa de backup','um tipo de cabo de rede','uma atualização do sistema'],1,'Phishing usa e-mails, SMS ou sites falsos que imitam empresas para "pescar" dados da vítima.'],
+['Informática','No Excel, ao copiar uma fórmula com $A$1, essa referência:',['muda de linha e coluna','continua apontando para A1','vira texto','some','muda só a linha'],1,'O cifrão fixa a referência (absoluta). $A$1 não muda ao copiar.'],
+['Informática','Sobre a navegação anônima, é correto afirmar:',['deixa você invisível para a empresa e o provedor','não salva histórico e cookies no aparelho, mas não esconde a navegação do provedor ou da rede da empresa','protege contra qualquer vírus','apaga os arquivos baixados','impede sites de saberem seu IP'],1,'O modo anônimo só evita guardar dados no próprio navegador. Provedor, empresa e sites ainda podem ver a navegação.'],
+['Informática','Um firewall serve para:',['acelerar a internet','controlar o tráfego de rede, bloqueando acessos não autorizados','fazer backup','editar planilhas','limpar o disco'],1,'O firewall filtra o que entra e sai da rede conforme regras de segurança.'],
+['Informática','Backup é:',['um vírus','uma cópia de segurança dos dados para recuperação em caso de perda','um tipo de senha','um navegador','uma rede sem fio'],1,'Backup é a cópia de segurança. O ideal é guardar em local diferente do original.'],
+['Informática','A autenticação em dois fatores combina, por exemplo:',['duas senhas iguais','a senha (algo que você sabe) com um código no celular (algo que você tem)','o login e o e-mail','dois navegadores','o nome e o CPF'],1,'Dois fatores = duas categorias diferentes: algo que você sabe, tem ou é (biometria).'],
+// PROBABILIDADE E ESTATÍSTICA
+['Estatística','Qual a média de 4, 6, 8, 10 e 12?',['6','7','8','9','10'],2,'Soma = 40; 40 ÷ 5 = 8.'],
+['Estatística','Qual a mediana de 3, 9, 5, 7 e 1?',['3','5','7','9','25'],1,'Em ordem: 1, 3, 5, 7, 9. O valor do meio é 5.'],
+['Estatística','Qual a moda de 2, 3, 3, 5, 7, 3, 7?',['2','3','5','7','não há moda'],1,'Moda é o valor que mais aparece: o 3 aparece três vezes.'],
+['Estatística','Ao lançar um dado comum, qual a probabilidade de sair um número par?',['1/6','1/3','1/2','2/3','5/6'],2,'Pares: 2, 4 e 6 = 3 de 6 resultados = 1/2.'],
+['Estatística','Ao lançar duas moedas, qual a probabilidade de saírem duas caras?',['1/2','1/3','1/4','3/4','1/8'],2,'1/2 × 1/2 = 1/4.'],
+['Estatística','Uma urna tem 3 bolas azuis e 5 vermelhas. Qual a probabilidade de tirar uma azul?',['3/5','3/8','5/8','1/3','1/2'],1,'São 3 azuis em 8 bolas: 3/8.'],
+['Estatística','Uma aluna tirou 6 numa prova de peso 2 e 9 numa de peso 1. Qual a média ponderada?',['6,5','7','7,5','8','8,5'],1,'(6 × 2 + 9 × 1) ÷ 3 = 21 ÷ 3 = 7.'],
+['Estatística','Qual a amplitude dos dados 4, 10, 7 e 15?',['6','8','11','15','19'],2,'Amplitude = maior − menor = 15 − 4 = 11.'],
+['Estatística','Se a probabilidade de chover é 0,3, qual a probabilidade de não chover?',['0,3','0,5','0,6','0,7','1,3'],3,'Eventos complementares somam 1: 1 − 0,3 = 0,7.'],
+['Estatística','De quantas formas é possível escolher uma dupla entre 5 pessoas?',['5','10','15','20','25'],1,'Combinação de 5 tomados 2 a 2: (5 × 4) ÷ 2 = 10. A ordem não importa.'],
+// VENDAS E NEGOCIAÇÃO
+['Vendas','Pelo Código de Defesa do Consumidor, em compras fora do estabelecimento (internet ou telefone), o prazo de arrependimento é de:',['3 dias','7 dias','15 dias','30 dias','90 dias'],1,'O art. 49 do CDC dá 7 dias, a contar da assinatura ou do recebimento, para desistir de compras feitas fora do estabelecimento.'],
+['Vendas','A venda consultiva se caracteriza por:',['oferecer o produto mais caro sempre','entender as necessidades do cliente antes de recomendar uma solução','vender o máximo no menor tempo','evitar perguntas ao cliente','focar só no preço'],1,'Na venda consultiva, o vendedor atua como consultor: ouve, diagnostica e recomenda o que faz sentido para o cliente.'],
+['Vendas','O principal objetivo do pós-venda é:',['encerrar o contato com o cliente','manter o relacionamento e fidelizar o cliente','cobrar dívidas','divulgar a concorrência','reduzir o atendimento'],1,'O pós-venda acompanha a satisfação, resolve problemas e constrói fidelidade.'],
+['Vendas','Oferecer um seguro residencial a quem acabou de contratar um financiamento imobiliário é exemplo de:',['upselling','cross-selling','venda casada','downselling','telemarketing ativo'],1,'Cross-selling é oferecer um produto complementar. Só seria venda casada se o financiamento dependesse de comprar o seguro.'],
+['Vendas','Condicionar a liberação de um empréstimo à compra de um título de capitalização é:',['estratégia legítima de vendas','venda casada, prática abusiva proibida pelo CDC','cross-selling permitido','upselling','fidelização'],1,'O art. 39 do CDC proíbe condicionar o fornecimento de um produto ou serviço à compra de outro.'],
+['Vendas','Numa negociação "ganha-ganha":',['só o banco sai ganhando','as duas partes buscam um acordo que atenda aos seus interesses','o cliente sempre cede','não há concessões','vence quem falar mais alto'],1,'O ganha-ganha busca soluções em que ambos saem satisfeitos, o que fortalece o relacionamento.'],
+['Vendas','Segmentação de mercado é:',['vender para todos do mesmo jeito','dividir os clientes em grupos com características e necessidades parecidas','aumentar os preços','cortar clientes','fazer propaganda na TV'],1,'Segmentar permite oferecer produtos e atendimento adequados a cada perfil (renda, idade, objetivo etc.).'],
+['Vendas','Diante de uma objeção do cliente, o mais adequado é:',['ignorar e insistir na venda','ouvir, entender a dúvida e esclarecer com informação','encerrar o atendimento','mudar de assunto','oferecer desconto sem analisar'],1,'Objeção é sinal de interesse com dúvida. Ouvir e esclarecer gera confiança.'],
+['Vendas','O marketing de relacionamento tem como foco:',['a venda única e rápida','a retenção e o relacionamento de longo prazo com o cliente','apenas atrair clientes novos','reduzir o atendimento','a propaganda em massa'],1,'Conquistar cliente novo custa mais que manter um atual; por isso o foco é o relacionamento duradouro.'],
+['Vendas','Ao oferecer um fundo de ações, é postura ética do bancário:',['garantir rentabilidade fixa','explicar os riscos e verificar se o produto é adequado ao perfil do cliente','esconder as taxas','dizer que não há risco','vender sem conhecer o cliente'],1,'Renda variável não tem rentabilidade garantida. É preciso informar os riscos e respeitar o perfil (suitability).'],
+// ATUALIDADES DO MERCADO FINANCEIRO
+['Atualidades','O Open Finance permite que:',['os bancos vendam dados sem autorização','o cliente compartilhe seus dados entre instituições, com o seu consentimento','o governo acesse contas livremente','as contas sejam fechadas automaticamente','o Pix seja cobrado'],1,'No Open Finance, os dados só são compartilhados com a autorização do cliente, que pode cancelá-la quando quiser.'],
+['Atualidades','Fintechs são:',['bancos públicos','empresas que usam tecnologia para oferecer serviços financeiros','corretoras de imóveis','órgãos do governo','cooperativas rurais'],1,'Fintech = finanças + tecnologia: contas digitais, pagamentos, crédito por aplicativo etc.'],
+['Atualidades','Qual destas NÃO é um tipo de chave Pix?',['CPF','e-mail','número de celular','chave aleatória','senha do cartão'],4,'As chaves Pix são CPF/CNPJ, e-mail, celular e chave aleatória. Senha nunca deve ser compartilhada.'],
+['Atualidades','O índice oficial de inflação usado para a meta de inflação no Brasil é o:',['IGP-M','IPCA','INPC','Selic','CDI'],1,'O IPCA, calculado pelo IBGE, é o índice oficial usado no sistema de metas de inflação.'],
+['Atualidades','Um aumento da taxa Selic tende a:',['baratear o crédito','encarecer o crédito e ajudar a conter a inflação','aumentar o consumo','reduzir os juros da poupança','acabar com o Pix'],1,'Juros mais altos encarecem empréstimos, reduzem o consumo e ajudam a conter a inflação.'],
+['Atualidades','Ao receber ligação da "central do banco" pedindo senha ou código, o cliente deve:',['informar a senha','desligar e procurar o banco pelos canais oficiais, porque bancos não pedem senha por telefone','enviar foto do cartão','instalar o aplicativo indicado','fazer um Pix de teste'],1,'É o golpe da falsa central. Bancos nunca pedem senha, código ou transferência por telefone.'],
+['Atualidades','A sigla ESG, usada em investimentos, se refere a:',['economia, saúde e governo','ambiental, social e governança','empresas, serviços e garantias','estoque, saldo e ganhos','estatal, setorial e global'],1,'ESG vem do inglês environmental, social and governance: avalia práticas ambientais, sociais e de governança das empresas.'],
+['Atualidades','O "sandbox regulatório" é:',['um tipo de investimento','um ambiente controlado em que empresas testam inovações financeiras sob regras temporárias','uma moeda digital','um tributo','um tipo de cartão'],1,'O sandbox permite testar produtos novos com supervisão do regulador antes de liberar para o mercado todo.'],
+['Atualidades','Banco digital é aquele que:',['só atende presencialmente','oferece seus serviços principalmente por aplicativo e internet, sem depender de agências físicas','não é regulado pelo Banco Central','não pode oferecer crédito','só atende empresas'],1,'Bancos digitais atendem por app e internet e são autorizados e fiscalizados pelo Banco Central como os demais.'],
+['Atualidades','Pela Lei 14.478/2022 e decreto de 2023, qual órgão foi designado para regular as prestadoras de serviços de ativos virtuais (criptoativos)?',['CVM','Banco Central do Brasil','Receita Federal','COAF','Febraban'],1,'O marco legal dos criptoativos (Lei 14.478/2022) teve o Banco Central designado, por decreto de 2023, como regulador das prestadoras de serviços de ativos virtuais.']];
+const QMAT=[...new Set(QZ.map(q=>q[0]))];
+const QZS={on:false};
+function qzDados(){S.quiz=S.quiz||{st:{},erros:[],vistas:{}};return S.quiz}
+function qzSortear(mat,n){const D=qzDados();let pool=QZ.map((q,i)=>i);if(mat==='erros')pool=D.erros.slice();else if(mat!=='mix')pool=pool.filter(i=>QZ[i][0]===mat);
+  pool.sort((a,b)=>((D.vistas[a]||0)-(D.vistas[b]||0))||(Math.random()-.5));return pool.slice(0,n)}
+function qzEmbaralha(i){const q=QZ[i];const ord=q[2].map((_,k)=>k).sort(()=>Math.random()-.5);return {i,mat:q[0],e:q[1],o:ord.map(k=>q[2][k]),c:ord.indexOf(q[3]),x:q[4]}}
+async function quizAbrir(){const ov=document.createElement('div');ov.className='quiz';ov.innerHTML='<div class="q3d" id="q3d"><button class="mini qsair" onclick="quizFechar()">Sair</button></div><div class="qbox" id="qbox"></div>';
+  document.body.appendChild(ov);QZS.ov=ov;QZS.on=true;JG.on=true;qzMenu();
+  try{await v3Load()}catch(e){return}const T=V3.T;const cv=document.createElement('canvas');cv.className='q3c';ov.querySelector('#q3d').prepend(cv);
+  const ren=new T.WebGLRenderer({canvas:cv,antialias:true,alpha:true});ren.outputColorSpace=T.SRGBColorSpace;ren.setPixelRatio(Math.min(2,window.devicePixelRatio||1));
+  const sc=new T.Scene();sc.add(new T.HemisphereLight(0xffffff,0x8a6a55,2.1));const d=new T.DirectionalLight(0xffffff,1.6);d.position.set(1.5,3,3);sc.add(d);
+  const cam=new T.PerspectiveCamera(30,1,.1,50);sc.add(V3.model);V3.model.position.set(0,0,0);V3.model.rotation.y=0;QZS.ren=ren;QZS.sc=sc;QZS.anim='acenar';QZS.t0=performance.now();
+  const loop=now=>{if(!QZS.on)return;const w=cv.clientWidth,h=cv.clientHeight;if(cv.width!==Math.round(w*ren.getPixelRatio())){ren.setSize(w,h,false);cam.aspect=w/h;cam.updateProjectionMatrix()}
+    cam.position.set(0,1.25,3.3);cam.lookAt(0,1.15,0);const t=(now-QZS.t0)/1000;let a=QZS.anim;if(a!=='idle'&&t>3.2){a=QZS.anim='idle'}
+    const f=V3ANIM[a](t);v3Pose(f.P,f.y);V3.model.rotation.y=.25*Math.sin(now/3000);ren.render(sc,cam);QZS.raf=requestAnimationFrame(loop)};QZS.raf=requestAnimationFrame(loop)}
+function qzReage(a){QZS.anim=a;QZS.t0=performance.now()}
+function qzMenu(){const D=qzDados();const box=QZS.ov.querySelector('#qbox');
+  box.innerHTML=`<h2>Concurso de banco · nível médio</h2><p class="muted">10 questões por rodada, com explicação. Cada acerto vale 1 XP (até 30 XP por dia com os jogos).</p>
+   <button class="go qbig" onclick="qzComecar('mix')">🎲 Rodada misturada</button>
+   <div class="qmats">${QMAT.map(m=>{const s=D.st[m]||{ok:0,t:0};return `<button onclick="qzComecar('${m}')"><b>${m}</b><small>${s.t?Math.round(100*s.ok/s.t)+'% de acerto · '+s.t+' respondidas':'ainda não começou'}</small></button>`}).join('')}</div>
+   ${D.erros.length?`<button class="mini" style="width:100%;margin-top:10px" onclick="qzComecar('erros')">🔁 Revisar as que errei (${D.erros.length})</button>`:''}`}
+function qzComecar(mat){const ids=qzSortear(mat,10);if(!ids.length){toast('Nenhuma questão para revisar');return}QZS.r={mat,qs:ids.map(qzEmbaralha),k:0,ok:0,seq:0,resp:null};qzReage('alongar');qzQuestao()}
+function qzQuestao(){const R=QZS.r,q=R.qs[R.k],box=QZS.ov.querySelector('#qbox');const L='ABCDE';
+  box.innerHTML=`<div class="qtop"><span class="pill">${q.mat}</span><span class="muted">Questão ${R.k+1} de ${R.qs.length}${R.seq>=2?` · 🔥 ${R.seq} seguidas`:''}</span></div>
+   <p class="qenun">${esc(q.e)}</p><div class="qops">${q.o.map((o,j)=>{let cl='';if(R.resp!=null){if(j===q.c)cl='certa';else if(j===R.resp)cl='errada'}return `<button class="${cl}" ${R.resp!=null?'disabled':''} onclick="qzResponde(${j})"><b>${L[j]}</b><span>${esc(o)}</span></button>`}).join('')}</div>
+   ${R.resp!=null?`<div class="qexp ${R.resp===q.c?'ok':'no'}"><b>${R.resp===q.c?'Acertou! 🎉':'Resposta certa: '+L[q.c]}</b><p>${esc(q.x)}</p></div><button class="go qbig" onclick="qzProxima()">${R.k+1<R.qs.length?'Próxima':'Ver resultado'}</button>`:''}`;box.scrollTop=0}
+function qzResponde(j){const R=QZS.r,q=R.qs[R.k],D=qzDados();if(R.resp!=null)return;R.resp=j;const ok=j===q.c;const s=D.st[q.mat]=D.st[q.mat]||{ok:0,t:0};s.t++;D.vistas[q.i]=(D.vistas[q.i]||0)+1;
+  if(ok){s.ok++;R.ok++;R.seq++;D.erros=D.erros.filter(x=>x!==q.i);qzReage(R.seq>=3?'pular':'comemorar');try{beep(1180,.12,.2)}catch(e){}}
+  else{R.seq=0;if(!D.erros.includes(q.i))D.erros.push(q.i);qzReage('descansar');try{beep(330,.2,.2)}catch(e){}}save();qzQuestao()}
+function qzProxima(){const R=QZS.r;R.k++;R.resp=null;if(R.k<R.qs.length){qzReage('idle');qzQuestao();return}
+  const J=jogoDados(),k=dkey(new Date());if(J.dia!==k){J.dia=k;J.xpDia=0}const ganho=Math.max(0,Math.min(30-J.xpDia,R.ok));J.xpDia+=ganho;J.xp+=ganho;save();
+  const p=R.ok/R.qs.length;qzReage(p>=.7?'comemorar':p>=.5?'acenar':'alongar');
+  QZS.ov.querySelector('#qbox').innerHTML=`<h2>${p>=.8?'Mandou muito! 🏆':p>=.6?'Muito bem! 👏':p>=.4?'Bom treino! 💪':'Errar faz parte de aprender 📚'}</h2>
+   <p class="qplac"><b>${R.ok}</b> de ${R.qs.length}</p><p class="muted">${ganho?`+${ganho} XP`:(J.xpDia>=30?'Você já pegou os 30 XP de jogos de hoje.':'')}</p>
+   <button class="go qbig" onclick="qzComecar('${R.mat}')">Mais 10 questões</button><button class="mini" style="width:100%;margin-top:8px" onclick="qzMenu()">Escolher outra matéria</button>`}
+function quizFechar(){QZS.on=false;JG.on=false;cancelAnimationFrame(QZS.raf);if(QZS.sc&&V3.model)QZS.sc.remove(V3.model);if(QZS.ren){QZS.ren.dispose();try{QZS.ren.forceContextLoss()}catch(e){}}if(QZS.ov)QZS.ov.remove();QZS.ov=null;QZS.ren=null;QZS.sc=null;render()}
+// o botão da Casinha passa a abrir o quiz (a corrida saiu)
+const _vCasinhaQ=vCasinha;vCasinha=function(){return _vCasinhaQ().replace('<button class="jbtn" onclick="jogoAbrir()">🎮 Jogar</button>','<button class="jbtn" onclick="quizAbrir()">📚 Estudar</button>')};
+
+
+/* ================= QUESTÕES REAIS: importar provas anteriores (texto copiado do PDF + gabarito) =================
+   As questões importadas ficam só no aparelho (S.quiz.imp), não vão para o GitHub. */
+function qzImp(){const D=qzDados();D.imp=D.imp||[];return D.imp}
+function QALL(){return QZ.concat(qzImp().map(q=>[q.m,q.e,q.o,q.c,q.x||'Questão de prova real ('+(q.f||'importada')+'). Confira a resolução comentada se tiver dúvida.']))}
+qzSortear=function(mat,n){const D=qzDados(),A=QALL();let pool=A.map((q,i)=>i);if(mat==='erros')pool=D.erros.filter(i=>i<A.length);else if(mat==='reais')pool=pool.filter(i=>i>=QZ.length);else if(mat!=='mix')pool=pool.filter(i=>A[i][0]===mat);
+  pool.sort((a,b)=>((D.vistas[a]||0)-(D.vistas[b]||0))||(Math.random()-.5));return pool.slice(0,n)};
+qzEmbaralha=function(i){const q=QALL()[i];const ord=q[2].map((_,k)=>k).sort(()=>Math.random()-.5);return {i,mat:q[0],e:q[1],o:ord.map(k=>q[2][k]),c:ord.indexOf(q[3]),x:q[4],real:i>=QZ.length}};
+// leitor do texto colado
+function qzLer(txt,gab){txt=(txt||'').replace(/\r/g,'').replace(/[ \t]+/g,' ');const out=[];const re=/\(\s*([A-E])\s*\)/g;let m,marks=[];while((m=re.exec(txt)))marks.push({l:m[1],i:m.index,f:re.lastIndex});
+  let ini=0;for(let k=0;k<marks.length;k++){if(marks[k].l!=='A')continue;const g=marks.slice(k,k+5);if(g.length<5||g.map(x=>x.l).join('')!=='ABCDE')continue;
+    let en=txt.slice(ini,g[0].i).trim();let num=null;const nms=[...en.matchAll(/(?:^|\n)[ \t]*(?:quest[ãa]o[ \t]*)?(\d{1,3})[ \t]*[\.\-–):]?[ \t]*(?:\n|(?=\S))/gi)];const nm=nms[nms.length-1];if(nm&&en.slice(nm.index+nm[0].length).trim().length>4){num=+nm[1];en=en.slice(nm.index+nm[0].length)}
+    en=en.replace(/^(gabarito|resposta|resp)\s*:?\s*[A-E]\b\s*/i,'').trim();
+    const ops=[];for(let j=0;j<5;j++){let fim=j<4?g[j+1].i:txt.length;let t=txt.slice(g[j].f,fim);if(j===4){const corte=t.search(/\n\s*\n|\n\s*(gabarito|resposta|resp)\s*:|\n\s*(?:quest[ãa]o\s*)?\d{1,3}\s*[\.\-–):]?\s/i);if(corte>=0)t=t.slice(0,corte)}ops.push(t.replace(/\s*\n\s*/g,' ').trim())}
+    let after=txt.slice(g[4].f,(marks.slice(k+5).find(x=>x.l==='A')||{i:txt.length}).i);const gm=after.match(/(gabarito|resposta|resp)\s*:?\s*([A-E])\b/i);
+    const e4=ops[4];ini=g[4].f+(txt.slice(g[4].f).indexOf(e4)+e4.length);if(gm)ini=Math.max(ini,g[4].f+after.indexOf(gm[0])+gm[0].length);
+    if(en.length<5||ops.some(o=>!o))continue;out.push({num,e:en.replace(/\s*\n\s*/g,' '),o:ops,c:gm?'ABCDE'.indexOf(gm[2].toUpperCase()):-1})}
+  // gabarito separado: "1-C 2-A", "1C 2A" ou só as letras em ordem "CAEBD"
+  const G=(gab||'').toUpperCase();const pares=[...G.matchAll(/(\d{1,3})\s*[\-–.:)]?\s*([A-E])\b/g)];
+  if(pares.length){const mp={};pares.forEach(p=>mp[+p[1]]=p[2]);out.forEach((q,k)=>{const l=mp[q.num!=null?q.num:k+1];if(l)q.c='ABCDE'.indexOf(l)})}
+  else{const letras=G.replace(/[^A-E]/g,'');if(letras.length)out.forEach((q,k)=>{if(letras[k])q.c='ABCDE'.indexOf(letras[k])})}
+  return out}
+let QIMP=null;
+function qzImportar(){const box=QZS.ov.querySelector('#qbox');
+  box.innerHTML=`<h2>Importar questões reais</h2>
+   <p class="muted">1. Baixe a prova e o gabarito oficiais (ex.: Banco do Brasil 2023 · Escriturário, Cesgranrio, no site da Cesgranrio ou no PCI Concursos).<br>2. No PDF, selecione e copie as questões e cole abaixo.<br>3. Cole o gabarito no segundo campo (ex.: <b>1-C 2-A 3-E</b>) ou escreva "Gabarito: C" depois de cada questão.</p>
+   <label class="qlab">Matéria<select id="qimat">${QMAT.map(m=>`<option>${m}</option>`).join('')}<option>Outras</option></select></label>
+   <label class="qlab">Prova (para lembrar a origem)<input id="qifon" placeholder="ex.: BB 2023 Escriturário · Cesgranrio"></label>
+   <textarea id="qitxt" class="qta" placeholder="Cole aqui as questões, com as alternativas (A) a (E)"></textarea>
+   <textarea id="qigab" class="qta pq" placeholder="Gabarito (opcional se já estiver no texto): 1-C 2-A 3-E..."></textarea>
+   <button class="go qbig" onclick="qzPrevia()">Conferir questões</button><div id="qiprev"></div>
+   <button class="mini" style="width:100%;margin-top:8px" onclick="qzMenu()">Voltar</button>`}
+function qzPrevia(){const L=qzLer(document.getElementById('qitxt').value,document.getElementById('qigab').value);QIMP=L;const prev=document.getElementById('qiprev');
+  if(!L.length){prev.innerHTML='<p class="qexp no">Não encontrei questões. Confira se as alternativas estão no formato (A), (B), (C), (D), (E).</p>';return}
+  const sem=L.filter(q=>q.c<0).length;
+  prev.innerHTML=`<p style="margin:10px 0 6px"><b>${L.length}</b> questão(ões) encontrada(s)${sem?` · <b style="color:var(--bad)">${sem} sem gabarito</b> (ficam de fora)`:''}.</p>
+   <ol class="qilist">${L.map(q=>`<li><span>${esc(q.e.slice(0,90))}${q.e.length>90?'…':''}</span><b>${q.c>=0?'ABCDE'[q.c]:'?'}</b></li>`).join('')}</ol>
+   <button class="go qbig" onclick="qzSalvarImp()">Salvar ${L.length-sem} questão(ões)</button>`}
+function qzSalvarImp(){const mat=document.getElementById('qimat').value,fon=document.getElementById('qifon').value.trim();const ok=(QIMP||[]).filter(q=>q.c>=0);
+  const imp=qzImp();const ja=new Set(imp.map(q=>q.e));let n=0;for(const q of ok){if(ja.has(q.e))continue;imp.push({m:mat,e:q.e,o:q.o,c:q.c,f:fon});n++}save();toast(n+' questões reais salvas');QIMP=null;qzMenu()}
+function qzApagarImp(){if(!confirm('Apagar todas as questões importadas deste aparelho?'))return;const D=qzDados();const base=QZ.length;D.erros=D.erros.filter(i=>i<base);for(const k in D.vistas)if(+k>=base)delete D.vistas[k];D.imp=[];save();qzMenu()}
+// menu do quiz: rodada só com questões reais, importar e apagar
+const _qzMenuI=qzMenu;qzMenu=function(){_qzMenuI();const box=QZS.ov.querySelector('#qbox');const n=qzImp().length;
+  box.insertAdjacentHTML('beforeend',`<div class="qreais"><h3>📄 Questões de provas reais</h3><p class="muted">${n?`${n} questão(ões) importada(s) neste aparelho.`:'Importe questões das provas oficiais anteriores para treinar com o que realmente caiu.'}</p>
+   ${n?`<button class="go qbig" onclick="qzComecar('reais')">Rodada só com questões reais</button>`:''}<button class="mini" style="width:100%;margin-top:8px" onclick="qzImportar()">➕ Importar questões de uma prova</button>${n?`<button class="reset" onclick="qzApagarImp()">Apagar as importadas</button>`:''}</div>`)};
+// mostra a origem da questão real
+const _qzQuestaoI=qzQuestao;qzQuestao=function(){_qzQuestaoI();const R=QZS.r,q=R.qs[R.k];if(q.real){const f=(qzImp()[q.i-QZ.length]||{}).f;const t=QZS.ov.querySelector('.qtop .pill');if(t)t.insertAdjacentHTML('afterend',`<span class="pill" style="background:#FFE08A">Prova real${f?' · '+esc(f):''}</span>`)}};
 
 boot();setTimeout(()=>{try{evRemind();evBadge()}catch(e){}},1500);
 
