@@ -458,6 +458,35 @@ main{padding-bottom:130px}
 .agvoz{display:flex;align-items:center;gap:6px}
 .agdias{display:grid;grid-template-columns:repeat(7,1fr);gap:6px}.agd{text-align:center;background:var(--sf2);border-radius:12px;padding:6px 0;border:2px solid transparent}.agd b{display:block;font-size:15px}.agd small{color:var(--mu);font-size:11px}
 .agd.ok{background:var(--mi);color:#fff;border-color:var(--ol)}.agd.ok small{color:#fff}.agd.meio{border-color:var(--pe)}
+/* visualização guiada + barra com 9 abas */
+.tabs button{font-size:10px;padding:6px 3px;letter-spacing:-.2px}
+.vgplay{min-height:62vh;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;padding:10px}
+.vgorb{width:150px;height:150px;border-radius:50%;background:radial-gradient(circle at 35% 35%,#FFE3C7,#F2875A 60%,#B9A6F0);box-shadow:0 0 60px rgba(242,135,90,.45);animation:vgresp 10s ease-in-out infinite;margin-bottom:26px}
+@keyframes vgresp{0%,100%{transform:scale(.82);opacity:.85}50%{transform:scale(1.08);opacity:1}}
+.vgfrase{font-size:20px;line-height:1.45;font-weight:700;max-width:520px;min-height:4.4em;margin:0 0 16px}
+.vgfrase.in{animation:vgin 1.2s ease}@keyframes vgin{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+.vgplay .agbar{width:100%;max-width:420px}
+/* a paisagem do som tocando não pode virar o botãozinho redondo .play */
+svg.scene.play{width:100%;height:auto;border-radius:0;background:none;box-shadow:none;border:0;border-bottom:2.5px solid var(--ol)!important;font-size:inherit}
+/* em casa: sub-abas + pompoarismo */
+.subsw{display:flex;gap:8px;margin-bottom:12px}.subsw button{flex:1;background:var(--sf);color:var(--tx);font-weight:800;font-size:14px;border-radius:16px;padding:10px;border:2.5px solid var(--ol);box-shadow:2px 3px 0 var(--ol)}.subsw button.on{background:var(--pe)}
+.ppplay{text-align:center;padding-top:22px}
+.ppcirc{width:170px;height:170px;margin:0 auto 18px;border-radius:50%;background:radial-gradient(circle at 40% 35%,#FFD9E2,#E25C74 70%);border:3px solid var(--ol);box-shadow:0 0 40px rgba(226,92,116,.35);transition:transform var(--d) ease-in-out}
+.ppcirc.rel{transform:scale(1)}.ppcirc.con{transform:scale(.55)}.ppcirc.a1{transform:scale(.8)}.ppcirc.a2{transform:scale(.62)}.ppcirc.a3{transform:scale(.45)}
+.ppfase{font-size:22px;font-weight:800;margin:0 0 4px}.ppseg{margin:0 0 12px;color:var(--mu)}.ppseg b{font-size:30px;color:var(--tx)}
+details.agcard summary{font-weight:800;cursor:pointer}
+/* mãos ocupadas */
+.unbtn{margin-top:10px;background:linear-gradient(135deg,#F9D3DE,var(--sf))!important}.unbtn .unic{font-size:34px;width:60px;height:60px;display:grid;place-items:center;border-radius:50%;background:#fff;border:2.5px solid var(--ol);flex:none}
+.unhead{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px}.unhead h2{margin:0}
+.unstats{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:12px}.unstats div{background:var(--sf);border:2.5px solid var(--ol);border-radius:16px;padding:10px;text-align:center;box-shadow:2px 3px 0 var(--ol)}.unstats b{display:block;font-size:30px}.unstats small{color:var(--mu);font-weight:700}
+.unmaobox{display:flex;justify-content:center}.unmao{width:min(100%,300px);height:auto}
+.uncores{display:flex;flex-wrap:wrap;gap:8px;margin-top:6px}.uncores button{width:34px;height:34px;border-radius:50%;border:2.5px solid var(--ol)}.uncores button.on{outline:3px solid var(--pe);outline-offset:2px}
+.ungal{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}.ungal button{background:var(--sf2);border:2px solid var(--ln);border-radius:12px;padding:4px}.ungal .unmao{width:100%}
+.unpulso{width:120px;height:120px;margin:4px auto 14px;border-radius:50%;background:radial-gradient(circle at 40% 35%,#FFE3EC,#F49AB8 70%);border:3px solid var(--ol);animation:vgresp 6s ease-in-out infinite}
+.un3d{height:300px;border-radius:16px;background:radial-gradient(circle at 50% 40%,#FFF4E8,#F3D2BE);overflow:hidden;display:grid;place-items:center}.un3d canvas{width:100%;height:100%;display:block;touch-action:pan-y}
+.unstats{grid-template-columns:1fr 1fr 1fr!important}.unmini{padding:4px!important}.unmini small{display:block;font-size:10.5px}.unmini .unmao{width:100%;max-height:70px}
+.undedos{display:grid;gap:6px;margin:8px 0 2px}.undedos div{display:flex;align-items:center;gap:6px}.undedos small{width:86px;font-weight:800;font-size:12px}.undedos button{width:34px;height:34px;border-radius:12px 12px 16px 16px;border:2.5px solid var(--ol);font-weight:900;font-size:12px;color:#2A2230}.undedos button.ok{color:#fff;text-shadow:0 1px 2px rgba(0,0,0,.5)}
+.ungalc{display:grid;grid-template-columns:repeat(5,1fr);gap:3px;padding:4px}.ungalc i{display:block;height:16px;border-radius:6px 6px 8px 8px;border:1.5px solid var(--ol)}
 </style></head><body>
 <main id="main"></main>
 <nav class="tabs" aria-label="Seções"><div>
@@ -1303,7 +1332,7 @@ function vCasinha(){const T=tama(),sel=T.sel||'eu',p=T[sel],L=level(totalXP()).l
     :[['racao','🥣','Ração'],['sache','🐟','Sachê'],['brincar','🧶','Brincar'],['carinho','💗','Carinho'],['escovar','🪮','Escovar'],['banho','🛁','Banho'],['caixa','🧹','Limpar caixinha']];
   let extra='';
   if(T.aba==='roupa'&&sel==='eu')extra=`<div class="tpanel"><h3>Guarda-roupa</h3><div class="troupas">${ROUPAS.map(([id,n,lv])=>{const ok=L>=lv;return `<button class="${p.roupa===id?'on':''}" ${ok?`onclick="tRoupaSet('${id}')"`:'disabled'}>${tAvatar({...p,roupa:id},'feliz','')}<span>${ok?n:'🔒 Nível '+lv}</span></button>`}).join('')}</div><p class="muted" style="font-size:12.5px">Roupas novas liberam conforme você sobe de nível no jogo.</p></div>`;
-  return `<header class="ph"><h1>Casinha</h1><p class="muted">Cuide de você e dos gatinhos. Seus hábitos de verdade também cuidam deles.</p><p class="muted" style="font-size:11px;margin:2px 0 8px">Gatos 3D: modelo “cat” de artofaria (Sketchfab).</p></header>
+  return `<header class="ph"><h1>Casinha</h1><p class="muted">Cuide de você e dos gatinhos. Seus hábitos de verdade também cuidam deles.</p><p class="muted" style="font-size:11px;margin:2px 0 8px">Modelos 3D do Sketchfab: gatos “cat”, de artofaria; apartamento “Apartment”, de DJ Baylon (CC-BY 4.0).</p></header>
   <section class="tcena"><div class="tjanela"></div><div class="tchao"></div>
     <div class="tfala"><b>${esc(T.guardiao.nome)}</b> ${esc(tFala(T))}</div>
     ${pers('guardiao')}${pers('preto')}${pers('eu')}${pers('frajola')}<div id="tfx"></div></section>
@@ -1513,13 +1542,13 @@ async function c3Abrir(box){C3.box=box;try{await v3Load()}catch(e){box.closest('
   const T=V3.T;if(!C3.ren){C3.canvas=document.createElement('canvas');C3.canvas.className='c3c';C3.ren=new T.WebGLRenderer({canvas:C3.canvas,antialias:true});C3.ren.outputColorSpace=T.SRGBColorSpace;C3.ren.setPixelRatio(Math.min(2,window.devicePixelRatio||1));
     c3Montar();C3.canvas.addEventListener('pointerup',e=>{const r=C3.canvas.getBoundingClientRect();const m=new T.Vector2((e.clientX-r.left)/r.width*2-1,-(e.clientY-r.top)/r.height*2+1);
       C3.ray.setFromCamera(m,C3.cam);const hit=C3.ray.intersectObjects([V3.model,...Object.values(C3.cats)],true)[0];const w=hit&&hit.object.userData.who;if(w)tSel(w)})}
-  if(!C3.scene.children.includes(V3.model)){C3.scene.add(V3.model);V3.model.position.set(0,0,0);V3.model.rotation.y=0}
+  if(!(V3.model.parent===(C3.palco||C3.scene))){(C3.palco||C3.scene).add(V3.model);V3.model.position.set(0,0,0);V3.model.rotation.y=0}
   c3Roupa((tama().eu.roupa3d)||'original');box.innerHTML='';box.appendChild(C3.canvas);box.closest('.tcena').classList.add('c3on');c3Loop()}
 function c3React(who,a){C3.acts[who]={a,t0:performance.now()};
   const em={comer:'🍲',banho:'🫧',dormir:'💤',racao:'🥣',sache:'🐟',petisco:'🐟',brincar:'🧶',carinho:'💗',escovar:'✨',caixa:'✨',roupa:'✨'}[a];if(em)c3Fx(who,em,a==='banho'?10:6)}
 function c3Loop(){cancelAnimationFrame(C3.raf);const T=V3.T;const tick=now=>{if(!C3.canvas||!C3.canvas.isConnected||JG.on)return;
    const w=C3.canvas.clientWidth,h=C3.canvas.clientHeight;if(C3.canvas.width!==Math.round(w*C3.ren.getPixelRatio())){C3.ren.setSize(w,h,false);C3.cam.aspect=w/h;C3.cam.updateProjectionMatrix()}
-   C3.cam.position.set(0,1.55,5.1);C3.cam.lookAt(0,.95,0);const t=now/1000,Tm=tama();
+   C3.cam.position.set(...(C3.cp||[0,1.55,5.1]));C3.cam.lookAt(...(C3.cl||[0,.95,0]));const t=now/1000,Tm=tama();
    // você
    const ae=C3.acts.eu;let an='idle',tt=t;if(ae){tt=(now-ae.t0)/1000;an={comer:'comer',banho:'alongar',dormir:'descansar',roupa:'comemorar',acenar:'acenar',dancar:'dancar',alongar:'alongar',pular:'pular',comemorar:'comemorar'}[ae.a]||'idle';if(tt>(an==='descansar'?6:4)){delete C3.acts.eu;an='idle';tt=t}}
    else if(tMood(Tm.eu)==='sono')an='descansar';
@@ -1557,7 +1586,7 @@ vCasinha=function(){let h=_vCasinhaC3();const T=tama();
 function c3Brinca(a){c3React('eu',a)}
 function c3RoupaSet(id){const T=tama();T.eu.roupa3d=id;save();c3Roupa(id);c3React('eu','roupa');render();toast('Roupa trocada ✨')}
 const _renderC3=render;
-render=function(){_renderC3();const box=document.getElementById('c3box');if(box&&!JG.on){if(C3.ren&&V3.model){box.innerHTML='';box.appendChild(C3.canvas);if(!C3.scene.children.includes(V3.model)){C3.scene.add(V3.model);V3.model.position.set(0,0,0);V3.model.rotation.y=0}c3Roupa((tama().eu.roupa3d)||'original');c3Loop()}else c3Abrir(box)}};
+render=function(){_renderC3();const box=document.getElementById('c3box');if(box&&!JG.on){if(C3.ren&&V3.model){box.innerHTML='';box.appendChild(C3.canvas);if(!(V3.model.parent===(C3.palco||C3.scene))){(C3.palco||C3.scene).add(V3.model);V3.model.position.set(0,0,0);V3.model.rotation.y=0}c3Roupa((tama().eu.roupa3d)||'original');c3Loop()}else c3Abrir(box)}};
 const _tAcaoC3=tAcao;tAcao=function(a){const w=tama().sel||'eu';if(a!=='roupa'&&a!=='conselho')c3React(w,a);if(a==='conselho')c3Fx('guardiao','🛡',4);_tAcaoC3(a)};
 const _tSelC3=tSel;tSel=function(w){_tSelC3(w);c3Fx(w,'✨',3)};
 
@@ -2253,6 +2282,382 @@ const QZ2=[
 ['Atualidades','O principal índice usado como referência para a meta de inflação no Brasil é o:',['IGP-M','INCC','IPCA','INPC','IPA'],2,'O IPCA, do IBGE, é o índice oficial do sistema de metas de inflação.']];
 QZ.length=0;QZ.push(...QZ2);
 const _qzDados2=qzDados;qzDados=function(){const D=_qzDados2();if(D.ver!==2){D.erros=(D.erros||[]).filter(i=>i>=80);D.vistas={};D.st={};D.ver=2}return D};
+
+/* ================= CASINHA NO APARTAMENTO ("Apartment" de DJ Baylon, Sketchfab, CC-BY 4.0) ================= */
+async function c3Apartamento(){if(C3.apto||C3.aptoCarregando)return;C3.aptoCarregando=true;const T=V3.T;
+  try{const {MeshoptDecoder}=await import(window.MESHOPT_URL||'./meshopt_decoder.module.js');const L=v3Loader(V3.GL);L.setMeshoptDecoder(MeshoptDecoder);
+    const buf=await v3Bytes('apartamento.glb');const g=await new Promise((ok,err)=>L.parse(buf,'',ok,err));const ap=g.scene;
+    // tira teto, luminárias do teto e o quadro com personagens de filme
+    ap.traverse(o=>{if(o.isMesh&&/ceiling|CeilingLights|PaintingsWindow|KitchenBarLamps/i.test(o.name))o.visible=false});
+    // esconde a sala antiga (piso, paredes, janela, tapete, prateleira, planta, potes)
+    const manter=new Set([V3.model,...Object.values(C3.cats)]);for(const o of C3.scene.children.slice())if(o.isMesh&&!manter.has(o))o.visible=false;
+    C3.scene.add(ap);C3.apto=ap;
+    // palco: você e os gatos na sala, entre o tapete e a cozinha, virados para a câmera
+    const pal=new T.Group();pal.position.set(-3.7,0,1.4);pal.rotation.y=Math.PI/2;C3.scene.add(pal);C3.palco=pal;pal.add(V3.model);V3.model.position.set(0,0,0);V3.model.rotation.y=0;
+    const pos={preto:[-.85,0,.45,.45],frajola:[.85,0,.45,-.45],guardiao:[-1.75,.46,-.9,.5]};
+    for(const k in pos){const c=C3.cats[k];if(!c)continue;const [x,y,z,ry]=pos[k];pal.add(c);c.position.set(x,y,z);c.rotation.y=ry;c.scale.setScalar(k==='guardiao'?.95:1.05)}
+    C3.cp=[0.9,1.7,1.45];C3.cl=[-4.9,.7,1.7];C3.cam.fov=52;C3.cam.updateProjectionMatrix()}catch(e){C3.aptoErro=e}finally{C3.aptoCarregando=false}}
+const _c3MontarAp=c3Montar;c3Montar=function(){_c3MontarAp();setTimeout(c3Apartamento,50)};
+
+
+/* ================= ÁUDIO MAIS CONFIÁVEL =================
+   Por que falhava: o navegador "dorme" o áudio quando o app vai para segundo plano ou a tela apaga,
+   e só deixa voltar depois de um toque; os bipes não acordavam o áudio; no iPhone a chave de
+   silencioso calava os sons; e a voz às vezes engolia a fala logo depois de um cancelamento. */
+const AUD={ok:false,vozes:[],voz:null};
+function audAcordar(){try{const a=ac();if(a.state!=='running')a.resume();if(!AUD.ok){const b=a.createBuffer(1,1,22050),s=a.createBufferSource();s.buffer=b;s.connect(a.destination);s.start(0);AUD.ok=true}}catch(e){}
+  try{if(navigator.audioSession)navigator.audioSession.type='playback'}catch(e){}
+  try{if(window.speechSynthesis&&!AUD.vozPrimed){const u=new SpeechSynthesisUtterance(' ');u.volume=0;speechSynthesis.speak(u);AUD.vozPrimed=true}}catch(e){}}
+['pointerdown','touchend','keydown'].forEach(ev=>document.addEventListener(ev,audAcordar,{capture:true,passive:true}));
+document.addEventListener('visibilitychange',()=>{if(document.visibilityState==='visible'){try{if(AC&&AC.state!=='running')AC.resume();if(window.speechSynthesis)speechSynthesis.resume()}catch(e){}}});
+function audVozes(){try{AUD.vozes=speechSynthesis.getVoices();AUD.voz=AUD.vozes.find(v=>/pt[-_]BR/i.test(v.lang))||AUD.vozes.find(v=>/^pt/i.test(v.lang))||null}catch(e){}}
+if(window.speechSynthesis){audVozes();speechSynthesis.onvoiceschanged=audVozes}
+// fala robusta: cancela, espera um instante e fala; avisa quando terminou (com plano B se o navegador não avisar)
+function falar(txt,rate,fim){if(!window.speechSynthesis){fim&&setTimeout(fim,Math.max(1500,txt.length*70));return}
+  try{speechSynthesis.resume();const ocupado=speechSynthesis.speaking||speechSynthesis.pending;if(ocupado)speechSynthesis.cancel();
+    setTimeout(()=>{const u=new SpeechSynthesisUtterance(txt);u.lang='pt-BR';u.rate=rate||.9;if(!AUD.voz)audVozes();if(AUD.voz)u.voice=AUD.voz;let feito=false;const ok=()=>{if(!feito){feito=true;clearTimeout(tb);fim&&fim()}};
+      u.onend=ok;u.onerror=ok;const tb=setTimeout(ok,txt.length*95/(rate||.9)+2500);speechSynthesis.speak(u)},ocupado?120:0)}catch(e){fim&&setTimeout(fim,1500)}}
+beep=function(f=880,d=.15,v=.25){try{const a=ac();const o=a.createOscillator(),g=a.createGain();o.frequency.value=f;o.type='sine';g.gain.setValueAtTime(v,a.currentTime);g.gain.exponentialRampToValueAtTime(.001,a.currentTime+d);o.connect(g);g.connect(a.destination);o.start();o.stop(a.currentTime+d)}catch(e){}};
+say=function(t){if(!CAL.narr)return;falar(t,.88)};
+agFala=function(t){if(!agD().voz)return;falar(String(t),1.15)};
+
+/* ================= ABA "VISUALIZAR": visualização guiada sobre o tema que você digitar ================= */
+const VG_TEMAS=[
+ {k:/concurs|prova|aprova|banco|caixa|estud|vestibular|exame/i,cena:t=>[
+   `Agora imagine o dia da prova: ${t}.`,'Você acorda descansada, toma um café com calma e sabe exatamente o que levar.','Você chega ao local com tempo de sobra. Repare no prédio, nas pessoas, no ar daquela manhã.','Você entra na sala, encontra o seu lugar e se senta. Seus ombros estão soltos, sua respiração é tranquila.','O caderno de questões chega às suas mãos. Você lê a primeira questão e reconhece o assunto.','As fórmulas, as regras de português, os conceitos de banco aparecem na sua mente com clareza, como páginas que você já leu muitas vezes.','Quando uma questão é difícil, você respira, marca para depois e segue em frente, sem pressa e sem medo.','Você termina com tempo para revisar. Confere o gabarito com atenção e entrega a prova sentindo que deu o seu melhor.','Agora avance no tempo. Você abre o resultado e vê o seu nome na lista de aprovados.','Sinta essa alegria no corpo. Onde ela aparece? No peito, no rosto, nas mãos?','Imagine o seu primeiro dia no banco: o crachá com o seu nome, a mesa, o bom-dia dos colegas.','Cada hora de estudo de hoje é um tijolo dessa cena. Ela está sendo construída agora.'],
+  af:['Eu aprendo com constância e confio na minha preparação.','Eu tenho calma para pensar e clareza para responder.','A minha aprovação é consequência do que faço todos os dias.']},
+ {k:/dorm|sono|ins[oô]nia|descans|noite/i,sono:true,cena:t=>[
+   'Imagine que você está deitada numa cama macia, num quarto escuro e fresco.','Lá fora cai uma chuva fina. O som é constante e tranquilo.','Sinta os pés pesados, afundando no colchão. Depois as pernas. Depois o quadril.','Suas costas se soltam, uma vértebra de cada vez.','Seus braços estão pesados e quentes. Suas mãos se abrem sozinhas.','O rosto relaxa: a testa, os olhos, a mandíbula. A língua descansa no fundo da boca.','Os pensamentos do dia passam como nuvens bem longe. Você não precisa segurar nenhum deles.','Não há nada para resolver agora. A noite cuida do resto.','Cada respiração fica mais lenta e mais longa, como ondas que vão e voltam.'],
+  af:['Eu mereço descansar.','O meu corpo sabe dormir.','Amanhã eu cuido do amanhã.']},
+ {k:/ansied|medo|preocup|p[aâ]nico|nervos|estress|ang[uú]sti/i,cena:t=>[
+   `Traga à mente, por um instante, o que está pesando: ${t}. Só observe, sem brigar com isso.`,'Agora imagine que você está sentada à margem de um rio calmo.','Cada preocupação que aparece, você coloca numa folha e deixa a folha descer com a correnteza.','Você vê a folha se afastando, ficando pequena, até sumir na curva do rio.','Se outra preocupação aparecer, tudo bem. Outra folha, outra vez.','Repare que você não é as suas preocupações. Você é quem observa o rio.','Sinta o chão firme embaixo de você. Ele te sustenta sem esforço.','O ar entra fresco e sai morno. O corpo sabe se acalmar quando você deixa.','Imagine uma luz morna no centro do peito, que se espalha devagar pelos ombros, pelos braços, pela barriga.'],
+  af:['Eu estou segura neste momento.','Eu posso sentir medo e, mesmo assim, seguir em frente.','Um passo de cada vez é suficiente.']},
+ {k:/treino|academia|agach|corpo|for[cç]a|m[uú]scul|gl[uú]teo|sa[uú]de|exerc/i,cena:t=>[
+   `Agora imagine você vivendo isto: ${t}.`,'Você chega à academia com energia, coloca a música de que gosta e se aquece com calma.','Veja você executando cada exercício com técnica: a postura firme, o abdômen ativo, o movimento controlado.','Sinta o músculo trabalhando: o glúteo apertando no topo, os ombros firmes na elevação lateral.','A última repetição é difícil, mas você termina com a forma limpa, e sente orgulho.','Avance alguns meses. Você se olha no espelho com carinho e repara na força nova dos ombros, das costas, das pernas.','Você sobe uma escada sem cansar, carrega as compras com facilidade, dorme melhor.','O seu corpo não é um projeto de punição. Ele é a sua casa, e você está deixando essa casa mais forte.'],
+  af:['O meu corpo fica mais forte a cada treino.','Eu treino por amor a mim, não contra mim.','Constância vale mais que perfeição.']},
+ {k:/entrevista|trabalho|reuni|apresenta|emprego|chefe|carreira|cliente/i,cena:t=>[
+   `Imagine a situação: ${t}.`,'Você se prepara com antecedência, escolhe uma roupa em que se sente bem e revisa o que quer dizer.','Você chega alguns minutos antes, respira fundo três vezes e entra com a postura aberta.','Você cumprimenta as pessoas olhando nos olhos, com um sorriso tranquilo.','Quando fala, a sua voz sai clara e no ritmo certo. Você sabe do que está falando.','Se surge uma pergunta difícil, você faz uma pausa, pensa e responde com honestidade.','Repare nas pessoas acenando com a cabeça, interessadas no que você diz.','Você sai dali sabendo que mostrou quem você é de verdade.'],
+  af:['Eu tenho valor e sei comunicar o meu valor.','Eu me preparo, e a preparação me dá calma.','Eu mereço estar nos lugares que conquisto.']},
+ {k:/autoestima|confian|amor.pr[oó]prio|aceita|beleza|espelho|insegur/i,cena:t=>[
+   `Pense no que você quer cultivar: ${t}.`,'Imagine-se diante de um espelho, numa luz suave e bonita.','Desta vez, você se olha como olharia para a sua melhor amiga: com gentileza.','Repare nos seus olhos. Eles já viram tanta coisa e continuam curiosos.','Repare nas suas mãos. Quantas coisas elas já cuidaram, construíram, acariciaram.','Lembre de três momentos em que você foi corajosa, mesmo com medo.','Diga para a sua imagem: eu estou do seu lado. Veja como o rosto no espelho se suaviza.','Sinta um abraço quente vindo de dentro, como se a sua versão mais sábia te segurasse.'],
+  af:['Eu sou suficiente como sou, e posso crescer mesmo assim.','Eu falo comigo com carinho.','O meu valor não depende do espelho nem da balança.']},
+ {k:/m[aã]e|pai|fam[ií]lia|amig|relacion|namor|perd[aã]o|saudade|luto/i,cena:t=>[
+   `Traga à mente a pessoa ou a relação ligada a isto: ${t}.`,'Imagine um lugar bonito e calmo, onde vocês podem se encontrar sem pressa.','Veja a pessoa chegando. Repare na expressão do rosto, no jeito de andar.','Vocês se sentam lado a lado. Não há cobrança nem pressa aqui.','Diga, em silêncio, o que você gostaria de dizer. Pode ser obrigada, desculpa, eu te amo ou sinto saudade.','Imagine a resposta chegando com carinho, do jeito que o seu coração precisa ouvir.','Sinta o que fica no peito depois dessa conversa. Deixe que seja o que for.','Guarde a parte boa desse encontro. Ela é sua.'],
+  af:['Eu ofereço e recebo carinho.','Eu posso amar e também cuidar dos meus limites.','O amor que eu dou também volta para mim.']},
+ {k:/dinheiro|finan|casa|apartamento|viagem|carro|meta|sonho|objetivo|futuro/i,cena:t=>[
+   `Imagine com detalhes o seu objetivo: ${t}.`,'Avance no tempo até o dia em que ele está realizado.','Onde você está? Repare nas cores, nos sons, no cheiro do lugar.','Quem está com você? Veja o rosto dessas pessoas felizes por você.','Sinta no corpo a sensação de ter conseguido: o peito aberto, o sorriso fácil.','Agora olhe para trás e veja o caminho que te trouxe até aqui.','Repare nos pequenos passos: o estudo de cada dia, cada real guardado, cada não que você disse para o que não importava.','Escolha um desses passos para dar hoje mesmo. Pequeno, possível e seu.'],
+  af:['Eu construo o meu futuro com escolhas de hoje.','Eu sou capaz de realizar o que planejo.','Cada passo pequeno conta.']}];
+const VG_GEN={cena:t=>[`Agora traga à mente o tema que você escolheu: ${t}.`,'Imagine esse tema acontecendo do jeito que você mais deseja.','Repare em onde você está, nas cores à sua volta, nos sons, na temperatura do ar.','Veja você nessa cena: a sua postura, a sua expressão, a calma nos seus gestos.','Sinta as emoções que aparecem. Deixe que elas se espalhem pelo corpo.','Imagine os detalhes: o que você diz, o que você faz, quem está por perto.','Perceba como você lida com qualquer dificuldade com tranquilidade e confiança.','Fique alguns instantes só sentindo isso, como se já fosse real.'],af:['Eu mereço viver o que desejo.','Eu confio no meu caminho.','Eu tenho tudo de que preciso para dar o próximo passo.']};
+function vgRoteiro(tema,min){const t=(tema||'').trim().replace(/[.!?]+$/,'')||'paz e tranquilidade';const n=(S.name||'').split(' ')[0];const T=VG_TEMAS.find(x=>x.k.test(t))||VG_GEN;
+  const intro=[`Olá${n?', '+n:''}. Encontre uma posição confortável, sentada ou deitada.`,'Se quiser, feche os olhos.','Inspire pelo nariz, devagar, contando até quatro.','Segure um instante.','E solte o ar pela boca, bem devagar.','Mais uma vez. Inspire… e solte.','Sinta o peso do seu corpo apoiado. Você não precisa segurar nada agora.','A cada respiração, os ombros descem um pouco mais.','Relaxe a testa, os olhos e a mandíbula.'];
+  const descida=['Imagine uma escada com cinco degraus, descendo para um lugar de calma.','Cinco… você desce o primeiro degrau.','Quatro… mais leve.','Três… mais tranquila.','Dois… quase lá.','Um… você chegou.'];
+  const seguro=['Você está num lugar onde se sente totalmente segura. Pode ser real ou imaginado.','Repare nas cores, na luz, nos sons desse lugar.'];
+  const af=['Agora repita em silêncio, sentindo cada palavra:',...T.af];
+  const fim=T.sono?['Continue descansando. Você não precisa fazer mais nada.','Deixe a respiração te levar para o sono.']:['Guarde essa sensação. Ela fica com você.','Vou contar de um a cinco, e você vai voltando devagar.','Um… dois… sinta o corpo de novo.','Três… mexa os dedos das mãos e dos pés.','Quatro… respire fundo.','Cinco… quando estiver pronta, abra os olhos.'];
+  const L=[...intro,...(min>=10?descida:[]),...seguro,...T.cena(t),...af,...fim];
+  const fala=L.reduce((a,s)=>a+s.length/13,0),alvo=min*60;const pausa=Math.max(2.5,(alvo-fala)/L.length);return {linhas:L,pausa,sono:!!T.sono}}
+const VG={on:false,i:0,r:null,pausado:false,tm:null};
+function vgD(){S.vg=S.vg||{min:10,som:'chuva',voz:true,feitas:0,ult:''};return S.vg}
+function vgComecar(){const D=vgD();const tema=(document.getElementById('vgtema')||{}).value||D.ult;D.ult=tema;save();VG.r=vgRoteiro(tema,D.min);VG.i=0;VG.on=true;VG.pausado=false;audAcordar();
+  if(D.som&&D.som!=='nenhum'&&typeof sndOn==='function'){try{sndOn(D.som,.45)}catch(e){}}try{if(navigator.wakeLock)navigator.wakeLock.request('screen').then(w=>VG.wl=w).catch(()=>{})}catch(e){}render();vgPasso()}
+function vgPasso(){clearTimeout(VG.tm);if(!VG.on||VG.pausado)return;const D=vgD(),R=VG.r;if(VG.i>=R.linhas.length){vgFim();return}const s=R.linhas[VG.i];const el=document.getElementById('vgfrase');if(el){el.classList.remove('in');void el.offsetWidth;el.textContent=s;el.classList.add('in')}
+  const bar=document.getElementById('vgbar');if(bar)bar.style.width=Math.round(100*VG.i/R.linhas.length)+'%';
+  const prox=()=>{VG.tm=setTimeout(()=>{VG.i++;vgPasso()},R.pausa*1000)};if(D.voz)falar(s,.85,prox);else VG.tm=setTimeout(()=>{VG.i++;vgPasso()},(s.length/13+R.pausa)*1000)}
+function vgPausar(){VG.pausado=!VG.pausado;if(VG.pausado){clearTimeout(VG.tm);try{speechSynthesis.cancel()}catch(e){}}else vgPasso();render();if(!VG.pausado)setTimeout(()=>{const el=document.getElementById('vgfrase');if(el&&VG.r)el.textContent=VG.r.linhas[VG.i]||''},0)}
+function vgParar(fim){VG.on=false;clearTimeout(VG.tm);try{speechSynthesis.cancel()}catch(e){}const D=vgD();if(D.som&&typeof sndOff==='function'){try{sndOff(D.som)}catch(e){}}try{VG.wl&&VG.wl.release()}catch(e){}if(fim){D.feitas++;save()}render()}
+function vgFim(){vgParar(true);toast('Visualização concluída 🌙')}
+function vgSet(k,v){vgD()[k]=v;save();render()}
+function vgSug(t){const el=document.getElementById('vgtema');if(el){el.value=t;el.focus()}}
+function vAgVisual(){const D=vgD();
+  if(VG.on&&VG.r)return `<section class="vgplay"><div class="vgorb"></div><p id="vgfrase" class="vgfrase in">${esc(VG.r.linhas[VG.i]||'')}</p><div class="agbar"><i id="vgbar" style="width:${Math.round(100*VG.i/VG.r.linhas.length)}%"></i></div>
+    <div class="agbtns" style="margin-top:12px"><button class="go" onclick="vgPausar()">${VG.pausado?'▶ Continuar':'⏸ Pausar'}</button><button class="mini warn" onclick="vgParar()">Encerrar</button></div>
+    <p class="muted" style="font-size:12px;text-align:center;margin-top:10px">${D.voz?'Se a voz não sair, aumente o volume e confira o modo silencioso.':'Modo leitura: as frases passam sozinhas.'}</p></section>`;
+  const sons=['nenhum',...(typeof SND!=='undefined'?Object.keys(SND):[])];
+  const sug=['Passar no concurso do Banco do Brasil','Dormir bem esta noite','Acalmar a ansiedade','Treinar com energia e ficar forte','Entrevista de emprego tranquila','Amor-próprio','Conversa com a minha mãe','Minha casa própria'];
+  return `<header class="ph"><h1>Visualização guiada</h1><p class="muted">Escreva sobre o que você quer visualizar. A voz te guia: relaxamento, a cena que você escolheu, afirmações e a volta.</p></header>
+   <section class="agcard"><label class="aglab" for="vgtema">Sobre o que você quer visualizar?</label><textarea id="vgtema" class="qta pq" placeholder="Ex.: fazer a prova do BB com calma e ser aprovada">${esc(D.ult||'')}</textarea>
+    <div class="chips" style="margin-top:8px">${sug.map(s=>`<button onclick="vgSug('${s}')">${s}</button>`).join('')}</div>
+    <p class="aglab">Duração</p><div class="agop">${[5,10,15].map(m=>`<button class="${D.min===m?'on':''}" onclick="vgSet('min',${m})">${m} min</button>`).join('')}</div>
+    <p class="aglab">Som de fundo</p><div class="agop">${sons.map(s=>`<button class="${D.som===s?'on':''}" onclick="vgSet('som','${s}')">${s==='nenhum'?'Nenhum':s[0].toUpperCase()+s.slice(1)}</button>`).join('')}</div>
+    <div class="agrow"><label class="agvoz"><input type="checkbox" ${D.voz?'checked':''} onchange="vgSet('voz',this.checked)"> narrar em voz alta</label></div>
+    <button class="go agstart" style="margin-top:12px" onclick="vgComecar()">✨ Começar</button>
+    <p class="muted" style="font-size:12px;margin:10px 0 0">Use fones, se puder. ${D.feitas?`Você já fez ${D.feitas} ${D.feitas===1?'visualização':'visualizações'}.`:''}</p></section>`}
+(function(){const nav=document.querySelector('.tabs div');if(nav&&!nav.querySelector('[data-t=visual]')){const b=document.createElement('button');b.dataset.t='visual';b.setAttribute('onclick',"go('visual')");b.innerHTML='<i aria-hidden="true">✨</i>Guiada';nav.insertBefore(b,nav.querySelector('[data-t=eu]'))}})();
+const _renderVg=render;render=function(){_renderVg();if(TAB==='visual'&&S.onboarded&&!EVF){$('#main').innerHTML=vAgVisual();$$('.tabs button').forEach(b=>b.classList.toggle('on',b.dataset.t==='visual'))}};
+
+/* ================= RUÍDO MARROM (brown noise), gerado no próprio celular ================= */
+SND_INFO.marrom=['Ruído marrom','Som grave e constante, bom para foco e sono'];
+SND.marrom='gerado';
+function ruidoMarrom(a){const sr=a.sampleRate,core=Math.floor(sr*10),fade=Math.floor(sr*.5),pad=Math.ceil(sr*.06);
+  const out=a.createBuffer(2,core+2*pad,sr);
+  for(let c=0;c<2;c++){const n=core+fade,raw=new Float32Array(n);let last=0;for(let i=0;i<n;i++){const w=Math.random()*2-1;last=(last+.02*w)/1.02;raw[i]=last*3.5}
+    const cr=new Float32Array(core);for(let i=0;i<core;i++)cr[i]=raw[i];for(let i=0;i<fade;i++){const k=i/fade;cr[i]=raw[i]*k+raw[core+i]*(1-k)}// emenda sem clique
+    const d=out.getChannelData(c);for(let i=0;i<pad;i++)d[i]=cr[core-pad+i];d.set(cr,pad);for(let i=0;i<pad;i++)d[pad+core+i]=cr[i]}
+  return out}
+const _sndBufM=sndBuf;sndBuf=async function(id){if(id!=='marrom')return _sndBufM(id);if(CAL.buf.marrom)return CAL.buf.marrom;return CAL.buf.marrom=ruidoMarrom(ac())};
+const _sceneM=scene;scene=function(id){if(id!=='marrom')return _sceneM(id);const O='var(--ol)';const on=CAL.on[id]?'play':'';
+  return `<svg class="scene ${on}" viewBox="0 0 200 130" aria-hidden="true"><defs><linearGradient id="sk-marrom" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#E9C9A6"/><stop offset="1" stop-color="#F7E6D2"/></linearGradient></defs>
+   <rect width="200" height="130" fill="url(#sk-marrom)"/><circle cx="160" cy="34" r="16" fill="#FFF1D6" stroke="${O}" stroke-width="3"/>
+   <path d="M0 78 q30 -14 60 0 t60 0 t60 0 t40 -4 V130 H0z" fill="#C89B6D" stroke="${O}" stroke-width="3" stroke-linejoin="round"/>
+   <path d="M0 96 q35 -12 70 0 t70 0 t60 -2 V130 H0z" fill="#A9774B" stroke="${O}" stroke-width="3" stroke-linejoin="round"/>
+   <path d="M0 114 q40 -10 80 0 t80 0 t40 0 V130 H0z" fill="#7E5432" stroke="${O}" stroke-width="3" stroke-linejoin="round"/></svg>`};
+
+
+/* ================= GATOS DORMEM NO SEU RITMO =================
+   Quando você marca "Dormir", Vader, Zorro e Barney dormem também (a energia sobe enquanto dormem);
+   quando você marca "Acordar", eles acordam com energia cheia. */
+function gatosDormindo(){try{const h=new Date().getHours(),d=S.days[dkey(new Date())]||{done:{}};const ont=new Date();ont.setDate(ont.getDate()-1);const o=S.days[dkey(ont)]||{done:{}};
+  if(d.done&&d.done.dormir)return true;if(h<12&&o.done&&o.done.dormir&&!(d.done&&d.done.acordar))return true;return false}catch(e){return false}}
+const _tamaSono=tama;tama=function(){const T=_tamaSono();const now=Date.now();const dt=Math.min(24,(now-(T.tSono||now))/36e5);T.tSono=now;
+  if(gatosDormindo()&&dt>0)for(const g of['preto','frajola','guardiao']){T[g].energia=Math.min(100,T[g].energia+12*dt+ (TDECAY[g].energia*dt));T[g].fome=Math.min(100,T[g].fome+TDECAY[g].fome*dt*.5)}
+  const k=dkey(new Date()),d=S.days[k];if(d&&d.done&&d.done.acordar&&!T.applied[k+':acordaGatos']){T.applied[k+':acordaGatos']=1;for(const g of['preto','frajola','guardiao'])T[g].energia=100}
+  return T};
+const _tMoodSono=tMood;tMood=function(p){try{const T=S.tama;if(T&&gatosDormindo()&&(p===T.preto||p===T.frajola||p===T.guardiao))return 'sono'}catch(e){}return _tMoodSono(p)};
+const _tFalaSono=tFala;tFala=function(T){if(gatosDormindo())return 'Shhh… estamos dormindo junto com você. Boa noite, humana. 🌙';return _tFalaSono(T)};
+// Zzz flutuando em cima de quem está dormindo
+setInterval(()=>{try{if(TAB!=='casinha'||!C3.scene||!C3.canvas||!C3.canvas.isConnected)return;const T=S.tama;if(!T)return;for(const k of['preto','frajola','guardiao'])if(tMood(T[k])==='sono')c3Fx(k,'💤',1)}catch(e){}},1800);
+
+/* ================= POMPOARISMO (treino do assoalho pélvico) ================= */
+const PP_NIV={
+ ini:{n:'Iniciante',ex:[['lentas','Contrações lentas',10,3,6],['rapidas','Contrações rápidas',10,1,2]]},
+ int:{n:'Intermediário',ex:[['lentas','Contrações lentas',10,5,5],['rapidas','Contrações rápidas',15,1,1],['elevador','Elevador (3 andares)',3,2,6]]},
+ ava:{n:'Avançado',ex:[['lentas','Contrações lentas',12,8,8],['rapidas','Contrações rápidas',20,1,1],['elevador','Elevador (3 andares)',4,2,6],['resist','Resistência',3,10,10]]}};
+const PP={on:false,fila:[],i:0,fim:0,pausa:null,tick:null,txt:'',cls:'',tot:0};
+function ppD(){S.pompo=S.pompo||{niv:'ini',voz:true,dias:{},xp:0,xpDias:{}};return S.pompo}
+const _totalXPp=totalXP;totalXP=function(){return _totalXPp()+((S.pompo&&S.pompo.xp)||0)};
+function ppMontar(){const N=PP_NIV[ppD().niv];const F=[{t:'Prepare-se: sente ou deite confortável, respire normalmente.',d:5,c:'rel',fala:'Prepare-se'}];
+  N.ex.forEach(([id,nome,rep,con,rel],ei)=>{F.push({t:nome,d:3,c:'rel',fala:nome,titulo:1});
+    for(let r=1;r<=rep;r++){if(id==='elevador'){[1,2,3].forEach(a=>F.push({t:`Sobe para o ${a}º andar`,d:con,c:'a'+a,fala:a+'º andar',rep:r,de:rep}));F.push({t:'Desce devagar e solta tudo',d:rel,c:'rel',fala:'Desce e solta',rep:r,de:rep})}
+      else{F.push({t:id==='resist'?'Contrai e segura forte':'Contrai',d:con,c:'con',fala:con>1?'Contrai':'Já',rep:r,de:rep});F.push({t:'Relaxa por completo',d:rel,c:'rel',fala:rel>2?'Relaxa':'',rep:r,de:rep})}}
+    if(ei<N.ex.length-1)F.push({t:'Descanse um pouco',d:20,c:'rel',fala:'Descanso'})});return F}
+function ppIniciar(){audAcordar();PP.fila=ppMontar();PP.i=-1;PP.on=true;PP.pausa=null;PP.tot=PP.fila.reduce((a,x)=>a+x.d,0);ppProx();clearInterval(PP.tick);PP.tick=setInterval(ppTique,100);try{navigator.wakeLock&&navigator.wakeLock.request('screen').then(w=>PP.wl=w).catch(()=>{})}catch(e){}render()}
+function ppProx(){PP.i++;if(PP.i>=PP.fila.length){ppFim();return}const f=PP.fila[PP.i];PP.fim=performance.now()+f.d*1000;if(ppD().voz&&f.fala)falar(f.fala,1.05);try{beep(f.c==='rel'?520:f.c==='con'?880:700+(+(f.c[1]||0))*120,.08,.2)}catch(e){}render()}
+function ppTique(){if(!PP.on||PP.pausa)return;const r=(PP.fim-performance.now())/1000;const el=document.getElementById('ppSeg');if(el)el.textContent=Math.max(0,Math.ceil(r));if(r<=0)ppProx()}
+function ppPausar(){if(PP.pausa){PP.fim+=performance.now()-PP.pausa;PP.pausa=null}else PP.pausa=performance.now();render()}
+function ppParar(){PP.on=false;clearInterval(PP.tick);try{PP.wl&&PP.wl.release()}catch(e){}render()}
+function ppFim(){ppParar();const D=ppD(),k=dkey(new Date());D.dias[k]=(D.dias[k]||0)+1;let g=0;if(!D.xpDias[k]){D.xpDias[k]=1;D.xp+=5;g=5}save();PP.ganho=g;PP.feito=true;falar('Muito bem. Treino concluído.',1);render()}
+function vPompo(){const D=ppD();
+  if(PP.on){const f=PP.fila[PP.i]||{};const feitos=PP.fila.slice(0,PP.i).reduce((a,x)=>a+x.d,0);
+    return `<section class="agcard ppplay"><div class="ppcirc ${f.c||'rel'}" style="--d:${f.d||1}s"></div><p class="ppfase">${esc(f.t||'')}</p><p class="ppseg"><b id="ppSeg">${f.d||0}</b> s${f.rep?` · ${f.rep} de ${f.de}`:''}</p>
+     <div class="agbar"><i style="width:${Math.round(100*feitos/PP.tot)}%"></i></div><div class="agbtns" style="margin-top:12px"><button class="go" onclick="ppPausar()">${PP.pausa?'▶ Continuar':'⏸ Pausar'}</button><button class="mini warn" onclick="ppParar()">Encerrar</button></div>
+     <p class="muted" style="font-size:12px;margin-top:10px">Respire normalmente o tempo todo. Não contraia barriga, coxas nem glúteo.</p></section>`}
+  const dias=Array.from({length:7},(_,i)=>{const d=new Date();d.setDate(d.getDate()-6+i);const v=D.dias[dkey(d)]||0;return `<div class="agd ${v?'ok':''}"><b>${v?'✓':'·'}</b><small>${['D','S','T','Q','Q','S','S'][d.getDay()]}</small></div>`}).join('');
+  const N=PP_NIV[D.niv];const min=Math.round(ppMontar().reduce((a,x)=>a+x.d,0)/60);
+  return `<header class="ph"><h1>Pompoarismo</h1><p class="muted">Treino guiado dos músculos do assoalho pélvico: contrai, relaxa, elevador e resistência, no seu ritmo.</p></header>
+   ${PP.feito?`<section class="agcard" style="text-align:center"><b style="font-size:20px">Treino concluído! 🌸</b><p class="muted" style="margin:4px 0 0">${PP.ganho?'+5 XP · ':''}O ideal é 1 a 3 sessões por dia.</p></section>`:''}
+   <section class="agcard"><h3>Nível</h3><div class="agop">${Object.entries(PP_NIV).map(([k,v])=>`<button class="${D.niv===k?'on':''}" onclick="ppD().niv='${k}';save();render()">${v.n}</button>`).join('')}</div>
+    <ul class="rlist" style="margin-top:8px">${N.ex.map(([id,nome,rep,con,rel])=>`<li><span>${nome}</span><b>${rep} ×</b><em>${id==='elevador'?'3 níveis':con+' s / '+rel+' s'}</em></li>`).join('')}</ul>
+    <div class="agrow"><label class="agvoz"><input type="checkbox" ${D.voz?'checked':''} onchange="ppD().voz=this.checked;save()"> guiar com voz</label><span class="muted">cerca de ${min} min</span></div>
+    <button class="go agstart" style="margin-top:12px" onclick="PP.feito=false;ppIniciar()">▶ Começar treino</button></section>
+   <section class="agcard"><h3>Últimos 7 dias</h3><div class="agdias">${dias}</div><p class="muted" style="font-size:12.5px;margin:8px 0 0">Comece pelo Iniciante e mude de nível quando fizer tudo sem esforço por uma semana.</p></section>
+   <details class="pall agcard"><summary>Como encontrar o músculo e fazer certo</summary><ol class="rtxt">
+    <li>O músculo certo é o que você usaria para segurar o xixi ou um pum. Use isso só para reconhecer a sensação: não treine interrompendo o xixi, porque isso pode atrapalhar o esvaziamento da bexiga.</li>
+    <li>Contraia "para dentro e para cima", sem apertar barriga, coxas ou glúteo.</li>
+    <li>Respire normalmente. Prender a respiração aumenta a pressão no abdômen e atrapalha.</li>
+    <li>Relaxar por completo é tão importante quanto contrair. Por isso o relaxamento dura o mesmo tempo ou mais.</li>
+    <li>Faça deitada no começo; depois sentada e, por fim, em pé.</li></ol></details>
+   <details class="pall agcard"><summary>Quando procurar uma fisioterapeuta pélvica</summary><p class="rtxt">Se sentir dor durante o treino ou nas relações, se tiver perda de urina, sensação de peso na região, depois de um parto ou cirurgia, ou se não conseguir perceber o músculo. Uma fisioterapeuta pélvica avalia e ajusta o treino para você.</p></details>`}
+/* aba "Em casa": 60 agachamentos + pompoarismo */
+let CASA_SUB='agachar';
+const _vAgacharP=vAgachar;
+vAgachar=function(){const sw=`<div class="subsw"><button class="${CASA_SUB==='agachar'?'on':''}" onclick="CASA_SUB='agachar';render()">🏋️ 60 agachamentos</button><button class="${CASA_SUB==='pompo'?'on':''}" onclick="CASA_SUB='pompo';render()">🌸 Pompoarismo</button></div>`;
+  return sw+(CASA_SUB==='pompo'?vPompo():_vAgacharP())};
+(function(){const b=document.querySelector('.tabs [data-t=agachar]');if(b)b.innerHTML='<i aria-hidden="true">🏠</i>Em casa'})();
+
+
+/* ================= MÃOS OCUPADAS: para quando der vontade de roer as unhas =================
+   Baseado na reversão de hábito: perceber a vontade, fazer uma "resposta concorrente" com as mãos
+   por 1 minuto (a vontade passa como uma onda) e manter as mãos ocupadas. As unhas da mãozinha
+   crescem a cada dia sem roer. */
+const UN_CORES=['#E25C74','#C8242E','#F49AB8','#B9A6F0','#4FA3E0','#2BA981','#FFD27A','#1C1C24','#F7F3EE','#C89B6D'];
+const UN_EF=[['liso','Liso'],['glitter','Glitter'],['franc','Francesinha'],['degrade','Degradê'],['bolinhas','Bolinhas']];
+function unD(){S.unhas=S.unhas||{cor:'#E25C74',ef:'liso',n:[null,null,null,null,null],salvos:[],log:{},ultRoi:null,ini:dkey(new Date())};return S.unhas}
+function unDias(){const D=unD();const desde=new Date((D.ultRoi||D.ini)+'T12:00:00');return Math.max(0,Math.floor((new Date(dkey(new Date())+'T12:00:00')-desde)/864e5))}
+function unVencidas(){const D=unD();return Object.values(D.log).reduce((a,x)=>a+(x.venci||0),0)}
+const UN={on:false,etapa:-1,fim:0,tick:null,ov:null,timer:false};
+const UN_PASSOS=[['Feche as mãos com força, como se segurasse algo.',10],['Agora solte devagar e abra bem os dedos.',5],['Junte as pontas dos dedos de uma mão com as da outra e pressione.',15],['Respire fundo: puxe o ar em 4… solte em 6.',10],['Esfregue as palmas das mãos, sentindo o calor.',10],['Apoie as mãos nas coxas, palmas para baixo, e repare na textura da roupa.',15],['A vontade é uma onda: ela sobe, chega ao pico e passa. Você está surfando ela.',15]];
+function unAbrir(){const ov=document.createElement('div');ov.className='quiz unov';ov.innerHTML='<div class="qbox" id="unbox" style="padding-top:calc(env(safe-area-inset-top,0px) + 12px)"></div>';document.body.appendChild(ov);UN.ov=ov;UN.on=true;audAcordar();unTela()}
+function unFechar(){clearInterval(UN.tick);UN.timer=false;if(UN.ov)UN.ov.remove();UN.ov=null;UN.on=false;render()}
+function unMao(n,dias){const L=Math.min(56,28+dias*2);// comprimento da unha cresce com os dias sem roer
+  const dedos=[[44,176,40,78,-34],[92,86,44,124,-9],[142,66,46,140,0],[192,80,44,130,8],[240,116,38,102,17]];
+  let s=`<svg viewBox="0 0 300 330" class="unmao"><defs><linearGradient id="unDeg" x1="0" y1="1" x2="0" y2="0"><stop offset="0" stop-color="#fff" stop-opacity="0"/><stop offset="1" stop-color="#fff" stop-opacity=".7"/></linearGradient></defs>
+   <path d="M62 206 q-16 84 46 116 h124 q52 -42 40 -126 z" fill="#D9A07A" stroke="var(--ol)" stroke-width="3"/>`;
+  dedos.forEach(([x,y,w,h,r],i)=>{const cx=x+w/2;s+=`<g transform="rotate(${r} ${cx} ${y+h})" onclick="unPintar(${i})" style="cursor:pointer"><rect x="${x}" y="${y}" width="${w}" height="${h+30}" rx="${w/2}" fill="#D9A07A" stroke="var(--ol)" stroke-width="3"/>`;
+    const u=n[i],nx=x+7,nw=w-14,ny=y+6-(L-26);const cor=u?u.c:'#F4D3C2';
+    s+=`<rect x="${nx}" y="${ny}" width="${nw}" height="${L}" rx="${nw/2}" fill="${cor}" stroke="var(--ol)" stroke-width="2"/>`;
+    if(u){if(u.e==='franc')s+=`<rect x="${nx}" y="${ny}" width="${nw}" height="${Math.min(12,L*.35)}" rx="${nw/2}" fill="#fff" stroke="var(--ol)" stroke-width="1.5"/>`;
+      if(u.e==='degrade')s+=`<rect x="${nx}" y="${ny}" width="${nw}" height="${L}" rx="${nw/2}" fill="url(#unDeg)"/>`;
+      if(u.e==='glitter')for(let k=0;k<9;k++)s+=`<circle cx="${nx+3+((k*7)%(nw-6))}" cy="${ny+4+((k*11)%(L-8))}" r="1.6" fill="${k%2?'#fff':'#FFD27A'}"/>`;
+      if(u.e==='bolinhas')for(let k=0;k<4;k++)s+=`<circle cx="${nx+nw/2+(k%2?-4:4)}" cy="${ny+7+k*((L-12)/4)}" r="2.6" fill="#fff"/>`;
+      s+=`<rect x="${nx+3}" y="${ny+3}" width="3" height="${L*.5}" rx="1.5" fill="#fff" opacity=".45"/>`}
+    s+='</g>'});return s+'</svg>'}
+function unPintar(i){const D=unD();D.n[i]={c:D.cor,e:D.ef};save();try{toast('💅 Unha pintada')}catch(e){}try{beep(900+i*80,.05,.12)}catch(e){}unTela()}
+function unTodas(){const D=unD();D.n=D.n.map(()=>({c:D.cor,e:D.ef}));save();unTela()}
+function unLimpar(){unD().n=[null,null,null,null,null];save();unTela()}
+function unSalvar(){const D=unD();if(D.n.every(x=>!x)){toast('Pinte pelo menos uma unha');return}D.salvos.unshift(D.n.map(x=>x&&{...x}));D.salvos=D.salvos.slice(0,9);save();toast('Unhas salvas na galeria 💅');unTela()}
+function unUsar(k){const D=unD();D.n=D.salvos[k].map(x=>x&&{...x});save();unTela()}
+function unLog(tipo){const D=unD(),k=dkey(new Date());D.log[k]=D.log[k]||{venci:0,roi:0};D.log[k][tipo]++;if(tipo==='roi')D.ultRoi=k;save();
+  if(tipo==='venci'){toast('Você venceu a vontade! 💪');try{beep(1320,.2,.2)}catch(e){}}else toast('Tudo bem. Amanhã é outro dia, e as unhas voltam a crescer 🌱');UN.timer=false;unTela()}
+function unVontade(){UN.timer=true;UN.etapa=-1;unProx();clearInterval(UN.tick);UN.tick=setInterval(()=>{const r=Math.ceil((UN.fim-performance.now())/1000);const el=document.getElementById('unSeg');if(el)el.textContent=Math.max(0,r);if(r<=0)unProx()},200)}
+function unProx(){UN.etapa++;if(UN.etapa>=UN_PASSOS.length){clearInterval(UN.tick);UN.etapa=UN_PASSOS.length;unTela();falar('Pronto. A vontade passou?',1);return}const [t,d]=UN_PASSOS[UN.etapa];UN.fim=performance.now()+d*1000;falar(t,1);try{beep(700,.06,.15)}catch(e){}unTela()}
+function unTela(){const D=unD(),box=UN.ov&&UN.ov.querySelector('#unbox');if(!box)return;const dias=unDias(),venc=unVencidas();
+  if(UN.timer){const fim=UN.etapa>=UN_PASSOS.length;const p=UN_PASSOS[UN.etapa]||['',0];
+    box.innerHTML=`<div class="unhead"><h2>Vontade de roer</h2><button class="mini" onclick="clearInterval(UN.tick);UN.timer=false;unTela()">Voltar</button></div>
+     ${fim?`<div class="agcard" style="text-align:center"><p class="ppfase">A vontade passou?</p><div class="agbtns" style="justify-content:center"><button class="go" onclick="unLog('venci')">✓ Venci</button><button class="mini" onclick="unLog('roi')">Roí um pouco</button></div><p class="muted" style="font-size:12.5px">Agora pinte uma unha aqui embaixo para manter as mãos ocupadas mais um pouco.</p></div>`
+     :`<div class="agcard" style="text-align:center"><div class="unpulso"></div><p class="ppfase">${esc(p[0])}</p><p class="ppseg"><b id="unSeg">${p[1]}</b> s · passo ${UN.etapa+1} de ${UN_PASSOS.length}</p></div>`}${unSalao(D,dias)}`;return}
+  box.innerHTML=`<div class="unhead"><h2>Mãos ocupadas</h2><button class="mini" onclick="unFechar()">Sair</button></div>
+   <div class="unstats"><div><b>${dias}</b><small>${dias===1?'dia':'dias'} sem roer</small></div><div><b>${venc}</b><small>vontades vencidas</small></div></div>
+   <button class="go agstart" onclick="unVontade()">🙌 Estou com vontade agora</button>
+   <p class="muted" style="font-size:12.5px;margin:6px 0 12px">Um minuto e meio guiado com as mãos ocupadas. A vontade costuma passar nesse tempo.</p>
+   ${unSalao(D,dias)}
+   <details class="pall agcard"><summary>Dicas que ajudam de verdade</summary><ol class="rtxt">
+    <li>Repare quando a vontade aparece: estudando, vendo série, ansiosa, entediada? Saber o gatilho já tira metade da força dele.</li>
+    <li>Deixe as unhas curtas e lixadas: ponta lascada pede para ser roída. Uma lixa na bolsa ajuda muito.</li>
+    <li>Tenha algo para as mãos nas horas de risco: bolinha antiestresse, elástico, caneta de clique, massinha.</li>
+    <li>Esmalte amargo (vendido em farmácia) ajuda a perceber o gesto antes de roer.</li>
+    <li>Fazer as unhas ou passar um esmalte bonito dá vontade de preservar.</li>
+    <li>Se roer machuca, sangra ou vem junto com muita ansiedade, vale conversar com um psicólogo: existe um tratamento específico para isso, chamado reversão de hábito.</li></ol></details>`}
+function unSalao(D,dias){return `<section class="agcard"><h3>💅 Salão de unhas</h3><p class="muted" style="font-size:12.5px;margin:0 0 6px">Toque numa unha para pintar. As unhas da mãozinha crescem a cada dia sem roer${dias?` (hoje: ${dias} ${dias===1?'dia':'dias'})`:''}.</p>
+   <div class="unmaobox">${unMao(D.n,dias)}</div>
+   <div class="uncores">${UN_CORES.map(c=>`<button style="background:${c}" class="${D.cor===c?'on':''}" aria-label="cor" onclick="unD().cor='${c}';save();unTela()"></button>`).join('')}</div>
+   <div class="agop" style="margin-top:8px">${UN_EF.map(([k,n])=>`<button class="${D.ef===k?'on':''}" onclick="unD().ef='${k}';save();unTela()">${n}</button>`).join('')}</div>
+   <div class="agbtns" style="margin-top:10px"><button class="mini" onclick="unTodas()">Pintar todas</button><button class="mini" onclick="unLimpar()">Tirar esmalte</button><button class="mini" onclick="unSalvar()">Salvar na galeria</button></div>
+   ${D.salvos.length?`<p class="aglab">Galeria</p><div class="ungal">${D.salvos.map((n,k)=>`<button onclick="unUsar(${k})">${unMao(n,10)}</button>`).join('')}</div>`:''}</section>`}
+// botão na aba Calma, logo abaixo do "Tô com raiva agora"
+const _vCalmaU=vCalma;vCalma=function(){const h=_vCalmaU();const i=h.indexOf('</button>',h.indexOf('class="sosbtn"'));if(i<0)return h;
+  return h.slice(0,i+9)+`<button class="sosbtn unbtn" onclick="unAbrir()"><span class="unic">💅</span><div><b>Vontade de roer as unhas</b><span>Um minuto guiado e o salão de unhas para ocupar as mãos</span></div></button>`+h.slice(i+9)};
+
+/* ================= SALÃO DE UNHAS EM 3D ("Woman hands low-poly", blendffnike, Sketchfab, CC-BY 4.0) =================
+   As 10 unhas são ilhas próprias na textura (faixa de cima), então dá para pintar cada uma separada. */
+const UN3={ren:null,canvas:null,scene:null,cam:null,mesh:null,grupo:null,U:null,cen:[],raf:0,rot:0,carregando:false};
+const UN_EFN={liso:1,glitter:2,franc:3,degrade:4,bolinhas:5};
+function unIdx(u){const th=[52,97,147,198,255,314,362,414,462];u*=512;let i=0;while(i<9&&u>=th[i])i++;return i}
+function unUniforms(){const D=unD();const T=V3.T;if(!UN3.U)return;for(let i=0;i<10;i++){const n=D.n[i];UN3.U.uC.value[i].set(n?n.c:'#000000');UN3.U.uE.value[i]=n?UN_EFN[n.e]||1:0}}
+async function unMontar3d(){const box=document.getElementById('un3d');if(!box)return;
+  if(!UN3.ren){if(UN3.carregando)return;UN3.carregando=true;try{await v3Load();const T=V3.T;
+      const buf=await v3Bytes('maos.glb');const g=await new Promise((ok,err)=>v3Loader(V3.GL).parse(buf,'',ok,err));
+      UN3.canvas=document.createElement('canvas');UN3.ren=new T.WebGLRenderer({canvas:UN3.canvas,antialias:true,alpha:true});UN3.ren.outputColorSpace=T.SRGBColorSpace;UN3.ren.setPixelRatio(Math.min(2,window.devicePixelRatio||1));
+      const sc=new T.Scene();sc.add(new T.HemisphereLight(0xffffff,0x9a7a62,2.0));const dl=new T.DirectionalLight(0xffffff,1.6);dl.position.set(.3,1,.2);sc.add(dl);
+      const grupo=new T.Group();sc.add(grupo);grupo.add(g.scene);g.scene.updateMatrixWorld(true);const bx=new T.Box3().setFromObject(g.scene),ce=bx.getCenter(new T.Vector3());g.scene.position.sub(ce);
+      let mesh;g.scene.traverse(o=>{if(o.isMesh)mesh=o});UN3.mesh=mesh;
+      UN3.U=true;
+      unCriarPecas(mesh);unEixos(mesh);
+      // centro de cada unha (para tocar perto e pintar a unha certa)
+      const P=mesh.geometry.attributes.position,UV=mesh.geometry.attributes.uv;const soma=Array.from({length:10},()=>[new T.Vector3(),0]);
+      for(let i=0;i<P.count;i++){if(UV.getY(i)>=.1)continue;const k=unIdx(UV.getX(i));soma[k][0].add(new T.Vector3().fromBufferAttribute(P,i));soma[k][1]++}
+      UN3.cen=soma.map(([v,n])=>n?v.divideScalar(n):null);
+      const cam=new T.PerspectiveCamera(32,1,.03,3);UN3.cam=cam;UN3.scene=sc;UN3.grupo=grupo;
+      const ray=new T.Raycaster();let x0=null,mov=0;
+      UN3.canvas.addEventListener('pointerdown',e=>{x0=e.clientX;mov=0;UN3.canvas.setPointerCapture(e.pointerId)});
+      UN3.canvas.addEventListener('pointermove',e=>{if(x0!=null){const dx=e.clientX-x0;mov+=Math.abs(dx);UN3.rot=Math.max(-.7,Math.min(.7,UN3.rot+dx*.01));x0=e.clientX}});
+      UN3.canvas.addEventListener('pointerup',e=>{x0=null;if(mov>8)return;const r=UN3.canvas.getBoundingClientRect();ray.setFromCamera(new T.Vector2((e.clientX-r.left)/r.width*2-1,-(e.clientY-r.top)/r.height*2+1),cam);
+        const hit=ray.intersectObject(mesh,true)[0];if(!hit)return;let k=-1;if(hit.object.userData.unha!=null)k=hit.object.userData.unha;else if(hit.uv&&hit.uv.y<.1)k=unIdx(hit.uv.x);
+        else{const lp=mesh.worldToLocal(hit.point.clone());let best=1e9;UN3.cen.forEach((c,i)=>{if(!c)return;const d=c.distanceTo(lp);if(d<best){best=d;k=i}});const esc=new T.Vector3();mesh.getWorldScale(esc);if(best*esc.x>.03)k=-1}
+        if(k>=0)unPintar(k)})}catch(e){box.innerHTML='<div class="unmaobox">'+unMao(unD().n,unDias())+'</div>';UN3.carregando=false;return}UN3.carregando=false}
+  if(!box.isConnected)return;box.innerHTML='';box.appendChild(UN3.canvas);unUniforms();
+  cancelAnimationFrame(UN3.raf);const T=V3.T;const tick=now=>{if(!UN3.canvas.isConnected)return;const w=UN3.canvas.clientWidth,h=UN3.canvas.clientHeight;
+    if(UN3.canvas.width!==Math.round(w*UN3.ren.getPixelRatio())){UN3.ren.setSize(w,h,false);UN3.cam.aspect=w/h;UN3.cam.updateProjectionMatrix()}
+    const a=w/h,lado=unD().lado||0;const fx=lado===1?-.07:lado===2?.07:0;const dist=(lado?.34:.6)/Math.min(1,a);UN3.cam.position.set(fx,dist*.85,-dist*.42);UN3.cam.lookAt(fx,0,.03);UN3.grupo.rotation.y=UN3.rot+.05*Math.sin(now/2500);
+    UN3.ren.render(UN3.scene,UN3.cam);UN3.raf=requestAnimationFrame(tick)};UN3.raf=requestAnimationFrame(tick)}
+// o salão passa a usar as mãos 3D (10 unhas); a mãozinha desenhada fica como "unhas de hoje" no placar
+const _unSalao3=unSalao;unSalao=function(D,dias){if(D.n.length<10)D.n=[...D.n,...new Array(10-D.n.length).fill(null)];
+  return _unSalao3(D,dias).replace(/<div class="unmaobox">[\s\S]*?<\/svg><\/div>/,'<div id="un3d" class="un3d"><p class="v3msg">Carregando as mãos…</p></div>')
+   .replace('Toque numa unha para pintar.','Toque numa unha para pintar. Arraste para girar.')
+   .replace('<div id="un3d"',`<div class="agop unlado">${[[1,'Mão direita'],[2,'Mão esquerda'],[0,'As duas']].map(([v,n])=>`<button class="${(D.lado||0)===v?'on':''}" onclick="unD().lado=${v};save();unTela()">${n}</button>`).join('')}</div><div id="un3d"`)
+   .replace('<div class="uncores">',`<div class="undedos">${[['Mão direita',[4,3,2,1,0]],['Mão esquerda',[5,6,7,8,9]]].map(([nm,ids])=>`<div><small>${nm}</small>${ids.map((k,j)=>{const n=D.n[k];return `<button onclick="unPintar(${k})" title="${['polegar','indicador','médio','anelar','mindinho'][j]}" style="background:${n?n.c:'#F4D3C2'}" class="${n?'ok':''}">${['P','I','M','A','m'][j]}</button>`}).join('')}</div>`).join('')}</div><p class="muted" style="font-size:11px;margin:4px 0 6px;text-align:center">Toque na unha da mão 3D ou nos botões (polegar, indicador, médio, anelar, mindinho). Mãos 3D: “Woman hands low-poly”, de blendffnike (Sketchfab, CC-BY 4.0) · v40</p><div class="uncores">`)};
+unTodas=function(){const D=unD();D.n=new Array(10).fill(0).map(()=>({c:D.cor,e:D.ef}));save();unTela()};
+unLimpar=function(){unD().n=new Array(10).fill(null);save();unTela()};
+const _unTela3=unTela;unTela=function(){_unTela3();const D=unD(),dias=unDias();const st=UN.ov&&UN.ov.querySelector('.unstats');
+  if(st&&!st.querySelector('.unmini'))st.insertAdjacentHTML('beforeend',`<div class="unmini"><small>suas unhas hoje</small>${unMao(D.n.slice(0,5),dias)}</div>`);
+  if(UN3.U)unUniforms();unMontar3d()};
+const _unPintar3=unPintar;unPintar=function(i){const D=unD();if(D.n.length<10)D.n=[...D.n,...new Array(10-D.n.length).fill(null)];_unPintar3(i)};
+
+/* unhas 3D, versão sem shader personalizado (funciona em qualquer celular/placa de vídeo):
+   cada unha vira uma peça própria com o seu esmalte. */
+function unTexEsmalte(c,e){const T=V3.T;const cv=document.createElement('canvas');cv.width=64;cv.height=128;const g=cv.getContext('2d');
+  g.fillStyle=c;g.fillRect(0,0,64,128);
+  if(e==='degrade'){const gr=g.createLinearGradient(0,0,0,128);gr.addColorStop(0,'rgba(255,255,255,0)');gr.addColorStop(1,'rgba(255,255,255,.75)');g.fillStyle=gr;g.fillRect(0,0,64,128)}
+  if(e==='franc'){g.fillStyle='#FBFBF7';g.fillRect(0,80,64,48)}
+  if(e==='glitter'){for(let i=0;i<70;i++){g.fillStyle=i%3?'#FFFFFF':'#FFE08A';g.beginPath();g.arc(Math.random()*64,Math.random()*128,1.4+Math.random()*1.4,0,7);g.fill()}}
+  if(e==='bolinhas'){g.fillStyle='#FFFFFF';for(let y=14;y<128;y+=26)for(let x=(y/26%2)*14+12;x<64;x+=28){g.beginPath();g.arc(x,y,5,0,7);g.fill()}}
+  const t=new T.CanvasTexture(cv);t.colorSpace=T.SRGBColorSpace;t.flipY=false;return t}
+function unCriarPecas(mesh){const T=V3.T,G=mesh.geometry,P=G.attributes.position,N=G.attributes.normal,UV=G.attributes.uv,I=G.index;const tri=Array.from({length:10},()=>[]);
+  const n=I?I.count:P.count;for(let t=0;t<n;t+=3){const a=I?I.getX(t):t,b=I?I.getX(t+1):t+1,c=I?I.getX(t+2):t+2;if(UV.getY(a)<.1&&UV.getY(b)<.1&&UV.getY(c)<.1){const k=unIdx((UV.getX(a)+UV.getX(b)+UV.getX(c))/3);tri[k].push(a,b,c)}}
+  UN3.pecas=tri.map((ids,k)=>{if(!ids.length)return null;const pos=[],nor=[],uv=[];let u0=1,u1=0,v0=1,v1=0;
+    ids.forEach(i=>{const ox=N?N.getX(i)*.00035:0,oy=N?N.getY(i)*.00035:0,oz=N?N.getZ(i)*.00035:0;pos.push(P.getX(i)+ox,P.getY(i)+oy,P.getZ(i)+oz);if(N)nor.push(N.getX(i),N.getY(i),N.getZ(i));const u=UV.getX(i),v=UV.getY(i);uv.push(u,v);u0=Math.min(u0,u);u1=Math.max(u1,u);v0=Math.min(v0,v);v1=Math.max(v1,v)});
+    // reescala o UV da unha para 0..1 (a estampa ocupa a unha inteira; ponta da unha = v maior)
+    for(let j=0;j<uv.length;j+=2){uv[j]=(uv[j]-u0)/(u1-u0||1);uv[j+1]=(uv[j+1]-v0)/(v1-v0||1)}
+    const g=new T.BufferGeometry();g.setAttribute('position',new T.Float32BufferAttribute(pos,3));if(nor.length)g.setAttribute('normal',new T.Float32BufferAttribute(nor,3));else g.computeVertexNormals();g.setAttribute('uv',new T.Float32BufferAttribute(uv,2));
+    const m=new T.Mesh(g,new T.MeshStandardMaterial({roughness:.22,metalness:0,polygonOffset:true,polygonOffsetFactor:-2,polygonOffsetUnits:-6,side:T.DoubleSide}));m.visible=false;m.userData.unha=k;mesh.add(m);return m})}
+unUniforms=function(){const D=unD();if(!UN3.pecas)return;UN3.pecas.forEach((m,k)=>{if(!m)return;const n=D.n[k];if(!n){m.visible=false;return}const chave=n.c+n.e;if(m.userData.chave!==chave){if(m.material.map)m.material.map.dispose();m.material.map=unTexEsmalte(n.c,n.e);m.material.needsUpdate=true;m.userData.chave=chave}m.visible=true})};
+
+/* ================= UNHAS QUE CRESCEM DE VERDADE (no modelo 3D) =================
+   Unha humana cresce em média 3,5 mm por mês (~0,116 mm por dia). Cada unha tem o seu "relógio":
+   quando você roe uma unha, o relógio dela volta a zero e ela fica curta de novo. */
+const UN_MM_DIA=0.116,UN_MM_MAX=12;
+function unCresc(){const D=unD();if(!D.cresc){const ini=Date.now()-unDias()*864e5;D.cresc={t0:new Array(10).fill(ini)}}return D.cresc}
+function unMM(k){const c=unCresc();return Math.min(UN_MM_MAX,Math.max(0,(Date.now()-c.t0[k])/864e5*UN_MM_DIA))}
+function unMMmedia(){let s=0;for(let k=0;k<10;k++)s+=unMM(k);return s/10}
+// bordas livres: uma "pontinha" de unha que nasce na ponta de cada unha 3D e cresce com os dias
+function unCriarBordas(mesh){const T=V3.T,G=mesh.geometry,P=G.attributes.position,N=G.attributes.normal;if(!UN3.pecas)return;
+  const cent=[new T.Vector3(),new T.Vector3()],cnt=[0,0];for(let i=0;i<P.count;i++){const x=P.getX(i);const h=x<0?0:1;cent[h].add(new T.Vector3(x,P.getY(i),P.getZ(i)));cnt[h]++}cent[0].divideScalar(cnt[0]||1);cent[1].divideScalar(cnt[1]||1);
+  const sh=new T.Shape();sh.moveTo(-.5,0);sh.lineTo(-.5,.55);sh.quadraticCurveTo(-.5,1,0,1);sh.quadraticCurveTo(.5,1,.5,.55);sh.lineTo(.5,0);sh.lineTo(-.5,0);const geo=new T.ShapeGeometry(sh,8);
+  UN3.bordas=UN3.pecas.map((m,k)=>{if(!m)return null;const pp=m.geometry.attributes.position,nn=m.geometry.attributes.normal;const c=new T.Vector3(),n=new T.Vector3();
+    for(let i=0;i<pp.count;i++){c.add(new T.Vector3().fromBufferAttribute(pp,i));if(nn)n.add(new T.Vector3().fromBufferAttribute(nn,i))}c.divideScalar(pp.count);n.normalize();
+    const hc=cent[c.x<0?0:1];const uu=m.geometry.attributes.uv;let mu=0,mv=0;for(let i=0;i<pp.count;i++){mu+=uu.getX(i);mv+=uu.getY(i)}mu/=pp.count;mv/=pp.count;
+    // direção da unha = para onde o "v" da textura cresce (rumo à ponta); confere apontando para fora da mão
+    let dir=new T.Vector3();for(let i=0;i<pp.count;i++)dir.add(new T.Vector3().fromBufferAttribute(pp,i).sub(c).multiplyScalar(uu.getY(i)-mv));
+    dir.sub(n.clone().multiplyScalar(dir.dot(n))).normalize();if(dir.dot(c.clone().sub(hc))<0)dir.negate();const lado=new T.Vector3().crossVectors(n,dir).normalize();
+    let pmax=-1e9,lmin=1e9,lmax=-1e9;for(let i=0;i<pp.count;i++){const v=new T.Vector3().fromBufferAttribute(pp,i).sub(c);pmax=Math.max(pmax,v.dot(dir));const l=v.dot(lado);lmin=Math.min(lmin,l);lmax=Math.max(lmax,l)}
+    const larg=(lmax-lmin)*.92;const ponta=c.clone().add(dir.clone().multiplyScalar(pmax*.96)).add(n.clone().multiplyScalar(.0003));
+    const mat=new T.MeshStandardMaterial({color:0xF7EFE8,roughness:.35,side:T.DoubleSide,polygonOffset:true,polygonOffsetFactor:-2,polygonOffsetUnits:-6});
+    const b=new T.Mesh(geo,mat);const M=new T.Matrix4().makeBasis(lado,dir,n);b.quaternion.setFromRotationMatrix(M);b.position.copy(ponta);b.userData={larg,unha:k};b.scale.set(larg,.0001,1);mesh.add(b);return b})}
+function unBordas(){if(!UN3.bordas)return;const D=unD(),esc=new V3.T.Vector3();UN3.mesh.getWorldScale(esc);
+  UN3.bordas.forEach((b,k)=>{if(!b)return;const mm=unMM(k);const L=mm/1000/(esc.x||1);// mm -> unidades do modelo
+    b.visible=mm>.05;b.scale.set(b.userData.larg,Math.max(L,.0001),1);const n=D.n[k];
+    if(n){if(b.userData.chave!==n.c+n.e){const tx=unTexEsmalte(n.e==='franc'?'#FBFBF7':n.c,n.e==='franc'?'liso':n.e);b.material.map=tx;b.material.emissiveMap=tx;b.material.emissive.set(0x555555);b.material.color.set(0xffffff);b.material.roughness=.22;b.material.needsUpdate=true;b.userData.chave=n.c+n.e}}
+    else if(b.userData.chave){b.material.map=null;b.material.emissiveMap=null;b.material.emissive.set(0x3a3330);b.material.color.set(0xFFFFFF);b.material.roughness=.45;b.material.needsUpdate=true;b.userData.chave=null}})}
+const _unUniformsC=unUniforms;unUniforms=function(){_unUniformsC();if(UN3.pecas&&!UN3.bordas&&UN3.mesh)unCriarBordas(UN3.mesh);unBordas()};
+// "Roí um pouco": você escolhe quais unhas roeu, e só elas voltam a ficar curtas
+const _unLogC=unLog;unLog=function(tipo){if(tipo==='roi'){UN.timer=false;UN.escRoi=new Set([0,1,2,3,4,5,6,7,8,9]);unTela();return}_unLogC(tipo)};
+function unRoiToggle(k){UN.escRoi.has(k)?UN.escRoi.delete(k):UN.escRoi.add(k);unTela()}
+function unRoiOk(){const c=unCresc(),now=Date.now();UN.escRoi.forEach(k=>c.t0[k]=now);UN.escRoi=null;_unLogC('roi')}
+const _unTelaC=unTela;unTela=function(){_unTelaC();const box=UN.ov&&UN.ov.querySelector('#unbox');if(!box)return;
+  // placar: comprimento médio em mm no lugar da mãozinha desenhada
+  const mini=box.querySelector('.unmini');if(mini)mini.outerHTML=`<div><b>${unMMmedia().toFixed(1).replace('.',',')}</b><small>mm de unha (média)</small></div>`;
+  if(UN.escRoi){const D=unD();const card=`<section class="agcard"><h3>Quais unhas você roeu?</h3><p class="muted" style="font-size:12.5px;margin:0 0 8px">Só as marcadas voltam a ficar curtas. Sem bronca: é só para a mãozinha 3D ficar igual à sua.</p>
+     <div class="undedos">${[['Mão direita',[4,3,2,1,0]],['Mão esquerda',[5,6,7,8,9]]].map(([nm,ids])=>`<div><small>${nm}</small>${ids.map((k,j)=>`<button onclick="unRoiToggle(${k})" style="background:${UN.escRoi.has(k)?'#E25C74':'#F4D3C2'}" class="${UN.escRoi.has(k)?'ok':''}">${['P','I','M','A','m'][j]}</button>`).join('')}</div>`).join('')}</div>
+     <div class="agbtns" style="margin-top:10px"><button class="go" onclick="unRoiOk()">Confirmar</button><button class="mini" onclick="UN.escRoi=null;unTela()">Cancelar</button></div></section>`;
+    const st=box.querySelector('.unstats');if(st)st.insertAdjacentHTML('afterend',card)}
+  // galeria: bolinhas de cor no lugar das mãozinhas desenhadas
+  box.querySelectorAll('.ungal button').forEach((bt,i)=>{const n=unD().salvos[i];if(n)bt.innerHTML=`<div class="ungalc">${n.map(x=>`<i style="background:${x?x.c:'#F4D3C2'}"></i>`).join('')}</div>`});
+  // texto do salão
+  const p=box.querySelector('.agcard p.muted');if(p&&/crescem/.test(p.textContent))p.textContent='Toque numa unha para pintar. Arraste para girar. As unhas crescem como as de verdade (cerca de 3,5 mm por mês) e encurtam quando você rói.'};
+
+/* eixo de cada unha calculado pela forma (comprimento x largura), sem depender da textura */
+function unEixos(mesh){const T=V3.T,P=mesh.geometry.attributes.position;const cent=[new T.Vector3(),new T.Vector3()],cnt=[0,0];
+  for(let i=0;i<P.count;i++){const x=P.getX(i),h=x<0?0:1;cent[h].add(new T.Vector3(x,P.getY(i),P.getZ(i)));cnt[h]++}cent[0].divideScalar(cnt[0]||1);cent[1].divideScalar(cnt[1]||1);
+  UN3.eixos=UN3.pecas.map(m=>{if(!m)return null;const pp=m.geometry.attributes.position,nn=m.geometry.attributes.normal;const c=new T.Vector3(),n=new T.Vector3();
+    for(let i=0;i<pp.count;i++){c.add(new T.Vector3().fromBufferAttribute(pp,i));if(nn)n.add(new T.Vector3().fromBufferAttribute(nn,i))}c.divideScalar(pp.count);n.normalize();
+    // base do plano da unha
+    const a=new T.Vector3(1,0,0);if(Math.abs(a.dot(n))>.9)a.set(0,1,0);const e1=a.sub(n.clone().multiplyScalar(a.dot(n))).normalize(),e2=new T.Vector3().crossVectors(n,e1);
+    // direção do dedo: da pele em volta (que fica atrás da ponta) até o centro da unha
+    const viz=new T.Vector3();let nv=0;for(let i=0;i<P.count;i++){const q=new T.Vector3(P.getX(i),P.getY(i),P.getZ(i));if(q.distanceTo(c)<.014){viz.add(q);nv++}}viz.divideScalar(nv||1);
+    let dir=c.clone().sub(viz);dir.sub(n.clone().multiplyScalar(dir.dot(n))).normalize();const lado=new T.Vector3().crossVectors(n,dir).normalize();
+    let dmin=1e9,dmax=-1e9,lmin=1e9,lmax=-1e9;for(let i=0;i<pp.count;i++){const v=new T.Vector3().fromBufferAttribute(pp,i).sub(c);const d=v.dot(dir),l=v.dot(lado);dmin=Math.min(dmin,d);dmax=Math.max(dmax,d);lmin=Math.min(lmin,l);lmax=Math.max(lmax,l)}
+    // UV da peça refeito pela forma: v = da base (0) até a ponta (1), u = de um lado ao outro
+    const uv=m.geometry.attributes.uv;
+    // o eixo da textura original que acompanha o comprimento da unha vira o "v" (0 = base, 1 = ponta)
+    let su=0,sv=0,mu=0,mv=0,md=0;const ds=[];for(let i=0;i<pp.count;i++){const d=new T.Vector3().fromBufferAttribute(pp,i).sub(c).dot(dir);ds.push(d);mu+=uv.getX(i);mv+=uv.getY(i);md+=d}mu/=pp.count;mv/=pp.count;md/=pp.count;
+    for(let i=0;i<pp.count;i++){su+=(uv.getX(i)-mu)*(ds[i]-md);sv+=(uv.getY(i)-mv)*(ds[i]-md)}
+    const porU=Math.abs(su)>Math.abs(sv),sinal=(porU?su:sv)>0;
+    for(let i=0;i<pp.count;i++){const U=uv.getX(i),V=uv.getY(i);let comp=porU?U:V,larg=porU?V:U;if(sinal)comp=1-comp;uv.setXY(i,larg,comp)}uv.needsUpdate=true;
+    return {c,n,dir,lado,dmax,larg:(lmax-lmin)}})}
+unCriarBordas=function(mesh){const T=V3.T;if(!UN3.pecas)return;if(!UN3.eixos)unEixos(mesh);
+  const sh=new T.Shape();sh.moveTo(-.5,0);sh.lineTo(-.5,.55);sh.quadraticCurveTo(-.5,1,0,1);sh.quadraticCurveTo(.5,1,.5,.55);sh.lineTo(.5,0);sh.lineTo(-.5,0);const geo=new T.ShapeGeometry(sh,8);
+  UN3.bordas=UN3.eixos.map((E,k)=>{if(!E)return null;const mat=new T.MeshStandardMaterial({color:0xFFFFFF,emissive:0x3a3330,roughness:.45,side:T.DoubleSide,polygonOffset:true,polygonOffsetFactor:-2,polygonOffsetUnits:-6});
+    const b=new T.Mesh(geo,mat);b.quaternion.setFromRotationMatrix(new T.Matrix4().makeBasis(E.lado.clone().negate(),E.dir,E.n));// base destra (sem espelhar)
+    b.position.copy(E.c).add(E.dir.clone().multiplyScalar(E.dmax*.97)).add(E.n.clone().multiplyScalar(.0002));b.userData={larg:E.larg*.9,unha:k};b.scale.set(E.larg*.9,.0001,1);mesh.add(b);return b})};
 
 boot();setTimeout(()=>{try{evRemind();evBadge()}catch(e){}},1500);
 

@@ -1,6 +1,6 @@
 // guarda o app no aparelho para abrir sem internet; com internet, sempre busca a versão mais nova
-const C='jogo-da-vida-v29';
-const CORE=['./','./index.html','./vida-imagens.js','./vida-exercicios.js','./vida-sons-1.js','./vida-sons-2.js','./manifest.webmanifest','./icon-180.png','./icon-192.png','./icon-512.png','./personagem.glb','./gato.glb','./agachamento.glb','./roupa7.glb','./roupa8.glb','./roupa9.glb','./roupa10.glb','./roupa11.glb','./roupa12.glb','./roupa6.idx','./roupa7.idx','./roupa8.idx','./roupa9.idx','./roupa10.idx','./roupa11.idx','./roupa12.idx','./three.module.min.js','./GLTFLoader.js','./BufferGeometryUtils.js'];
+const C='jogo-da-vida-v40';
+const CORE=['./','./index.html','./vida-imagens.js','./vida-exercicios.js','./vida-sons-1.js','./vida-sons-2.js','./manifest.webmanifest','./icon-180.png','./icon-192.png','./icon-512.png','./personagem.glb','./gato.glb','./maos.glb','./apartamento.glb','./meshopt_decoder.module.js','./agachamento.glb','./roupa7.glb','./roupa8.glb','./roupa9.glb','./roupa10.glb','./roupa11.glb','./roupa12.glb','./roupa6.idx','./roupa7.idx','./roupa8.idx','./roupa9.idx','./roupa10.idx','./roupa11.idx','./roupa12.idx','./three.module.min.js','./GLTFLoader.js','./BufferGeometryUtils.js'];
 self.addEventListener('install',e=>{e.waitUntil(caches.open(C).then(c=>Promise.all(CORE.map(u=>fetch(u,{cache:'reload'}).then(r=>r.ok&&c.put(u,r)).catch(()=>{})))));self.skipWaiting()});
 self.addEventListener('activate',e=>{e.waitUntil(caches.keys().then(ks=>Promise.all(ks.filter(k=>k!==C).map(k=>caches.delete(k)))).then(()=>self.clients.claim()))});
 self.addEventListener('fetch',e=>{const r=e.request;if(r.method!=='GET')return;const u=new URL(r.url);
