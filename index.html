@@ -2143,10 +2143,16 @@ const A3={ren:null,canvas:null,scene:null,cam:null,raf:0};
 async function agMount3d(box){try{await v3Load()}catch(e){return}const T=V3.T;if(!A3.ren){A3.canvas=document.createElement('canvas');A3.ren=new T.WebGLRenderer({canvas:A3.canvas,antialias:true,alpha:true});A3.ren.outputColorSpace=T.SRGBColorSpace;A3.ren.setPixelRatio(Math.min(2,window.devicePixelRatio||1));
     A3.scene=new T.Scene();A3.scene.add(new T.HemisphereLight(0xffffff,0x8a6a55,2.1));const d=new T.DirectionalLight(0xffffff,1.6);d.position.set(1.5,3,3);A3.scene.add(d);A3.cam=new T.PerspectiveCamera(28,1,.1,50);
     const ch=new T.Mesh(new T.CircleGeometry(.7,40),new T.MeshBasicMaterial({color:0,transparent:true,opacity:.12}));ch.rotation.x=-Math.PI/2;A3.scene.add(ch)}
+  if(!A3.act){try{const buf=await v3Bytes('agachamento.glb');const g=await new Promise((ok,err)=>v3Loader(V3.GL).parse(buf,'',ok,err));const clip=g.animations[0];clip.tracks.forEach(t=>{t.name=t.name.replace(/^mixamorig\d*/,'')});A3.mix=V3.mixer||(V3.mixer=new T.AnimationMixer(V3.model));A3.act=A3.mix.clipAction(clip);A3.dur=clip.duration}catch(e){}}
   if(!box.isConnected)return;box.innerHTML='';box.appendChild(A3.canvas);A3.scene.add(V3.model);V3.model.position.set(0,0,0);
   cancelAnimationFrame(A3.raf);const tick=now=>{if(!A3.canvas.isConnected)return;const w=A3.canvas.clientWidth,h=A3.canvas.clientHeight;if(A3.canvas.width!==Math.round(w*A3.ren.getPixelRatio())){A3.ren.setSize(w,h,false);A3.cam.aspect=w/h;A3.cam.updateProjectionMatrix()}
     A3.cam.position.set(2.2,1.2,3.6);A3.cam.lookAt(0,.8,0);let f;
-    if(AG.fase==='serie'&&!AG.pausa){const T2=agD().tempo*1000,ph=((now-AG.t0)%T2)/T2;const d=ph<.6?Math.sin(ph/.6*Math.PI/2):Math.cos((ph-.6)/.4*Math.PI/2);f=V3ANIM.agachar(d)}
+    if(AG.fase==='serie'&&!AG.pausa){const T2=agD().tempo*1000,ph=((now-AG.t0)%T2)/T2;const d=ph<.6?Math.sin(ph/.6*Math.PI/2):Math.cos((ph-.6)/.4*Math.PI/2);
+      if(A3.act){// animação de verdade (Mixamo): começo do clipe = agachada, fim = em pé
+        if(V3.run&&V3.run.isRunning())V3.run.stop();A3.act.enabled=true;if(!A3.act.isRunning())A3.act.play();A3.act.time=(1-d)*A3.dur*.98;A3.mix.update(0);
+        V3.B.Hips.position.x=V3.hips0.x;V3.B.Hips.position.z=V3.hips0.z;V3.model.rotation.y=0;A3.ren.render(A3.scene,A3.cam);A3.raf=requestAnimationFrame(tick);return}
+      f=V3ANIM.agachar(d)}
+    if(A3.act&&A3.act.isRunning())A3.act.stop();
     else if(AG.fase==='fim')f=V3ANIM.comemorar(now/1000);else if(AG.fase==='prep')f=V3ANIM.alongar(now/1000);else f=V3ANIM.idle(now/1000);
     v3Pose(f.P,f.y);V3.model.rotation.y=0;A3.ren.render(A3.scene,A3.cam);A3.raf=requestAnimationFrame(tick)};A3.raf=requestAnimationFrame(tick)}
 // aba nova
